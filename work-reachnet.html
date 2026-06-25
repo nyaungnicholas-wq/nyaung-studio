@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReachNet — Case Study | Nicholas</title>
+  <meta name="description" content="Honest-by-design outbound cold email — An outbound cold-email platform built for small businesses. Import prospects from CSV, run multi-step sequences from you" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-reachnet.html" />
+  <meta property="og:title" content="ReachNet — Honest-by-design outbound cold email" />
+  <meta property="og:description" content="Honest-by-design outbound cold email — An outbound cold-email platform built for small businesses. Import prospects from CSV, run multi-step sequences from you" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"ReachNet","headline":"ReachNet — Honest-by-design outbound cold email","description":"An outbound cold-email platform built for small businesses. Import prospects from CSV, run multi-step sequences from your own domain, and work replies in a pipeline inbox. Dispatching is idempotent, daily send caps keep volume in check, every send is CAN-SPAM compliant, and one-click unsubscribe ships on every message.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Next.js 16, React 19, TypeScript, Drizzle ORM, Postgres, Tailwind","about":"SaaS Product"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">SaaS Product</span>
+        <h1 class="reveal" data-d="1">ReachNet</h1>
+        <p class="lede reveal" data-d="2">Honest-by-design outbound cold email</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-saas reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.5h.01"/><path d="M9 6.5h.01"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>An outbound cold-email platform built for small businesses. Import prospects from CSV, run multi-step sequences from your own domain, and work replies in a pipeline inbox. Dispatching is idempotent, daily send caps keep volume in check, every send is CAN-SPAM compliant, and one-click unsubscribe ships on every message.</p></div>
+        
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Small businesses that want to run cold outreach usually get stuck between two bad options. They can blast from a shared sending service that risks their domain reputation and skirts compliance, or they can stitch together spreadsheets and manual follow-ups that drop leads and double-send. Neither one leaves them a clean record of who was contacted, who replied, and who asked to stop.</p></div>
+        <div class="feature"><h3>What I built</h3><p>The full send → reply → unsubscribe loop is verified in the browser. Prospects import and dedupe. Sequences dispatch under caps from the sending domain. Replies and unsubscribes halt the cadence, and the pipeline inbox reflects each state change. The product is built but not yet deployed.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>ReachNet is the outbound sibling to LeadNet, and it runs on the same Next.js 16 / React 19 / TypeScript stack with Drizzle ORM over Postgres. At the core is an idempotent dispatcher. Every send is keyed, so a retry or a re-run can't fire the same email twice. Daily caps and warm-up guidance throttle volume to protect deliverability. Sending is own-domain-only by design. The system is honest by design too: the moment a reply or an unsubscribe lands, the remaining steps in that prospect's sequence stop instead of pushing through the cadence. CSV import runs deduplication and suppression checks on the way in. Sequences carry merge fields and vertical templates. The whole funnel surfaces in a pipeline inbox (queued → sent → replied → won) with an Outbound Advisor for next steps. CAN-SPAM compliance and one-click unsubscribe are wired into every send rather than bolted on after.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Full send → reply → unsubscribe loop verified in the browser</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>CSV import with automatic deduplication and suppression checks</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Multi-step sequences with merge fields and vertical templates</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Idempotent dispatcher that never double-sends, with daily caps and warm-up guidance</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Own-domain-only sending to protect deliverability and sender reputation</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Honest-by-design: a reply or unsubscribe stops the remaining sequence steps</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Pipeline inbox (queued → sent → replied → won) with an Outbound Advisor</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Next.js 16</span><span class="proj-tag">React 19</span><span class="proj-tag">TypeScript</span><span class="proj-tag">Drizzle ORM</span><span class="proj-tag">Postgres</span><span class="proj-tag">Tailwind</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-leadnet.html"><div class="dir">← Previous</div><div class="nm">LeadNet</div></a>
+          <a class="next" href="work-scoutnet.html"><div class="dir">Next →</div><div class="nm">ScoutNet</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

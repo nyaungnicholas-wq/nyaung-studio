@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeadNet — Case Study | Nicholas</title>
+  <meta name="description" content="Speed-to-lead capture for local small businesses — A multi-tenant lead-capture SaaS for local small businesses. It catches every form submission, fires instant alerts and " />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-leadnet.html" />
+  <meta property="og:title" content="LeadNet — Speed-to-lead capture for local small businesses" />
+  <meta property="og:description" content="Speed-to-lead capture for local small businesses — A multi-tenant lead-capture SaaS for local small businesses. It catches every form submission, fires instant alerts and " />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"LeadNet","headline":"LeadNet — Speed-to-lead capture for local small businesses","description":"A multi-tenant lead-capture SaaS for local small businesses. It catches every form submission, fires instant alerts and branded auto-replies, then nurtures leads through multi-step email sequences. It's built for realtors, contractors, and attorneys who win by answering fast. Delivery is only confirmed once an alert actually succeeds.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Next.js, TypeScript, PGlite, Drizzle ORM, Tailwind, Resend","about":"SaaS Product"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">SaaS Product</span>
+        <h1 class="reveal" data-d="1">LeadNet</h1>
+        <p class="lede reveal" data-d="2">Speed-to-lead capture for local small businesses</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-saas reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.5h.01"/><path d="M9 6.5h.01"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A multi-tenant lead-capture SaaS for local small businesses. It catches every form submission, fires instant alerts and branded auto-replies, then nurtures leads through multi-step email sequences. It's built for realtors, contractors, and attorneys who win by answering fast. Delivery is only confirmed once an alert actually succeeds.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">14/14</span><span class="ml">lead-vault tests pass</span></div><div class="metric"><span class="mv">5</span><span class="ml">vertical templates</span></div><div class="metric"><span class="mv">AES-256</span><span class="ml">encrypted secrets</span></div><div class="metric"><span class="mv">7-day</span><span class="ml">billing grace window</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Local businesses lose deals when they answer leads too slowly. Most capture tools make it worse: they quietly drop submissions when an alert fails or when billing lapses. The lead that came in while you were on a job site is usually the one you needed most. And a tool that stops capturing the moment a card expires turns a billing hiccup into lost revenue.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Built and verified. All 14 of 14 lead-vault tests pass, and the tsc, lint, and build checks come back green. Capture keeps working even when billing lapses: suspended accounts still bank every lead, gated behind a pay-to-access vault. The suspend lock was hardened after an adversarial review closed a server-side bypass.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>Leads arrive through an embeddable widget or a headless endpoint. On every submission the system fans out to configured sinks (Google Sheets, Brevo, HubSpot, or a webhook), with secrets held under AES-256 encryption. It only confirms delivery to the submitter once an alert has actually succeeded, so a silent failure can't masquerade as a saved lead. Five vertical templates pre-shape forms and copy per industry, and a setup agent reads the company website to auto-extract business info during onboarding. The nurture engine drives multi-step email sequences that auto-stop the moment a human reply lands. On top of the speed-to-lead inbox sit the reply engine and inbound advisor. The defining design decision is that capture is always-on while billing is decoupled from it. An operator can manually suspend an account, which locks the dashboard but never stops capture. Leads keep flowing into a vault that the customer pays to access, with a 7-day grace window and an /admin console to manage it. Development runs zero-env on PGlite with a dev outbox, so the whole stack boots without external services. An adversarial review caught and closed a server-side bypass of the suspend lock.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>14/14 lead-vault tests pass; capture keeps working even if billing lapses</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Embed widget or headless endpoint with 5 vertical templates</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Delivery only confirms once an alert actually succeeds, so no silent drops</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Sheets, Brevo, HubSpot, and webhook sinks with AES-256 encrypted secrets</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Speed-to-lead inbox; nurture sequences auto-stop on a human reply</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Setup agent auto-extracts business info from the company website</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Billing suspend locks the dashboard but never stops capture; leads vault, 7-day grace</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Next.js</span><span class="proj-tag">TypeScript</span><span class="proj-tag">PGlite</span><span class="proj-tag">Drizzle ORM</span><span class="proj-tag">Tailwind</span><span class="proj-tag">Resend</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-grownet.html"><div class="dir">← Previous</div><div class="nm">GrowNet</div></a>
+          <a class="next" href="work-reachnet.html"><div class="dir">Next →</div><div class="nm">ReachNet</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

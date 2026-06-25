@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-page="uses">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uses — What I Build With | Nicholas</title>
+  <meta name="description" content="The tools behind the work — the languages, frameworks, AI models, and infrastructure Nicholas ships with, all in production across real projects." />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nicholasnyaung.com/uses.html" />
+  <meta property="og:title" content="Uses — What I Build With | Nicholas" />
+  <meta property="og:description" content="The languages, frameworks, AI models, and infrastructure behind the work." />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <!-- Privacy-friendly analytics — activates once you create the site in Plausible (or swap for GA). -->
+  <script defer data-domain="nicholasnyaung.com" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+  <main id="top">
+  <section class="page-hero">
+    <div class="wrap case-wrap">
+      <span class="eyebrow reveal">Uses</span>
+      <h1 class="reveal" data-d="1">What I <span class="brand-text">build with.</span></h1>
+      <p class="lede reveal" data-d="2">The tools behind the work — picked to fit the problem, and all in production across shipped projects, not a wishlist.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:6px">
+    <div class="wrap">
+      <div class="feature-grid">
+        <div class="feature reveal">
+          <h3>Languages &amp; frameworks</h3>
+          <ul class="uses-list"><li>TypeScript</li><li>Next.js</li><li>React</li><li>Node.js</li><li>Python</li><li>FastAPI</li></ul>
+        </div>
+        <div class="feature reveal" data-d="1">
+          <h3>Frontend &amp; motion</h3>
+          <ul class="uses-list"><li>Three.js + custom GLSL</li><li>GSAP + ScrollTrigger</li><li>Lenis</li><li>Tailwind</li><li>Remotion</li></ul>
+        </div>
+        <div class="feature reveal" data-d="2">
+          <h3>Data</h3>
+          <ul class="uses-list"><li>Postgres</li><li>Drizzle ORM</li><li>PGlite</li><li>SQLite</li><li>pandas / NumPy</li><li>PyArrow</li></ul>
+        </div>
+        <div class="feature reveal">
+          <h3>AI</h3>
+          <ul class="uses-list"><li>Gemini</li><li>Claude</li><li>FLUX</li><li>ElevenLabs</li><li>Depth Anything V2</li></ul>
+        </div>
+        <div class="feature reveal" data-d="1">
+          <h3>Infra &amp; ops</h3>
+          <ul class="uses-list"><li>Vercel</li><li>Cloudflare / Netlify</li><li>launchd cron</li><li>Resend</li><li>Buffer API</li><li>Alpaca API</li></ul>
+        </div>
+        <div class="feature reveal" data-d="2">
+          <h3>How I work</h3>
+          <ul class="uses-list"><li>One repo per project</li><li>Ship, then prove</li><li>Verify the full loop</li><li>Automate the boring parts</li></ul>
+        </div>
+      </div>
+      <p class="post-note reveal" style="margin-top:30px">Tools are means, not the point — I pick whatever ships the outcome. <a href="work.html">See what they built →</a></p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <div class="cta-card reveal">
+        <span class="eyebrow" style="justify-content:center">Let's build</span>
+        <h2>Want this stack <span class="brand-text">pointed at your problem?</span></h2>
+        <p>Tell me what you're trying to ship. You'll get a scoped plan and a straight answer.</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+          <a href="work.html" class="btn btn-ghost btn-lg">See the work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

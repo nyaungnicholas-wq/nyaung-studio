@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jarvis — Case Study | Nicholas</title>
+  <meta name="description" content="An Iron Man–style assistant that builds holograms — A voice-driven personal AI assistant with a holographic fabrication engine. It sees through a camera with Gemini vision " />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-jarvis.html" />
+  <meta property="og:title" content="Jarvis — An Iron Man–style assistant that builds holograms" />
+  <meta property="og:description" content="An Iron Man–style assistant that builds holograms — A voice-driven personal AI assistant with a holographic fabrication engine. It sees through a camera with Gemini vision " />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Jarvis","headline":"Jarvis — An Iron Man–style assistant that builds holograms","description":"A voice-driven personal AI assistant with a holographic fabrication engine. It sees through a camera with Gemini vision and runs on an always-on wake word. Hand it a reference image and it turns that into a 3D hologram, then designs and renders its own builds. Each result gets compared against the reference, with fixes hot-swapped in a self-correction loop.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, FastAPI, Gemini, Three.js, Depth Anything V2, WebGL","about":"AI Agent"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">AI Agent</span>
+        <h1 class="reveal" data-d="1">Jarvis</h1>
+        <p class="lede reveal" data-d="2">An Iron Man–style assistant that builds holograms</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-ai reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><circle cx="18" cy="17.5" r="1.6"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A voice-driven personal AI assistant with a holographic fabrication engine. It sees through a camera with Gemini vision and runs on an always-on wake word. Hand it a reference image and it turns that into a 3D hologram, then designs and renders its own builds. Each result gets compared against the reference, with fixes hot-swapped in a self-correction loop.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">12-30</span><span class="ml">parts per component</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Voice assistants stop at conversation. They can't see what's in front of them. They can't build anything you can inspect, and they have no way to check whether their own output is actually correct.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Built and working. The assistant sees through a camera, deconstructs a reference image into a 3D hologram, then designs and renders its own multi-part 3D build. From there it critiques and corrects that build against the reference in a closing loop. The self-correction loop renders, critiques, and refines its own 3D builds.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>A FastAPI backend ties three layers together. The input layer stays always-on: a wake word opens a voice channel, and a camera feed goes to Gemini vision so the assistant can reason about what it sees. The graphics layer renders in the browser on Three.js/WebGL. Its Hologram Deconstructor takes a reference image and uses Depth Anything V2 in-browser to lift it into a depth-mapped 3D hologram, which is the Relief engine. The key build is the Fabrication Engine. Rather than treating schematics as flat pictures, it generates them as JARVIS-designed 3D builds described in a rich geometry language, assembling roughly 12 to 30 parts per component. What makes it more than a renderer is the Iron Man self-correction loop. The engine renders its own build, sends that render back through Gemini vision to compare against the reference, then hot-swaps fixes and re-renders. A REFINE control triggers another pass on demand.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Self-correction loop renders, critiques, and refines its own 3D builds</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Always-on wake word and voice, FastAPI backend with Gemini vision</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Hologram Deconstructor plus Relief engine using Depth Anything V2, in-browser</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Fabrication Engine builds schematics as 3D geometry, 12-30 parts per component</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Iron Man self-correction loop: render the build, vision-critique against the reference, refine</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>REFINE control re-runs the render-compare-fix pass on demand</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Browser graphics on Three.js/WebGL, no server round-trip for rendering</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">FastAPI</span><span class="proj-tag">Gemini</span><span class="proj-tag">Three.js</span><span class="proj-tag">Depth Anything V2</span><span class="proj-tag">WebGL</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-scoutnet.html"><div class="dir">← Previous</div><div class="nm">ScoutNet</div></a>
+          <a class="next" href="work-intern-agent.html"><div class="dir">Next →</div><div class="nm">Intern Agent</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

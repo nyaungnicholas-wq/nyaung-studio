@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrowNet — Case Study | Nicholas</title>
+  <meta name="description" content="One funnel that catches leads and starts conversations — GrowNet is one growth platform that runs inbound lead capture and outbound cold outreach side by side for small teams. I" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-grownet.html" />
+  <meta property="og:title" content="GrowNet — One funnel that catches leads and starts conversations" />
+  <meta property="og:description" content="One funnel that catches leads and starts conversations — GrowNet is one growth platform that runs inbound lead capture and outbound cold outreach side by side for small teams. I" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"GrowNet","headline":"GrowNet — One funnel that catches leads and starts conversations","description":"GrowNet is one growth platform that runs inbound lead capture and outbound cold outreach side by side for small teams. It sits on a spine-first data model: one person is exactly one record, so the two channels can never work the same contact at once.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Next.js, React 19, TypeScript, Drizzle ORM, Postgres, Tailwind","about":"SaaS Product"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">SaaS Product</span>
+        <h1 class="reveal" data-d="1">GrowNet</h1>
+        <p class="lede reveal" data-d="2">One funnel that catches leads and starts conversations</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-saas reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.5h.01"/><path d="M9 6.5h.01"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>GrowNet is one growth platform that runs inbound lead capture and outbound cold outreach side by side for small teams. It sits on a spine-first data model: one person is exactly one record, so the two channels can never work the same contact at once.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">1</span><span class="ml">record per person (contact spine)</span></div><div class="metric"><span class="mv">2</span><span class="ml">channels, one lock</span></div><div class="metric"><span class="mv">2x</span><span class="ml">full-loop client passes, both green</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Teams that run inbound and outbound on separate tools waste leads. The same person gets cold-emailed while a nurture sequence is already running. No system owns the contact, so the channels step on each other and the prospect ends up with a confusing double-touch.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Built and verified. The full inbound to outbound loop was run twice as the client, both passes green, and the next build passed. Status is Built, not yet deployed.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>GrowNet came from merging two earlier products, LeadNet (inbound) and ReachNet (outbound), into one contact-spine data model where each person is a single record both channels read and write. The interference problem gets solved in the database rather than the UI. A single-active-automation lock means a contact can have at most one running automation, so a nurture sequence and a cold campaign can never fire on the same person at the same time. An import warm-exclusion guard catches the correlation case right at ingestion: newly imported prospects are held back from outbound if they already exist as warm inbound contacts. On top of the unified funnel sits a Growth Advisor that reads the whole pipeline and surfaces correlation-aware next moves. An onboarding agent reads a company website to pre-write copy and set up sender identity. The design was worked out council-first before any building started. Stack: Next.js, React 19, TypeScript, Drizzle ORM, Postgres, Tailwind, with an indigo/emerald/sky three-channel UI.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Full inbound → outbound loop verified twice as a client — both passes green</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Merges LeadNet inbound and ReachNet outbound into one contact-spine data model</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Single-active-automation lock, enforced in the database, blocks channel collisions</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Import warm-exclusion guard holds back prospects who are already warm inbound contacts</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Inbound capture forms and an outbound campaign dispatcher live in one interface</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Growth Advisor reads the whole funnel and surfaces correlation-aware next moves</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Onboarding agent reads a website to pre-write copy and set up sender identity</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Next.js</span><span class="proj-tag">React 19</span><span class="proj-tag">TypeScript</span><span class="proj-tag">Drizzle ORM</span><span class="proj-tag">Postgres</span><span class="proj-tag">Tailwind</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-fintwit-dashboard.html"><div class="dir">← Previous</div><div class="nm">Investor Alpha Hub</div></a>
+          <a class="next" href="work-leadnet.html"><div class="dir">Next →</div><div class="nm">LeadNet</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

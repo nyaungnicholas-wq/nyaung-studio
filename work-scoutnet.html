@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScoutNet — Case Study | Nicholas</title>
+  <meta name="description" content="Find local businesses, score them, draft the pitch, send — A lead-discovery and qualification agent for web professionals. It searches the web for stable local businesses, then re" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-scoutnet.html" />
+  <meta property="og:title" content="ScoutNet — Find local businesses, score them, draft the pitch, send" />
+  <meta property="og:description" content="Find local businesses, score them, draft the pitch, send — A lead-discovery and qualification agent for web professionals. It searches the web for stable local businesses, then re" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"ScoutNet","headline":"ScoutNet — Find local businesses, score them, draft the pitch, send","description":"A lead-discovery and qualification agent for web professionals. It searches the web for stable local businesses, then reads each site and online presence to score them on two things: income stability and fixable digital gaps. From there it drafts a personalized cold email for every match, auto-sends the strongest ones, and queues the rest for review.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Next.js 16, React 19, TypeScript, Drizzle ORM, Resend","about":"AI Agent"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">AI Agent</span>
+        <h1 class="reveal" data-d="1">ScoutNet</h1>
+        <p class="lede reveal" data-d="2">Find local businesses, score them, draft the pitch, send</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-ai reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><circle cx="18" cy="17.5" r="1.6"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A lead-discovery and qualification agent for web professionals. It searches the web for stable local businesses, then reads each site and online presence to score them on two things: income stability and fixable digital gaps. From there it drafts a personalized cold email for every match, auto-sends the strongest ones, and queues the rest for review.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">80+</span><span class="ml">score to auto-send</span></div><div class="metric"><span class="mv">2</span><span class="ml">scoring axes</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Freelancers and small web shops lose hours hunting for clients who can actually pay and genuinely need the work, then guessing at a pitch. Most leads are either broke or already have a solid site. Generic cold emails get ignored.</p></div>
+        <div class="feature"><h3>What I built</h3><p>The full discover, score, pitch, and send pipeline runs end-to-end with compliance built in, and the complete loop was verified in the browser. Built, not yet deployed.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>Forked from the ReachNet outbound infrastructure and built on Next.js 16, React 19, and TypeScript with Drizzle ORM. Discovery pulls candidates from Google Places, OpenStreetMap, or a sample dataset. A deterministic enrichment pass then inspects each business's site for concrete signals, such as SSL, mobile-readiness, stale copy, working forms, and social links, rather than leaning on a black-box model. Every lead gets scored on two transparent axes, income stability and digital gap, and a hybrid send rule decides what happens next. Scores of 80 or higher auto-fire a personalized cold email from the user's own domain via Resend. Anything below that is queued for manual review. Daily send caps, CAN-SPAM compliance, and an unsubscribe-to-suppression path are wired into the send layer, so the agent can run without crossing compliance lines.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Discover → score → pitch → send pipeline runs end-to-end, compliance built in</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Discovers leads from Google Places, OpenStreetMap, or sample data</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Scores on two transparent axes: income stability and digital gap</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Deterministic site enrichment checks SSL, mobile-readiness, stale copy, forms, socials</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Hybrid send: auto-fires scores 80+, queues the rest for review, caps enforced</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Sends from the user's own domain via Resend</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>CAN-SPAM compliant with unsubscribe-to-suppression built in</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Next.js 16</span><span class="proj-tag">React 19</span><span class="proj-tag">TypeScript</span><span class="proj-tag">Drizzle ORM</span><span class="proj-tag">Resend</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-reachnet.html"><div class="dir">← Previous</div><div class="nm">ReachNet</div></a>
+          <a class="next" href="work-jarvis.html"><div class="dir">Next →</div><div class="nm">Jarvis</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

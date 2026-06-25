@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-page="writing">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing — Notes from the Build | Nicholas</title>
+  <meta name="description" content="Build notes from Nicholas — how I think about shipping software solo: database-level guarantees, honest-by-design systems, self-correcting AI, and hands-off automation." />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nicholasnyaung.com/writing.html" />
+  <meta property="og:title" content="Writing — Notes from the Build | Nicholas" />
+  <meta property="og:description" content="How I think about shipping software solo — short notes from the work." />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "Blog", "name": "Nicholas — Writing", "url": "https://nicholasnyaung.com/writing.html", "author": { "@type": "Person", "name": "Nicholas Nyaung" },
+    "blogPost": [
+      { "@type": "BlogPosting", "headline": "Honest by design", "about": "Enforcing the right behavior in the data model, not in policy" },
+      { "@type": "BlogPosting", "headline": "Running a strategy live and walking away", "about": "Hands-off systematic trading" },
+      { "@type": "BlogPosting", "headline": "Scoring strangers", "about": "An explainable lead-qualification agent" },
+      { "@type": "BlogPosting", "headline": "When billing lapses, capture shouldn't", "about": "Decoupling billing from lead capture" },
+      { "@type": "BlogPosting", "headline": "Teaching an assistant to check its own work", "about": "A self-correcting AI fabrication loop" },
+      { "@type": "BlogPosting", "headline": "Why I gave GrowNet a database-level lock", "about": "Designing guarantees into the data model" },
+      { "@type": "BlogPosting", "headline": "Two sleeves, twenty-six years", "about": "Designing a futures system that survives every regime" },
+      { "@type": "BlogPosting", "headline": "Posting every day without touching it", "about": "Autonomous content pipelines" }
+    ] }
+  </script>
+  <!-- Privacy-friendly analytics — activates once you create the site in Plausible (or swap for GA). -->
+  <script defer data-domain="nicholasnyaung.com" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+  <main id="top">
+  <section class="page-hero">
+    <div class="wrap case-wrap">
+      <span class="eyebrow reveal">Writing</span>
+      <h1 class="reveal" data-d="1">Notes from <span class="brand-text">the build.</span></h1>
+      <p class="lede reveal" data-d="2">Short, honest notes on how I ship software solo — the decisions, the trade-offs, and the systems that run without me.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:10px">
+    <div class="wrap case-wrap">
+      <article class="post reveal">
+        <div class="post-meta"><span class="post-cat">Principles</span> · <time>Jun 2026</time></div>
+        <h2>Honest by design</h2>
+        <p>A rule that lives in a doc gets broken. Not out of malice. Docs are suggestions, and deadlines are real, so the honest behavior gets skipped the first time it's inconvenient and nobody notices until a customer does. Across my SaaS work I stopped writing rules for people to follow and started building them into the one place that can't be argued with: the schema. If the data model won't let you do the wrong thing, you don't have to remember not to.</p>
+        <p>GrowNet is the clearest case. Running inbound nurture and outbound cold-email on the same person at the same time is about the worst thing you can hand a prospect, and I didn't want that to be a setting someone could fat-finger on a bad day. So I put a lock at the database level: one active automation per contact. You can nurture them or you can cold-email them. "Both at once" isn't a mistake the UI nudges you away from. It's a state the database refuses to store.</p>
+        <p>ReachNet works the same way. The moment someone replies or unsubscribes, the sending stops. No daily review, no flag a human has to clear. It's enforced where it can't slip. And LeadNet never holds your data hostage, because I never built the leverage to do it. Same move every time: don't trust intentions, delete the option.</p>
+        <p>None of this is glamorous, which is sort of the point. Policy is what you promise. The data model is what actually happens. When the two disagree, the data model wins, so I'd rather the honest version be the only one the system can express. Make the right thing the only thing, and nobody has to be trusted to do it.</p>
+      </article>
+
+      <article class="post reveal" data-d="1">
+        <div class="post-meta"><span class="post-cat">Systems</span> · <time>Jun 2026</time></div>
+        <h2>Running a strategy live and walking away</h2>
+        <p>A backtest is a hypothesis. A system that trades on its own, on a schedule, with nobody watching — that's the real test. Stock Trader V7 has run on an Alpaca paper account since June 2026: a two-speed loop that checks positions every 60 seconds and re-evaluates signals daily, with full order execution and slippage tracking.</p>
+        <p>The hard part wasn't the strategy (20.7% CAGR against a −30% max drawdown in backtest). It was making it boring: no manual intervention, no babysitting, clean restarts. "Hands-off" is a feature you have to engineer, not a state you hope for.</p>
+      </article>
+
+      <article class="post reveal" data-d="2">
+        <div class="post-meta"><span class="post-cat">AI Agents</span> · <time>Jun 2026</time></div>
+        <h2>Scoring strangers</h2>
+        <p>Most lead tools hand you a number and hide where it came from. You get a 92 and a promise that the model knows best. I don't trust that, and I don't expect a small business owner to act on it either. So when I built ScoutNet, the agent that decides which local businesses are worth pitching, I made it show its work. Every score breaks into two axes you can say out loud: can they pay, and is there something I could actually fix.</p>
+        <p>Income stability answers the first question. Digital gap answers the second, and that's the half that does the real work. Rather than ask a model to guess, ScoutNet runs deterministic checks on each site. SSL or not. Mobile-readiness. Stale copy. Whether the contact form actually submits. Whether they show up anywhere social. None of it is a hunch. It's a checklist that runs the same way every time, so when a business scores high on digital gap, I can point at the dead form and say, that, right there.</p>
+        <p>Sending follows the same logic. Anything over 80 gets a personalized cold email, fired from your own domain. Everything below queues for manual review, because the cases that aren't obvious are exactly the ones a human should read. It's CAN-SPAM compliant, and an unsubscribe maps straight to suppression. No second-guessing, no quiet re-adds. Discovery pulls from Google Places, OpenStreetMap, or sample data, but the part I care about is what happens after.</p>
+        <p>A model that scores 92 and shrugs is asking for blind trust. A score built from missing SSL, a dead form, and a four-year-old homepage is an argument. The second one I can defend to the person I'm about to email, and to myself. A score you can explain beats a model you can't.</p>
+      </article>
+
+      <article class="post reveal">
+        <div class="post-meta"><span class="post-cat">Product</span> · <time>Jun 2026</time></div>
+        <h2>When billing lapses, capture shouldn't</h2>
+        <p>Most lead tools tie capture to billing. Miss a payment and the form goes dark. So the one thing a customer pays you to never break is the first thing you break. That's backwards. A billing problem is between me and the customer. It should never reach the stranger filling out a contact form.</p>
+        <p>In LeadNet I split the two apart. The app stays on. An operator can suspend an account from an /admin console, and that suspend locks the dashboard, but it does not stop capture. Leads keep landing in a vault the customer pays to reopen, with a 7-day grace window before the lock bites. The money question and the data question run on separate systems. You can owe me and still not lose a single lead.</p>
+        <p>The hard part was making the lock honest. Locking the UI is easy and meaningless if the capture path still trusts the front end. I ran an adversarial review of my own code and found a server-side bypass: the data could be reached around the locked dashboard. I closed it. The delivery side carries the same rule. I only confirm a lead as saved to the person who submitted it once an alert actually succeeds, so a silent failure can't pass itself off as a delivered lead.</p>
+        <p>Right now 14 of 14 lead-vault tests pass, and tsc, lint, and build are green. That's not the point on its own. The point is the rule underneath it. The worst day in a customer's billing relationship with me should cost them an awkward email, not a customer of their own.</p>
+      </article>
+
+      <article class="post reveal" data-d="1">
+        <div class="post-meta"><span class="post-cat">AI Agents</span> · <time>Jun 2026</time></div>
+        <h2>Teaching an assistant to check its own work</h2>
+        <p>Most assistants are blind and forgetful about their own output. They make something, hand it over, and have no clue whether it's any good. Jarvis is where I tried to fix both ends of that. It's a voice assistant with an always-on wake word, and it actually sees the world in front of it: a camera feeds Gemini vision, so it has a read on what's there. That one capability changes what you can ask it to do.</p>
+        <p>The part I'm proudest of is the fabrication side. The Hologram Deconstructor takes a reference image and runs Depth Anything V2 in the browser to lift it into a 3D hologram. The Fabrication Engine goes further. It builds schematics as real geometry, twelve to thirty parts per component, not a flat picture dressed up to look dimensional. Once you're building actual parts, the build can be wrong in real, inspectable ways. That's what made the next step possible.</p>
+        <p>Here's the loop I care about. Jarvis renders its own build, sends that render back through Gemini vision, and compares it against the original reference. Where they disagree, it hot-swaps the fixes and re-renders. A REFINE button kicks off another pass when I want one. The assistant doesn't trust its first answer. It looks at what it actually made and grades it against the target, the same way I'd squint at a render and go, no, the proportions are off.</p>
+        <p>I think this is the part more agents should steal. Seeing the world is one capability. Checking your own output against a goal is a different one, and most tools skip it because shipping the first draft is easier. Jarvis does both, and the self-correction loop is the reason its holograms come out looking like the thing I pointed it at.</p>
+      </article>
+
+      <article class="post reveal" data-d="2">
+        <div class="post-meta"><span class="post-cat">Architecture</span> · <time>Jun 2026</time></div>
+        <h2>Why I gave GrowNet a database-level lock</h2>
+        <p>Most growth tools let inbound nurture and outbound cold-email run side by side. The result is the worst email a prospect can get: a "nice to meet you" sequence and a cold pitch landing in the same inbox, the same week, from the same company.</p>
+        <p>I didn't want that to be a policy you could misconfigure — I wanted it to be impossible. So GrowNet is built on a spine-first data model: one person is one record, resolved by email, and a single-active-automation lock lives in the database, not the UI. A contact can be in nurture <em>or</em> outreach, never both. The honest behaviour is enforced by the only thing that actually enforces anything — the schema. I verified the full loop twice, as the client, before I trusted it.</p>
+      </article>
+
+      <article class="post reveal">
+        <div class="post-meta"><span class="post-cat">Systems</span> · <time>Jun 2026</time></div>
+        <h2>Two sleeves, twenty-six years</h2>
+        <p>Every trading strategy has a regime it was never built for, and that's where it quietly bleeds. Trend-following loves a market that keeps moving and gets chopped to pieces in one that doesn't. Mean reversion does the opposite. So my NQ futures system doesn't pick a side. It runs two sleeves, and each one covers the other's bad weather.</p>
+        <p>TREND is time-series momentum: 19.3% CAGR against a −43% max drawdown at 5x, winning only about 40% of the time. That win rate looks ugly until you see the shape of it. A handful of big trends pay for a long line of small losers, and that's the deal you sign for with trend-following. DIP-CATCHER has the opposite temperament. It buys oversold pullbacks, but only above the 200-day SMA, so it catches dips inside an uptrend instead of knives in a falling market. The triggers are simple: RSI(2) at or below 10, three down days, or a low IBS reading. It wins around 70% of the time for 8–16% CAGR at 2–3x MNQ. Blended, the two land near 21.8% CAGR. But the number isn't the point. The point is that the two equity curves don't suffer at the same time.</p>
+        <p>I backtested this across 2000 to 2026, twenty-six years, net of costs. The number I trust isn't the CAGR. It's the validation around it. I checked the edge four ways: Monte-Carlo resampling to see if the order of returns mattered, walk-forward to test it on data it hadn't fit to, a cost-stress pass to confirm fees didn't eat the whole thing, and an 1,800-config parameter frontier to prove the result wasn't one lucky setting perched on a cliff. A pretty equity curve is the easiest thing in the world to draw. A result that survives being attacked from four directions is something else.</p>
+        <p>Here's the honest part: this is backtest only. No real capital has touched it, and I won't pretend otherwise. The lesson I'm keeping isn't about NQ at all. A single strategy bleeds in the regime it wasn't built for, and confidence should come from how hard you tried to break the thing, not from how good the chart looks when you don't.</p>
+      </article>
+
+      <article class="post reveal" data-d="1">
+        <div class="post-meta"><span class="post-cat">Automation</span> · <time>Jun 2026</time></div>
+        <h2>Posting every day without touching it</h2>
+        <p>Consistent short-form content is a grind that burns creators out in weeks. So MINTSET removes the human from the loop entirely: AI story ideation, deterministic Remotion rendering, and scheduled posting — script to publish, every day, to its audience.</p>
+        <p>The lesson that keeps repeating across my work: if a thing needs to happen reliably, don't rely on discipline. Build the pipeline, give it a schedule, and let the system carry it.</p>
+      </article>
+
+      <p class="post-note reveal">More notes coming. Want to talk shop or hire the studio? <a href="contact.html">Get in touch →</a></p>
+    </div>
+  </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

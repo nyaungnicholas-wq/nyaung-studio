@@ -1,0 +1,13 @@
+{
+  "name": "Nicholas — Independent Product & AI Studio",
+  "short_name": "Nicholas",
+  "description": "One builder. Fourteen products, shipped end to end — SaaS, AI agents, trading systems, websites, and content engines.",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "theme_color": "#07070B",
+  "background_color": "#07070B",
+  "display": "standalone",
+  "start_url": "/"
+}

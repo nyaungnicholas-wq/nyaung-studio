@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troy NJROTC Warriors — Case Study | Nicholas</title>
+  <meta name="description" content="A cinematic, naval-inspired redesign for a JROTC unit — A static redesign of troynjrotc.org for a high-school Navy JROTC program. The front door is a WebGL hero scene: a fresne" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-troy-njrotc-site.html" />
+  <meta property="og:title" content="Troy NJROTC Warriors — A cinematic, naval-inspired redesign for a JROTC unit" />
+  <meta property="og:description" content="A cinematic, naval-inspired redesign for a JROTC unit — A static redesign of troynjrotc.org for a high-school Navy JROTC program. The front door is a WebGL hero scene: a fresne" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Troy NJROTC Warriors","headline":"Troy NJROTC Warriors — A cinematic, naval-inspired redesign for a JROTC unit","description":"A static redesign of troynjrotc.org for a high-school Navy JROTC program. The front door is a WebGL hero scene: a fresnel energy core, a wireframe globe, orbiting gyroscope rings, and a parallax starfield, all moving under smooth scroll animation. A dark navy, red, and white design system carries that look across 30+ pages.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Three.js, GSAP, ScrollTrigger, Lenis, WebGL, JavaScript","about":"Website"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Website</span>
+        <h1 class="reveal" data-d="1">Troy NJROTC Warriors</h1>
+        <p class="lede reveal" data-d="2">A cinematic, naval-inspired redesign for a JROTC unit</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-web reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 2.7 15.4 0 18M12 3c-2.7 2.6-2.7 15.4 0 18"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A static redesign of troynjrotc.org for a high-school Navy JROTC program. The front door is a WebGL hero scene: a fresnel energy core, a wireframe globe, orbiting gyroscope rings, and a parallax starfield, all moving under smooth scroll animation. A dark navy, red, and white design system carries that look across 30+ pages.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">30+</span><span class="ml">pages</span></div><div class="metric"><span class="mv">12+</span><span class="ml">competitive-team pages</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>A JROTC unit's site has to carry a large, sprawling program. That means the core unit plus a dozen-plus competitive teams, all while still reading like a naval organization. Most templated school sites manage neither. They flatten everything into the same generic pages and feel nothing like the unit they represent.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Built and ready to ship: 30+ pages with the custom WebGL hero and per-team sections. Not yet deployed.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The hero is a Three.js WebGL scene built around a custom fresnel shader. The energy core glows brighter at its edges, where the view angle grazes the surface, and it's wrapped by a wireframe globe, orbiting gyroscope rings, and a parallax particle starfield for depth. Motion runs on Lenis for smooth scroll, feeding GSAP ScrollTrigger so animations fire as sections enter the viewport instead of on a timer. The whole thing is static JavaScript with no build step or backend. That lets the 30+ pages, including 12+ dedicated competitive-team pages for CyberPatriot, robotics, and StellarXplorers, share one navy/red/white design system in Cinzel and Oswald rather than getting squeezed into a single template.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>30+ pages with a custom WebGL hero, built and ready to ship</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Three.js WebGL hero with a custom fresnel core, wireframe globe, orbit rings, and starfield</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>GSAP ScrollTrigger driven by Lenis for scroll-triggered animation</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>12+ dedicated competitive-team pages (CyberPatriot, robotics, StellarXplorers)</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Navy / red / white design system in Cinzel and Oswald typography</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Fully static JavaScript, with no build step and no backend</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>30+ pages sharing one consistent naval design language</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Three.js</span><span class="proj-tag">GSAP</span><span class="proj-tag">ScrollTrigger</span><span class="proj-tag">Lenis</span><span class="proj-tag">WebGL</span><span class="proj-tag">JavaScript</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-shanty-realestate.html"><div class="dir">← Previous</div><div class="nm">Shanty Soerjono — Realtor Site</div></a>
+          <a class="next" href="work-mintset.html"><div class="dir">Next →</div><div class="nm">MINTSET</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

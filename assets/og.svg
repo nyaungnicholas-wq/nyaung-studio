@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0A0A12"/>
+      <stop offset="1" stop-color="#07070B"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.6" stop-color="#C7C9F7"/>
+      <stop offset="1" stop-color="#818CF8"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#818CF8"/><stop offset="0.5" stop-color="#6366F1"/><stop offset="1" stop-color="#C084FC"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0" r="1">
+      <stop offset="0" stop-color="#6366F1" stop-opacity="0.35"/>
+      <stop offset="0.6" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(90,90)">
+    <rect width="120" height="120" rx="30" fill="url(#mark)"/>
+    <path d="M36 86V36h9l30 34V36h9v50h-9L45 52v34z" fill="#0A0A14"/>
+  </g>
+  <text x="232" y="178" font-family="Satoshi, Arial, sans-serif" font-size="44" font-weight="700" fill="#A6A6C0">Nicholas</text>
+  <text x="88" y="360" font-family="Satoshi, Arial, sans-serif" font-size="86" font-weight="900" fill="url(#brand)">We design, build, and ship</text>
+  <text x="88" y="456" font-family="Satoshi, Arial, sans-serif" font-size="86" font-weight="900" fill="#818CF8">ambitious software.</text>
+  <text x="88" y="540" font-family="General Sans, Arial, sans-serif" font-size="32" fill="#74748C">SaaS · AI agents · Trading systems · High-craft websites</text>
+</svg>

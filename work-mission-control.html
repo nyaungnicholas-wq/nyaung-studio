@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Control — Case Study | Nicholas</title>
+  <meta name="description" content="A local command center for your whole project fleet — A local macOS command center that watches an entire project fleet from one pane of glass. Live status lights, KPI sparkl" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-mission-control.html" />
+  <meta property="og:title" content="Mission Control — A local command center for your whole project fleet" />
+  <meta property="og:description" content="A local command center for your whole project fleet — A local macOS command center that watches an entire project fleet from one pane of glass. Live status lights, KPI sparkl" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Mission Control","headline":"Mission Control — A local command center for your whole project fleet","description":"A local macOS command center that watches an entire project fleet from one pane of glass. Live status lights, KPI sparklines, git freshness, uptime, and launchd schedule checks all stream in from a 24/7 Node daemon, rendered behind a NASA-ops interface.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Next.js 15, React 19, Node.js, node:sqlite, SSE, TypeScript","about":"Developer Tool"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Developer Tool</span>
+        <h1 class="reveal" data-d="1">Mission Control</h1>
+        <p class="lede reveal" data-d="2">A local command center for your whole project fleet</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-tool reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M13 15h4"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A local macOS command center that watches an entire project fleet from one pane of glass. Live status lights, KPI sparklines, git freshness, uptime, and launchd schedule checks all stream in from a 24/7 Node daemon, rendered behind a NASA-ops interface.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">12</span><span class="ml">projects monitored</span></div><div class="metric"><span class="mv">5</span><span class="ml">real findings surfaced</span></div><div class="metric"><span class="mv">30s</span><span class="ml">probe interval</span></div><div class="metric"><span class="mv">24/7</span><span class="ml">telemetry daemon</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Run a dozen projects at once and their health scatters across terminals, cron logs, and git checkouts. You find out something broke long after it actually did. There's no single place to glance at and know which projects are fresh, running, and on schedule.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Built and running locally. It monitors 12 projects in one Fleet Grid with live status lights and KPI sparklines. The audit agents have already surfaced 5 real findings, proven on the troy project, with no write access to any monitored repo.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>A 24/7 Node daemon runs real probes against each project: git freshness, uptime, launchd schedule state, KPIs. It writes the results to a node:sqlite telemetry store. The Next.js 15 / React 19 front end, written in TypeScript, renders them as a read-only Fleet Grid and pushes updates over SSE every 30 seconds. Boot starts with an env safety gate, a self-test that fails closed if it detects a secret leak before the daemon comes up. On top of that sits the M3 hole-finder. It runs suggest-only audit agents that spawn the trusted Claude CLI in read-only mode and hand back findings instead of touching code.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Running locally — monitors 12 projects; audit agents surfaced 5 real findings</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Read-only Fleet Grid with live status lights and KPI sparklines</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Git freshness, uptime, and launchd schedule probes every 30s</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>24/7 Node daemon writes telemetry to a node:sqlite store, streamed over SSE</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Env safety gate: boot self-test fails closed on secret leaks</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Suggest-only audit agents spawn a read-only Claude CLI and return findings</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Monitors 12 projects; audit agents surfaced 5 real findings on troy</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Next.js 15</span><span class="proj-tag">React 19</span><span class="proj-tag">Node.js</span><span class="proj-tag">node:sqlite</span><span class="proj-tag">SSE</span><span class="proj-tag">TypeScript</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-intern-agent.html"><div class="dir">← Previous</div><div class="nm">Intern Agent</div></a>
+          <a class="next" href="work-stock-trader.html"><div class="dir">Next →</div><div class="nm">Stock Trader V7</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

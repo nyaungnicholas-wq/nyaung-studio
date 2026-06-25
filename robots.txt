@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Update the domain below to your real deployed URL.
+Sitemap: https://nicholasnyaung.com/sitemap.xml

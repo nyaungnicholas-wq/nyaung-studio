@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MINTSET — Case Study | Nicholas</title>
+  <meta name="description" content="A weekly autopilot factory for finance reels — A fully autonomous content engine for finance storytelling reels. AI writes the scripts, a deterministic Remotion factor" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-mintset.html" />
+  <meta property="og:title" content="MINTSET — A weekly autopilot factory for finance reels" />
+  <meta property="og:description" content="A weekly autopilot factory for finance reels — A fully autonomous content engine for finance storytelling reels. AI writes the scripts, a deterministic Remotion factor" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"MINTSET","headline":"MINTSET — A weekly autopilot factory for finance reels","description":"A fully autonomous content engine for finance storytelling reels. AI writes the scripts, a deterministic Remotion factory renders them, and scheduled crons post to @mint._.set with no human in the loop. It was built for a creator who needs to publish daily short-form without doing the daily work.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Remotion, React, Node.js, ElevenLabs, FLUX, Buffer API","about":"Content Engine"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Content Engine</span>
+        <h1 class="reveal" data-d="1">MINTSET</h1>
+        <p class="lede reveal" data-d="2">A weekly autopilot factory for finance reels</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status live"><span class="sd"></span>Live</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-content reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10.5 9.2v5.6l4.5-2.8z"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A fully autonomous content engine for finance storytelling reels. AI writes the scripts, a deterministic Remotion factory renders them, and scheduled crons post to @mint._.set with no human in the loop. It was built for a creator who needs to publish daily short-form without doing the daily work.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">7</span><span class="ml">scripts written &amp; rendered weekly</span></div><div class="metric"><span class="mv">8</span><span class="ml">FLUX images per reel</span></div><div class="metric"><span class="mv">1 + 5</span><span class="ml">TikTok + IG parts posted daily</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Posting short-form video consistently is a grind, and it burns creators out within weeks. The daily scripting, voiceover, editing, captioning, and publishing never stop. MINTSET takes the human out of that loop so the cadence holds without anyone showing up every day.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Live and running hands-off. Every Sunday it writes and renders the week's seven reels. Every day a cron publishes one to @mint._.set as 1 TikTok plus 5 Instagram parts. Script to publish, with no human in the loop.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The core is a deterministic "V7 factory." Each reel is defined by a JSON spec, and the same locked Remotion template renders it into a unique reel: ElevenLabs voiceover, 8 FLUX-generated images, beat-synced caption phrases, and generated code. Output stays repeatable but never comes out identical. Two launchd crons run the whole machine. A Sunday 5pm job kicks off a multi-agent batch that writes the next week's 7 scripts and renders all 7 up front. Then a daily 5pm cron posts one pre-rendered reel through the Buffer API with no approval gate. A ManyChat funnel sits downstream of the posts to capture interest.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Live &amp; autonomous — 1 TikTok + 5 Instagram parts posted daily, hands-off</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Weekly multi-agent batch writes 7 human-scorable scripts every Sunday</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Deterministic V7 factory: one locked template, unique VO, music, and imagery per reel</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>JSON-spec pipeline running ElevenLabs TTS, 8 FLUX images, beat-synced captions, and generated code</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Two launchd crons: Sunday renders all 7, daily posts one with no approval gate</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Publishes to @mint._.set as 1 TikTok plus 5 Instagram parts daily</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>ManyChat funnel downstream of posts to capture interest</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Remotion</span><span class="proj-tag">React</span><span class="proj-tag">Node.js</span><span class="proj-tag">ElevenLabs</span><span class="proj-tag">FLUX</span><span class="proj-tag">Buffer API</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-troy-njrotc-site.html"><div class="dir">← Previous</div><div class="nm">Troy NJROTC Warriors</div></a>
+          <a class="next" href="work-finance-book.html"><div class="dir">Next →</div><div class="nm">Money, Finally Explained</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

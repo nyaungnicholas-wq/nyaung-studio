@@ -1,0 +1,5 @@
+.DS_Store
+*.output
+.enriched.json
+.humanized.json
+node_modules/

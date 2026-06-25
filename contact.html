@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-page="contact">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start a Project with Nicholas — Contact</title>
+  <meta name="description" content="Tell me what you're building. I design and build products end to end, solo. Start a project or email nyaungnicholas@gmail.com directly." />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nicholasnyaung.com/contact.html" />
+  <meta property="og:title" content="Start a Project — Nicholas" />
+  <meta property="og:description" content="Tell me what you're building. Solo product & AI builder, end to end. Replies within 1–2 business days." />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "ContactPage", "name": "Contact — Nicholas", "url": "https://nicholasnyaung.com/contact.html", "mainEntity": { "@type": "Organization", "name": "Nicholas", "email": "nyaungnicholas@gmail.com", "url": "https://nicholasnyaung.com/" } }
+  </script>
+  <!-- Privacy-friendly analytics — activates once you create the site in Plausible (or swap for GA). -->
+  <script defer data-domain="nicholasnyaung.com" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+  <main id="top">
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow reveal">Start a project</span>
+      <h1 class="reveal" data-d="1">Tell me what <span class="brand-text">you're building.</span></h1>
+      <p class="lede reveal" data-d="2">I'm Nicholas — I design and build products end to end, solo. Whether you have a tight spec or a rough idea you can't shake, send it over. The more concrete you are about what success looks like, the faster I can tell you if I'm the right person to build it.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:10px">
+    <div class="wrap">
+      <div class="contact-grid">
+        <form class="form reveal" id="contact-form" novalidate>
+          <p style="color:var(--muted);font-size:14.5px;margin-bottom:4px">A few quick details and your message goes straight to my inbox — no account, no funnel. Prefer email? <a href="mailto:nyaungnicholas@gmail.com" style="color:var(--violet)">nyaungnicholas@gmail.com</a>.</p>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required aria-required="true" aria-describedby="f-name-error" />
+              <span class="field-error" id="f-name-error" role="alert"></span>
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="f-email-error" />
+              <span class="field-error" id="f-email-error" role="alert"></span>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-type">Project type</label>
+              <select id="f-type" name="type">
+                <option>SaaS product</option>
+                <option>AI agent / automation</option>
+                <option>Quant / trading system</option>
+                <option>Website / web app</option>
+                <option>Content engine</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-budget">Budget / timeline</label>
+              <input id="f-budget" name="budget" type="text" placeholder="e.g. ~$8k, 6 weeks" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-message">What are you trying to build?</label>
+            <textarea id="f-message" name="message" required aria-required="true" aria-describedby="f-message-error" placeholder="The problem, who it's for, and what success looks like."></textarea>
+            <span class="field-error" id="f-message-error" role="alert"></span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" style="align-self:flex-start">
+            Send message
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <p class="form-note" id="form-note" role="status"></p>
+        </form>
+
+        <aside class="reveal" data-d="1">
+          <div class="expect">
+            <div class="feature"><h3>I actually read it</h3><p>Every message lands with me directly — not an assistant, not a queue. I read the whole thing and think about whether I can help before I reply.</p></div>
+            <div class="feature"><h3>A straight answer</h3><p>You'll get an honest take: whether it's a fit, a rough sense of scope and timeline, and what the first step looks like. If I'm not the right build, I'll say so.</p></div>
+            <div class="feature"><h3>A real conversation</h3><p>If it's a match, we get on a call to pressure-test the idea and shape the work. No decks, no drawn-out sales process — just figuring out what to ship.</p></div>
+          </div>
+          <div class="contact-direct">
+            I reply to every serious inquiry within 1–2 business days. Prefer email? Reach me directly at <a href="mailto:nyaungnicholas@gmail.com">nyaungnicholas@gmail.com</a>.
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

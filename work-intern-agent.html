@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intern Agent — Case Study | Nicholas</title>
+  <meta name="description" content="An autonomous AI internship hunter — An autonomous agent that runs internship hunting from start to finish. It scrapes 8+ job boards, scores each opening aga" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-intern-agent.html" />
+  <meta property="og:title" content="Intern Agent — An autonomous AI internship hunter" />
+  <meta property="og:description" content="An autonomous AI internship hunter — An autonomous agent that runs internship hunting from start to finish. It scrapes 8+ job boards, scores each opening aga" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Intern Agent","headline":"Intern Agent — An autonomous AI internship hunter","description":"An autonomous agent that runs internship hunting from start to finish. It scrapes 8+ job boards, scores each opening against your résumé, writes personalised cover letters, and manages the whole application pipeline with tracking and analytics.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, Streamlit, SQLite, Playwright, Claude API","about":"AI Agent"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">AI Agent</span>
+        <h1 class="reveal" data-d="1">Intern Agent</h1>
+        <p class="lede reveal" data-d="2">An autonomous AI internship hunter</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-ai reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><circle cx="18" cy="17.5" r="1.6"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>An autonomous agent that runs internship hunting from start to finish. It scrapes 8+ job boards, scores each opening against your résumé, writes personalised cover letters, and manages the whole application pipeline with tracking and analytics.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">3,200+</span><span class="ml">lines shipped</span></div><div class="metric"><span class="mv">8+</span><span class="ml">job boards scraped</span></div><div class="metric"><span class="mv">A/B/C</span><span class="ml">cover-letter tone variants</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Internship hunting is a high-volume grind. The same listings show up across LinkedIn, Indeed, Glassdoor, Handshake, and WayUp, and every one wants a tailored cover letter, a manual apply, and a follow-up you forget to send. Do it by hand and you either apply to a handful of roles well or to a lot of roles badly.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Built and shipping at 3,200+ lines. It's a complete scrape → score → apply → follow-up pipeline with an outbox, an approval gate, Playwright auto-apply, and follow-up scheduling, all surfaced through a Streamlit dashboard with tracking and analytics.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The agent is a staged Python pipeline: scrape, score, apply, follow-up. Each opening moves through as a tracked record in SQLite. Scrapers pull from 8+ boards (LinkedIn, Indeed, Glassdoor, Handshake, WayUp), then a match-scoring step ranks every role against the résumé using demand analysis and skills-gap detection, so the highest-fit listings float to the top. The Claude API writes a personalised cover letter per role with A/B/C tone variants, and Playwright drives the actual submission. Both sit behind an outbox and approvals, so nothing goes out unreviewed. A Streamlit interface ties the loop together with pipeline tracking and analytics, and follow-ups get scheduled off the same record.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>3,200+ lines shipping a full scrape → score → apply → follow-up pipeline</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Scrapes 8+ boards: LinkedIn, Indeed, Glassdoor, Handshake, WayUp</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Match scoring against your résumé using demand analysis and skills-gap detection</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>AI cover-letter generation with A/B/C tone variants via the Claude API</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Playwright auto-apply behind an outbox and approval gate</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>One Streamlit dashboard for tracking, analytics, and scheduled follow-ups</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>SQLite-backed records carry each opening from scrape through follow-up</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">Streamlit</span><span class="proj-tag">SQLite</span><span class="proj-tag">Playwright</span><span class="proj-tag">Claude API</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-jarvis.html"><div class="dir">← Previous</div><div class="nm">Jarvis</div></a>
+          <a class="next" href="work-mission-control.html"><div class="dir">Next →</div><div class="nm">Mission Control</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

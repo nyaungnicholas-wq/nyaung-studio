@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock Trader V7 — Case Study | Nicholas</title>
+  <meta name="description" content="Sector rotation, running live and fully hands-off — A systematic equity engine that runs leveraged sector rotation off momentum and volatility targeting. The V7 "PUSH-20" s" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-stock-trader.html" />
+  <meta property="og:title" content="Stock Trader V7 — Sector rotation, running live and fully hands-off" />
+  <meta property="og:description" content="Sector rotation, running live and fully hands-off — A systematic equity engine that runs leveraged sector rotation off momentum and volatility targeting. The V7 "PUSH-20" s" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Stock Trader V7","headline":"Stock Trader V7 — Sector rotation, running live and fully hands-off","description":"A systematic equity engine that runs leveraged sector rotation off momentum and volatility targeting. The V7 \"PUSH-20\" strategy has traded live on an Alpaca paper account since June 9, 2026. It places its own orders on a schedule, tracks execution and slippage, and runs with no human in the loop.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, pandas, numpy, yfinance, Alpaca API, pytest","about":"Quant / Trading"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Quant / Trading</span>
+        <h1 class="reveal" data-d="1">Stock Trader V7</h1>
+        <p class="lede reveal" data-d="2">Sector rotation, running live and fully hands-off</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status live"><span class="sd"></span>Live</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-quant reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A systematic equity engine that runs leveraged sector rotation off momentum and volatility targeting. The V7 "PUSH-20" strategy has traded live on an Alpaca paper account since June 9, 2026. It places its own orders on a schedule, tracks execution and slippage, and runs with no human in the loop.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">20.7%</span><span class="ml">CAGR (backtest)</span></div><div class="metric"><span class="mv">−30%</span><span class="ml">max drawdown (backtest)</span></div><div class="metric"><span class="mv">60s</span><span class="ml">position-check loop</span></div><div class="metric"><span class="mv">$103.5k</span><span class="ml">paper equity</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Discretionary trading is inconsistent and eats your time. Most "systems" never actually run unattended. They live in a backtest notebook and die there. The hard part was never the signal. It's getting a strategy to execute itself every day without someone babysitting it.</p></div>
+        <div class="feature"><h3>What I built</h3><p>A leveraged sector-rotation engine, live on an Alpaca paper account since June 9, 2026. It runs fully hands-off on a launchd schedule, with paper equity at $103.5k. The backtest shows 20.7% CAGR against a −30% max drawdown over 2005–2024, and now it trades itself daily: 60-second position checks, daily signal rotation, real order execution, slippage tracking.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The engine ranks sectors by momentum, sizes positions with volatility targeting, then applies leverage. That's the "PUSH-20" tuning, which produced 20.7% CAGR against a −30% max drawdown across the 2005–2024 backtest. Execution runs as a two-speed loop. A fast 60-second cycle checks open positions and order fills; a separate daily cycle recomputes signals and rotates the book. The whole thing is wired to launchd, so it wakes the Mac and runs on its own schedule, hands-off, with a live HUD dashboard for watching fills and slippage. Under the hood it's Python on pandas and numpy, yfinance for data, the Alpaca API for order execution, and pytest covering the logic.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Live &amp; hands-off on Alpaca paper since Jun 2026 — 20.7% CAGR backtest</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>20.7% CAGR / −30% max drawdown in backtest (2005–2024)</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Live on an Alpaca paper account since Jun 9, 2026</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Two-speed loop: 60-second position checks plus daily signal cycles</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Fully hands-off via launchd, with the Mac waking itself on schedule</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Live HUD dashboard tracking fills and slippage</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Paper equity at $103.5k</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">pandas</span><span class="proj-tag">numpy</span><span class="proj-tag">yfinance</span><span class="proj-tag">Alpaca API</span><span class="proj-tag">pytest</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-mission-control.html"><div class="dir">← Previous</div><div class="nm">Mission Control</div></a>
+          <a class="next" href="work-futures-trader.html"><div class="dir">Next →</div><div class="nm">NQ Futures Quant Suite</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>
