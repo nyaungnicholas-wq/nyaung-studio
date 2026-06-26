@@ -220,7 +220,7 @@ function initCounters() {
 /* ---------- Contact form (validation + success) ----------
    Delivery order: 1) CONTACT_ENDPOINT (Resend serverless fn) → 2) Formspree → 3) mailto.
    Each falls back to the next if it isn't configured or fails. */
-const CONTACT_ENDPOINT = ''; // ← set to '/api/contact' after deploying api/contact.js (Resend) on Vercel/Netlify functions
+const CONTACT_ENDPOINT = '/api/contact'; // Resend via serverless fn (api/contact.js); env vars set in Vercel
 const FORMSPREE_ID = '';     // ← or set a Formspree form id (e.g. 'xqkdgabc') for a no-backend option
 function initContactForm() {
   const form = document.getElementById('contact-form'); if (!form) return;

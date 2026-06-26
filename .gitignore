@@ -3,3 +3,4 @@
 .enriched.json
 .humanized.json
 node_modules/
+.vercel
