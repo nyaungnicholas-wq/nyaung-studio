@@ -6,6 +6,9 @@
 (function () {
   const EMAIL = 'nyaungnicholas@gmail.com';
   const KB = [
+    // Scope guard: politely refuse off-topic / "do a task for me" / jailbreak attempts.
+    // (This bot is a static keyword lookup — no AI backend, so it can't run tasks or cost anything anyway.)
+    { k: ['write me', 'write a', 'write my', 'write code', 'code', 'script', 'debug', 'homework', 'essay', 'do my', 'build me', 'make me a', 'for me', 'jailbreak', 'ignore previous', 'ignore your', 'pretend you', 'roleplay', 'system prompt'], a: `I'm just a guide to the studio — not a build-it-for-you bot, and I only answer questions about Nicholas's work, services, and how to start a project. If you actually want something built, that's exactly what Nicholas does — <a href="contact.html">start a project</a>.` },
     { k: ['service', 'do you do', 'what do you', 'offer', 'build for', 'help with', 'capab'], a: `I design, build, and ship software end to end — <strong>SaaS products, AI agents, trading systems, websites, and content engines</strong>. Full menu on the <a href="services.html">Services</a> page.` },
     { k: ['available', 'hire', 'taking', 'open', 'work with', 'free'], a: `Yes — open for projects. Start one on the <a href="contact.html">Contact</a> page or email <a href="mailto:${EMAIL}">${EMAIL}</a>. I reply within 1–2 business days.` },
     { k: ['price', 'cost', 'how much', 'budget', 'rate', 'pricing', 'expensive'], a: `Project work is <strong>fixed-price against an agreed outcome</strong> — you know the number before we start. Retainers are monthly; advisory is by engagement. More in the FAQ on <a href="services.html">Services</a>.` },
