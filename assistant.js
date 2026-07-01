@@ -56,8 +56,14 @@
 
     const log = panel.querySelector('#ap-log');
     const chipsWrap = panel.querySelector('#ap-chips');
-    const add = (html, who) => { const d = document.createElement('div'); d.className = 'amsg ' + who; d.innerHTML = html; log.appendChild(d); log.scrollTop = log.scrollHeight; };
-    const ask = (text) => { add(text.replace(/</g, '&lt;'), 'user'); setTimeout(() => add(answer(text), 'bot'), 220); };
+    const add = (content, who) => {
+      const d = document.createElement('div'); d.className = 'amsg ' + who;
+      // User input is untrusted → render as plain text (textContent never parses HTML).
+      // Bot content comes only from the hardcoded KB above → safe to render as HTML for links.
+      if (who === 'user') d.textContent = content; else d.innerHTML = content;
+      log.appendChild(d); log.scrollTop = log.scrollHeight;
+    };
+    const ask = (text) => { add(text, 'user'); setTimeout(() => add(answer(text), 'bot'), 220); };
 
     let seeded = false;
     const open = () => {

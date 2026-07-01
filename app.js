@@ -107,15 +107,22 @@ function initTestimonials() {
   const list = window.NS_TESTIMONIALS || [];
   if (!list.length) return; // section stays hidden until you add real quotes
   const grid = sec.querySelector('#testimonials-grid');
-  grid.innerHTML = list.map(t => `
+  // Testimonial fields come from data — escape them before they enter innerHTML so a
+  // stray < or " in a pasted quote can't inject markup. Only allow http(s) urls.
+  const escH = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const safeUrl = (u) => { const s = String(u || ''); const full = /^https?:\/\//i.test(s) ? s : 'https://' + s; return /^https?:\/\//i.test(full) ? full : ''; };
+  grid.innerHTML = list.map(t => {
+    const href = safeUrl(t.url);
+    return `
     <figure class="tcard reveal">
-      <blockquote>“${t.quote}”</blockquote>
+      <blockquote>“${escH(t.quote)}”</blockquote>
       <figcaption>
-        <span class="tname">${t.name}</span>
-        ${t.title ? `<span class="ttitle">${t.title}</span>` : ''}
-        ${t.url ? `<a href="${t.url.startsWith('http') ? t.url : 'https://' + t.url}" target="_blank" rel="noopener" class="tlink">${t.url.replace(/^https?:\/\//, '')}</a>` : ''}
+        <span class="tname">${escH(t.name)}</span>
+        ${t.title ? `<span class="ttitle">${escH(t.title)}</span>` : ''}
+        ${href ? `<a href="${escH(href)}" target="_blank" rel="noopener" class="tlink">${escH(href.replace(/^https?:\/\//, ''))}</a>` : ''}
       </figcaption>
-    </figure>`).join('');
+    </figure>`;
+  }).join('');
   sec.style.display = '';
   observeReveals(grid);
 }
@@ -254,7 +261,7 @@ function initContactForm() {
       try {
         const res = await fetch(CONTACT_ENDPOINT, {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: g('name'), email: g('email'), type: g('type'), budget: g('budget'), message: g('message') }),
+          body: JSON.stringify({ name: g('name'), email: g('email'), type: g('type'), budget: g('budget'), message: g('message'), company: g('company') }),
         });
         if (res.ok) { form.reset(); showOk("Got it — I'll read this and reply within 1–2 business days."); return; }
       } catch (_) { /* fall through to the next method */ }
