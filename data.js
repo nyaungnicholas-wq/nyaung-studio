@@ -539,47 +539,47 @@ window.NS_PROJECTS = [
     "slug": "futures-trader",
     "name": "NQ Futures Quant Suite",
     "category": "Quant / Trading",
-    "tagline": "Two-sleeve NQ systems, backtested across 26 years",
-    "description": "A systematic NQ futures system built from two complementary sleeves. One is a time-series momentum \"TREND\" sleeve; the other is a mean-reversion dip-catcher. It ships with a daily signal tool and a full validation stack, and I backtested it across 26 years of daily bars. Backtest only, with no real capital deployed.",
-    "problem": "Discretionary futures trading is inconsistent and hard to sustain. A single strategy also tends to bleed in the regimes it wasn't designed for. Trend systems chop sideways in range-bound markets, and mean-reversion systems get run over in strong trends. The harder problem is trust. Most \"systems\" are never validated rigorously enough to believe their backtest.",
-    "approach": "Two sleeves run side by side so each covers the other's weak regime. The TREND sleeve is time-series momentum on the NQ, sized at 5x, posting 19.3% CAGR against a −43% max drawdown at a ~40% win rate. That's typical of trend-following, where a few large wins carry many small losses. The DIP-CATCHER mean-reversion sleeve buys oversold pullbacks only above the 200-day SMA, triggering on RSI(2) ≤ 10, three down days, or low-IBS dips, sized at 2–3x MNQ. It runs a high-hit-rate profile around 70% win and 8–16% CAGR. Blended, the two run at ~21.8% CAGR. The whole thing sits on a pure-stdlib backtest engine in Python with NumPy, Pandas, and PyArrow. I validated it four ways: Monte-Carlo resampling, walk-forward testing, cost-stress, and an 1,800-config parameter frontier to confirm the edge isn't a single lucky setting.",
-    "outcome": "A working two-sleeve NQ system with a from-scratch backtest engine and a ready-to-trade daily signal tool. I validated it across a 26-year (2000–2026) cost-stressed backtest at ~21.8% blended CAGR. It stays backtest only, with no real capital deployed.",
+    "tagline": "Proving what a Nasdaq-only system can't do, then shipping what it can",
+    "description": "A 30-year research programme on systematically trading the Nasdaq-100. The brief asked for 30%+ annual returns from a single instrument. The interesting result is the proof that it doesn't exist \u2014 and the strategy that does, published with its costs, its caveats and its failure modes attached.",
+    "problem": "The brief was 30%+ CAGR trading the Nasdaq alone, with drawdowns kept small. Most backtests answering a brief like that quietly flatter themselves: they ignore financing on borrowed money, assume free execution, peek at data they wouldn't have had, or tune parameters until one lucky configuration looks brilliant. The real question was not how good a number I could produce, but which numbers survive honest accounting.",
+    "approach": "The strategy counts how many of the 63, 126 and 252-day returns are positive and maps that vote to a target exposure, gates leverage on the 200-day moving average, scales position size to hit a 30% volatility target, halves the leverage cap whenever equity sits more than 10% below its high-water mark, and only trades when leverage drifts far enough to be worth the cost. Every signal is lagged a full day. Financing is charged at the T-bill rate on borrowed notional and idle margin earns T-bills, so leverage costs what leverage actually costs. The configuration was then split in and out of sample, walked forward, and pushed through a Monte Carlo to find how often the drawdown budget breaks.",
+    "outcome": "The shipped configuration returns 16.1% annually against a 32.9% maximum drawdown over 30 years, with the out-of-sample period scoring better than the in-sample \u2014 the opposite of an overfitting signature. Buy-and-hold over the same window returns 13.2% but with an 82.9% drawdown, so the edge is risk containment rather than raw return. Two harder claims were proven false: 30%+ CAGR on this instrument is unreachable at the available Sharpe without ruinous volatility, and 25% CAGR inside a 20% drawdown budget is impossible \u2014 the honest frontier maximum is 12.2%. The strategy is also ported to TradingView Pine Script and published open-source alongside the research.",
     "highlights": [
-      "TREND sleeve: 19.3% CAGR / −43% max drawdown, ~40% win at 5x",
-      "DIP-CATCHER mean reversion: ~70% win, 8–16% CAGR at 2–3x MNQ",
-      "Entries on RSI(2) ≤ 10, three down days, or low-IBS dips above the 200-SMA",
-      "Backtested 2000–2026, 26 years of daily NQ bars, net of costs",
-      "Validated with Monte-Carlo, walk-forward, cost-stress, and an 1,800-config frontier",
-      "Pure-stdlib backtest engine plus a ready-to-trade daily signal tool"
+      "16.1% CAGR / \u221232.9% max drawdown over 30 years, financing and costs modelled",
+      "Out-of-sample Sharpe 0.75 beats in-sample 0.66 \u2014 no overfitting signature",
+      "Proved 30%+ CAGR on a single index is unreachable, rather than claiming it",
+      "Proved 25% CAGR under a \u221220% drawdown budget impossible; real frontier max is 12.2%",
+      "Rejected after testing: shorting, leverage caps above 5x, indicator stacks, fixed R:R stops",
+      "Ported to TradingView Pine Script, with every deviation from the Python documented"
     ],
     "metrics": [
       {
-        "value": "~21.8%",
-        "label": "Blended CAGR (backtest)"
+        "value": "16.1%",
+        "label": "CAGR, 30yr, costs modelled"
       },
       {
-        "value": "~70%",
-        "label": "Mean-reversion win rate"
+        "value": "\u221232.9%",
+        "label": "max drawdown"
       },
       {
-        "value": "26 yrs",
-        "label": "Backtest span (2000–2026)"
+        "value": "0.75",
+        "label": "out-of-sample Sharpe (> in-sample)"
       },
       {
-        "value": "1,800",
-        "label": "Config frontier tested"
+        "value": "30 yrs",
+        "label": "backtest span, 1996\u20132026"
       }
     ],
-    "result": "~21.8% blended CAGR across a 26-year, cost-stressed backtest",
+    "result": "16.1% CAGR over 30 years \u2014 and a proof the 30% brief was impossible",
     "techStack": [
       "Python",
       "NumPy",
       "Pandas",
-      "PyArrow"
+      "Pine Script"
     ],
     "status": "Backtest only",
-    "url": null,
-    "tier": "standard"
+    "url": "https://github.com/nyaungnicholas-wq/futures-trader",
+    "tier": "flagship"
   },
   {
     "slug": "shanty-realestate",
