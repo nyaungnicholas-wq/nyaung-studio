@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaxLens — Case Study | Nicholas</title>
+  <meta name="description" content="Cross-border tax answers that cite their own sources — A grounded AI assistant sitting on top of a purpose-built cross-border tax knowledge base covering 147 countries. It ans" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-taxlens.html" />
+  <meta property="og:title" content="TaxLens — Cross-border tax answers that cite their own sources" />
+  <meta property="og:description" content="Cross-border tax answers that cite their own sources — A grounded AI assistant sitting on top of a purpose-built cross-border tax knowledge base covering 147 countries. It ans" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"TaxLens","headline":"TaxLens — Cross-border tax answers that cite their own sources","description":"A grounded AI assistant sitting on top of a purpose-built cross-border tax knowledge base covering 147 countries. It answers withholding-tax and treaty questions by retrieving from verified data rather than generating from memory, and shows the corridor data behind every answer.","url":"https://n1ch0las-taxlens.hf.space","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, FastAPI, SQLite, React, Docker","about":"AI Agent"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">AI Agent</span>
+        <h1 class="reveal" data-d="1">TaxLens</h1>
+        <p class="lede reveal" data-d="2">Cross-border tax answers that cite their own sources</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status live"><span class="sd"></span>Live</span>
+          <a class="btn btn-ghost" href="https://n1ch0las-taxlens.hf.space" target="_blank" rel="noopener" style="padding:8px 16px">Visit live <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-ai reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><circle cx="18" cy="17.5" r="1.6"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A grounded AI assistant sitting on top of a purpose-built cross-border tax knowledge base covering 147 countries. It answers withholding-tax and treaty questions by retrieving from verified data rather than generating from memory, and shows the corridor data behind every answer.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">147</span><span class="ml">countries in the explorer</span></div><div class="metric"><span class="mv">34,819</span><span class="ml">treaty withholding rows ingested</span></div><div class="metric"><span class="mv">86/86</span><span class="ml">grounding evaluation passed</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Cross-border withholding tax is exactly the kind of question a general chatbot answers confidently and wrongly. The real rates live in treaty tables that differ per country pair, per income type, and change over time — so an answer without a verifiable source behind it is worse than no answer.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Live and publicly reachable, running as a containerised app on a free hosting tier with a self-healing database bootstrap that re-seeds itself on integrity failure or version change.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>Rather than trusting a model's recall, the system ingests official treaty withholding data into a local knowledge base, marks each country corridor with how well-sourced it is, and only lets the assistant answer from what it can retrieve. Ingesting the OECD treaty withholding dataset added tens of thousands of verified rows and promoted roughly six hundred non-US corridors from single-source to verified. A global explorer lets you browse all 147 countries directly, and answers export to a PDF memo.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Live and public — grounded answers across 147 countries, sources shown</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>147-country sortable tax explorer built from a real territories dataset</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>34,819 OECD treaty withholding rows ingested and reconciled</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>~600 country corridors promoted from single-source to verified</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Answers are grounded in retrieved data and exportable as a PDF memo</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Holding-structure optimiser and follow-and-alert on corridors you care about</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Self-healing container bootstrap re-seeds the database on integrity failure</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">FastAPI</span><span class="proj-tag">SQLite</span><span class="proj-tag">React</span><span class="proj-tag">Docker</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-throughline.html"><div class="dir">← Previous</div><div class="nm">Throughline</div></a>
+          <a class="next" href="work-quant-suite.html"><div class="dir">Next →</div><div class="nm">Quant Suite</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

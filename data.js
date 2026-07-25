@@ -9,6 +9,195 @@
    ============================================================ */
 window.NS_PROJECTS = [
   {
+    "slug": "1042s-organizer",
+    "name": "1042-S Organizer",
+    "category": "Developer Tool",
+    "tagline": "Turning a 1,000-page tax PDF into one clean file per recipient",
+    "description": "An Adobe Acrobat JavaScript tool that reads a single massive IRS filing PDF, works out which recipient each page belongs to, and splits it into one correctly-named, correctly-ordered file per person — with every form still paired to its instruction page. Built for a real client and running on their machine.",
+    "problem": "A tax preparer receives one enormous PDF containing hundreds of IRS 1042-S forms — plus 1099s, W-2s and annual 1042s — for dozens of different recipients, shuffled together and each paired with an instruction page. Splitting and sorting it by hand is hours of error-prone work every filing season, and a misfiled form means sending one client another client's tax data.",
+    "approach": "The tool runs inside Adobe Acrobat as pure Acrobat JavaScript, so it needs no installation and no data ever leaves the client's machine. It reads the text off each page, identifies which IRS form type it is, extracts the recipient from Box 13a, keeps every form glued to its instruction page, then writes one alphabetically-sorted file per recipient plus a CSV manifest. Because Acrobat's scripting engine is single-threaded and freezes the UI on long loops, the runner is chunked so Acrobat stays responsive across a thousand-plus pages.",
+    "outcome": "Shipped and proven on the client's own Acrobat installation — four separate bugs reported from the client's real environment were each fixed and then locked down with a permanent regression test. A demo harness downloads the genuine IRS forms from irs.gov, stamps real recipient names into Box 13a, shuffles the pages, and verifies the organiser reconstructs every file correctly with no page lost.",
+    "highlights": [
+      "Runs entirely inside Adobe Acrobat — no install, no upload, tax data never leaves the machine",
+      "Identifies 1042-S, 1099, W-2 and 1042 pages and groups every form a recipient has into one file",
+      "Keeps each form paired with its instruction page so nothing is separated in the split",
+      "Chunked runner keeps Acrobat responsive instead of freezing on long documents",
+      "CSV manifest export guarded against spreadsheet formula injection",
+      "Filename sanitisation strips control characters and normalises paths to prevent stray writes"
+    ],
+    "metrics": [
+      { "value": "101", "label": "assertions across 5 test suites" },
+      { "value": "600", "label": "randomised documents fuzz-tested" },
+      { "value": "20/20", "label": "names read off the real IRS form" }
+    ],
+    "result": "Shipped to a paying client and proven on their Acrobat — open-sourced with a full test suite",
+    "techStack": ["Acrobat JavaScript", "Node", "pdf-lib", "pdfjs-dist"],
+    "status": "Live",
+    "url": "https://github.com/nyaungnicholas-wq/1042s-organizer",
+    "tier": "flagship"
+  },
+  {
+    "slug": "throughline",
+    "name": "Throughline",
+    "category": "SaaS Product",
+    "tagline": "Delegate the work, track it, approve it — without the spreadsheet",
+    "description": "A multi-tenant work-management platform built around one loop most tools ignore: a manager delegates a piece of work, the assignee moves it forward, and someone with authority approves it. Boards render as table, kanban, calendar or timeline, all projected from a single snapshot of the data.",
+    "problem": "General project tools track that work exists but not who owes what to whom. The moment a team needs real delegation with an approval step, the process leaks into spreadsheets and chat — and nothing stops a person from quietly approving their own work.",
+    "approach": "Delegation is modelled as an explicit seven-state machine with a single mutator function, so every transition is validated in one place and no-self-approval is enforced for every role including owners. Flexible per-board columns use a typed entity-attribute-value model rather than dynamic schema changes. Tenant isolation runs through one authorisation chokepoint, backed by a custom ESLint rule that fails the build if a component reaches for the database directly. The same code runs on an embedded Postgres locally and a hosted Postgres in production, with migrations serialised by an advisory lock so cold-starting instances can't race.",
+    "outcome": "Feature-complete and green across typecheck, lint, tests and production build. Runs with zero configuration locally — install, start, and a dev quick-login drops you into a seeded two-organisation demo.",
+    "highlights": [
+      "Seven-state delegation machine with no-self-approval enforced for every role",
+      "Table, kanban, calendar and timeline views all projected from one board snapshot",
+      "Multi-tenant isolation through a single authorisation chokepoint, guarded by a custom ESLint rule",
+      "Typed EAV model gives per-board custom columns without dynamic schema migrations",
+      "Dual database driver — embedded Postgres locally, hosted Postgres in production, one codebase",
+      "Advisory-lock migrations stop cold-starting serverless instances racing each other"
+    ],
+    "metrics": [
+      { "value": "7", "label": "state delegation machine, one mutator" },
+      { "value": "31", "label": "routes across the app" },
+      { "value": "0", "label": "config needed to run it locally" }
+    ],
+    "result": "Feature-complete — build, lint, typecheck and full test suite all green",
+    "techStack": ["Next.js 16", "React 19", "TypeScript", "Drizzle ORM", "Postgres", "Tailwind v4"],
+    "status": "Built",
+    "url": null,
+    "tier": "flagship"
+  },
+  {
+    "slug": "taxlens",
+    "name": "TaxLens",
+    "category": "AI Agent",
+    "tagline": "Cross-border tax answers that cite their own sources",
+    "description": "A grounded AI assistant sitting on top of a purpose-built cross-border tax knowledge base covering 147 countries. It answers withholding-tax and treaty questions by retrieving from verified data rather than generating from memory, and shows the corridor data behind every answer.",
+    "problem": "Cross-border withholding tax is exactly the kind of question a general chatbot answers confidently and wrongly. The real rates live in treaty tables that differ per country pair, per income type, and change over time — so an answer without a verifiable source behind it is worse than no answer.",
+    "approach": "Rather than trusting a model's recall, the system ingests official treaty withholding data into a local knowledge base, marks each country corridor with how well-sourced it is, and only lets the assistant answer from what it can retrieve. Ingesting the OECD treaty withholding dataset added tens of thousands of verified rows and promoted roughly six hundred non-US corridors from single-source to verified. A global explorer lets you browse all 147 countries directly, and answers export to a PDF memo.",
+    "outcome": "Live and publicly reachable, running as a containerised app on a free hosting tier with a self-healing database bootstrap that re-seeds itself on integrity failure or version change.",
+    "highlights": [
+      "147-country sortable tax explorer built from a real territories dataset",
+      "34,819 OECD treaty withholding rows ingested and reconciled",
+      "~600 country corridors promoted from single-source to verified",
+      "Answers are grounded in retrieved data and exportable as a PDF memo",
+      "Holding-structure optimiser and follow-and-alert on corridors you care about",
+      "Self-healing container bootstrap re-seeds the database on integrity failure"
+    ],
+    "metrics": [
+      { "value": "147", "label": "countries in the explorer" },
+      { "value": "34,819", "label": "treaty withholding rows ingested" },
+      { "value": "86/86", "label": "grounding evaluation passed" }
+    ],
+    "result": "Live and public — grounded answers across 147 countries, sources shown",
+    "techStack": ["Python", "FastAPI", "SQLite", "React", "Docker"],
+    "status": "Live",
+    "url": "https://n1ch0las-taxlens.hf.space",
+    "tier": "flagship"
+  },
+  {
+    "slug": "quant-suite",
+    "name": "Quant Suite",
+    "category": "Quant / Trading",
+    "tagline": "Describe a strategy in English, get a reproducible backtest",
+    "description": "A three-application finance suite sharing one foundation: CopilotQuant turns a plain-English strategy description into a typed specification and backtests it, RiskLens analyses portfolio risk, and FilingMind reads company filings. Built from adversarially-reviewed specifications rather than improvised.",
+    "problem": "Most backtesting tools force you to write code before you can test an idea, and most give you a different answer if you run them twice. Neither is acceptable if the number is going to inform a decision.",
+    "approach": "A monorepo splits the interface from the computation: a TypeScript web application handles parsing, storage and presentation, while a Python service owns the actual backtest engine, written in plain pandas and numpy so the maths stays auditable. Natural language is parsed into a typed strategy specification — a validated object, not a prompt — which is what actually gets executed. Determinism is enforced by keying the data generator off a hash of the seed and symbol, so the same specification produces a byte-identical result run after run.",
+    "outcome": "All three units built and verified end to end in the browser: login, parse a strategy from English, save it, run the backtest through the live Python service, and read the metrics, equity curve and fill blotter. Reproducibility proven by two runs returning identical figures to six decimal places.",
+    "highlights": [
+      "English strategy description parsed into a typed, validated specification before execution",
+      "Backtest engine in pure pandas/numpy so every calculation is auditable",
+      "Byte-identical results across repeated runs — determinism proven, not assumed",
+      "Dashboard with metrics, equity-vs-benchmark, drawdown and a full fill blotter",
+      "Grounded explanations of results generated from the actual run data",
+      "Built from adversarially-reviewed specs with pinned architectural decisions"
+    ],
+    "metrics": [
+      { "value": "331", "label": "tests green across Python and TypeScript" },
+      { "value": "3", "label": "applications on one shared foundation" },
+      { "value": "2", "label": "runs, byte-identical output" }
+    ],
+    "result": "All three units built and browser-verified — reproducibility proven to six decimals",
+    "techStack": ["Next.js 16", "React 19", "TypeScript", "Python", "FastAPI", "pandas"],
+    "status": "Built",
+    "url": null,
+    "tier": "flagship"
+  },
+  {
+    "slug": "lotline",
+    "name": "Lotline",
+    "category": "SaaS Product",
+    "tagline": "What a property is worth, costs to own, and costs to fix",
+    "description": "A property-intelligence application for real-estate agents, investors and developers. It pulls from eleven live data sources — including tax-defaulted property rolls and trustee, sheriff and probate notices — to answer the three questions that actually decide a deal.",
+    "problem": "The data that tells you whether a property is a real opportunity is scattered across county tax rolls, legal notice publications and listing feeds, much of it published as PDFs designed for human eyes rather than software.",
+    "approach": "A source engine normalises eleven feeds behind one interface, with purpose-written PDF and HTML adapters for the distress signals that are only published as scanned county documents. The interface is dark-first and deliberately dense — closer to a terminal than a consumer app — with five interactive pillars covering comparables, cost of ownership, and renovation cost.",
+    "outcome": "Deployed and reachable, with the AI layer running live. Roughly sixty pages across twenty-nine routes, full test suite green, typecheck and lint clean.",
+    "highlights": [
+      "Eleven live data sources normalised behind a single engine interface",
+      "Custom PDF and HTML adapters extract distress signals from county documents",
+      "Tax-defaulted rolls plus trustee, sheriff and probate notices in one view",
+      "Five interactive pillars covering comparables, ownership cost and renovation cost",
+      "Dark-first dense interface built for professionals, not casual browsers"
+    ],
+    "metrics": [
+      { "value": "11", "label": "live data sources" },
+      { "value": "29", "label": "routes, ~60 pages" },
+      { "value": "49/49", "label": "tests green" }
+    ],
+    "result": "Deployed and live with eleven data sources feeding it",
+    "techStack": ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Recharts"],
+    "status": "Live",
+    "url": "https://lotline-nine.vercel.app",
+    "tier": "standard"
+  },
+  {
+    "slug": "creatorledger",
+    "name": "CreatorLedger",
+    "category": "SaaS Product",
+    "tagline": "What creators actually keep after tax",
+    "description": "A financial back-office aimed at creators earning across several platforms at once. The first public piece is a free calculator that takes multi-platform income and returns real profit and the quarterly tax to set aside — shipped as a validation asset before building the full product.",
+    "problem": "A creator earning from four platforms has no single number for what they actually keep. Self-employment tax, the half-SE deduction and irregular income make the arithmetic genuinely hard, and getting it wrong shows up as a surprise tax bill.",
+    "approach": "Rather than building the product and hoping, the idea went through a validation pass that killed seven other consumer-finance concepts on licensing traps, entrenched free incumbents, or one-off revenue. The survivor was tested with the cheapest possible artefact: a single static page with a working calculator that computes federal brackets, standard deduction, self-employment tax and the half-SE deduction entirely client-side, with an email capture attached.",
+    "outcome": "Live and public on free hosting, functioning as a demand test rather than a launch — the calculator is genuinely useful on its own, which is what earns the email address.",
+    "highlights": [
+      "Seven competing product ideas tested and eliminated before committing to this one",
+      "Free calculator covering federal brackets, standard deduction and self-employment tax",
+      "Runs entirely client-side — no income figures are ever transmitted",
+      "Shipped as a demand test first, product second"
+    ],
+    "metrics": [
+      { "value": "7", "label": "ideas eliminated before choosing this one" },
+      { "value": "0", "label": "income data leaves the browser" }
+    ],
+    "result": "Live as a demand test — a working calculator earning the signup",
+    "techStack": ["HTML", "CSS", "Vanilla JS"],
+    "status": "Live",
+    "url": "https://nyaungnicholas-wq.github.io/creatorledger",
+    "tier": "standard"
+  },
+  {
+    "slug": "nova-studio",
+    "name": "NOVA Studio",
+    "category": "AI Agent",
+    "tagline": "One operator running social content for many brands",
+    "description": "A multi-tenant command center for social video: an idea becomes a script, the script becomes a cinematic AI-generated reel, the reel gets per-platform captions, and the whole thing schedules out to Reels, TikTok and Shorts. Currently runs in mock and dry-run mode — nothing is published and no credits are spent at rest.",
+    "problem": "Running short-form video for several brands means repeating the same chain — idea, script, footage, captions, per-platform copy, scheduling — over and over, with the context for each brand held in someone's head.",
+    "approach": "The core of the system is a prompt engine that turns a brief into structured, preset-driven generation instructions rather than freeform text, so output stays consistent across runs and across brands. A Python API owns generation and scheduling; a separate React front end is the operator's console. Every external side effect is behind a live/dry-run flag that defaults to off.",
+    "outcome": "Verified end to end in mock and dry-run mode: the full chain runs, produces its artefacts, and stops short of publishing. Deliberately left unarmed until the pipeline is trusted.",
+    "highlights": [
+      "Multi-tenant — one operator, several brands, isolated context each",
+      "Preset-driven prompt engine for consistent generation instead of freeform prompting",
+      "Every publishing side effect behind a dry-run flag that defaults to off",
+      "Verified end to end without spending generation credits or posting anything"
+    ],
+    "metrics": [
+      { "value": "3", "label": "tenants configured" },
+      { "value": "0", "label": "credits spent at rest" }
+    ],
+    "result": "Full pipeline verified in dry-run — deliberately not armed to publish yet",
+    "techStack": ["FastAPI", "Python", "React 19", "Vite", "Tailwind v4"],
+    "status": "Prototype",
+    "url": null,
+    "tier": "standard"
+  },
+  {
     "slug": "grownet",
     "name": "GrowNet",
     "category": "SaaS Product",
@@ -301,38 +490,39 @@ window.NS_PROJECTS = [
     "slug": "stock-trader",
     "name": "Stock Trader V7",
     "category": "Quant / Trading",
-    "tagline": "Sector rotation, running live and fully hands-off",
-    "description": "A systematic equity engine that runs leveraged sector rotation off momentum and volatility targeting. The V7 \"PUSH-20\" strategy has traded live on an Alpaca paper account since June 9, 2026. It places its own orders on a schedule, tracks execution and slippage, and runs with no human in the loop.",
-    "problem": "Discretionary trading is inconsistent and eats your time. Most \"systems\" never actually run unattended. They live in a backtest notebook and die there. The hard part was never the signal. It's getting a strategy to execute itself every day without someone babysitting it.",
-    "approach": "The engine ranks sectors by momentum, sizes positions with volatility targeting, then applies leverage. That's the \"PUSH-20\" tuning, which produced 20.7% CAGR against a −30% max drawdown across the 2005–2024 backtest. Execution runs as a two-speed loop. A fast 60-second cycle checks open positions and order fills; a separate daily cycle recomputes signals and rotates the book. The whole thing is wired to launchd, so it wakes the Mac and runs on its own schedule, hands-off, with a live HUD dashboard for watching fills and slippage. Under the hood it's Python on pandas and numpy, yfinance for data, the Alpaca API for order execution, and pytest covering the logic.",
-    "outcome": "A leveraged sector-rotation engine, live on an Alpaca paper account since June 9, 2026. It runs fully hands-off on a launchd schedule, with paper equity at $103.5k. The backtest shows 20.7% CAGR against a −30% max drawdown over 2005–2024, and now it trades itself daily: 60-second position checks, daily signal rotation, real order execution, slippage tracking.",
+    "tagline": "Sector rotation that trades itself — and the honest numbers behind it",
+    "description": "A systematic equity engine running leveraged sector rotation off momentum and volatility targeting. The V7 \"PUSH-20\" strategy has traded hands-off on an Alpaca paper account since June 9, 2026. Its headline backtest was later re-run under an independent validation harness, which found the original figure optimistic — the corrected numbers are the ones published here.",
+    "problem": "Discretionary trading is inconsistent and eats your time. Most \"systems\" never actually run unattended — they live in a backtest notebook and die there. And most published backtests quietly flatter themselves through optimistic cost assumptions, which is how a strategy looks great on paper and disappoints in practice.",
+    "approach": "The engine ranks sectors by momentum, sizes positions with volatility targeting, then applies leverage. Execution runs as a two-speed loop: a 60-second cycle checks open positions and order fills, while a separate daily cycle recomputes signals and rotates the book. The more interesting work was the validation pass — re-running the strategy through its own engine at a realistic 10 basis points of slippage instead of the original 5, then attacking it with walk-forward testing, a timing-luck study across six different start months, and a parameter sweep to check whether the configuration sat on a knife edge.",
+    "outcome": "The validation corrected the headline down: real performance is 19.0% CAGR against a −36.6% max drawdown, not the 20.7% / −30% originally published. The strategy itself held up — it beat the benchmark in all five walk-forward sub-periods, varied by only 0.8 percentage points across six start months, and sat on smooth parameter surfaces rather than a knife edge, so it is genuinely not overfit. Its real weakness is sharp whipsaw corrections, where it loses roughly 1.6× the benchmark. Three separate attempts to fix that all failed, which is documented rather than hidden.",
     "highlights": [
-      "20.7% CAGR / −30% max drawdown in backtest (2005–2024)",
-      "Live on an Alpaca paper account since Jun 9, 2026",
-      "Two-speed loop: 60-second position checks plus daily signal cycles",
-      "Fully hands-off via launchd, with the Mac waking itself on schedule",
-      "Live HUD dashboard tracking fills and slippage",
-      "Paper equity at $103.5k"
+      "19.0% CAGR / −36.6% max drawdown, validated at realistic 10 bps slippage",
+      "Original 20.7% / −30% headline found optimistic and publicly corrected",
+      "Beat the benchmark in 5 of 5 walk-forward sub-periods",
+      "Timing-luck study: only 0.8pp spread across six different start months",
+      "Parameter sweeps show smooth surfaces — not overfit to a knife-edge configuration",
+      "Known weakness documented: loses ~1.6× the benchmark in fast whipsaw selloffs",
+      "Trades hands-off on Alpaca paper via launchd, with slippage tracking"
     ],
     "metrics": [
       {
-        "value": "20.7%",
-        "label": "CAGR (backtest)"
+        "value": "19.0%",
+        "label": "CAGR (validated, 10 bps)"
       },
       {
-        "value": "−30%",
-        "label": "max drawdown (backtest)"
+        "value": "−36.6%",
+        "label": "max drawdown (validated)"
       },
       {
-        "value": "60s",
-        "label": "position-check loop"
+        "value": "5/5",
+        "label": "walk-forward periods beating SPY"
       },
       {
-        "value": "$103.5k",
-        "label": "paper equity"
+        "value": "0.8pp",
+        "label": "spread across six start months"
       }
     ],
-    "result": "Live & hands-off on Alpaca paper since Jun 2026 — 20.7% CAGR backtest",
+    "result": "Validated honestly — 19.0% CAGR after correcting my own optimistic headline",
     "techStack": [
       "Python",
       "pandas",

@@ -1,6 +1,6 @@
 # Nicholas — Studio Site
 
-The portfolio + business site for **Nicholas**, an independent product & AI studio run by Nicholas Nyaung. One builder; fourteen products shipped end to end across SaaS, AI agents, quant/trading, websites, and content engines.
+The portfolio + business site for **Nicholas**, an independent product & AI studio run by Nicholas Nyaung. One builder; twenty-one products shipped end to end across SaaS, AI agents, quant/trading, websites, and content engines.
 
 It's a **self-contained static site** — vanilla HTML/CSS/JS, **no build step, no framework, no dependencies to install**. The fancy parts (custom WebGL/GLSL background, ⌘K command palette, scroll motion) all load from CDNs at runtime and degrade gracefully if they fail.
 
@@ -69,7 +69,7 @@ Fill these in before going live (everything works without them, but they're plac
 - [ ] **Photo** — drop a headshot at `assets/portrait.jpg`; it replaces the monogram on the About page automatically.
 - [ ] **Testimonials** — add real quotes to `NS_TESTIMONIALS` in `data.js`; the "What clients say" section appears once it's non-empty.
 - [ ] **Analytics** — the Plausible snippet is wired with `data-domain`; create the site in Plausible (or swap for GA) and match the domain.
-- [ ] **Contact email** — currently `dimples.n3fam@gmail.com` (in `app.js`, `components.js`, `assistant.js`); change if you want a different public address.
+- [ ] **Contact email** — currently `nyaungnicholas@gmail.com` (in `app.js`, `components.js`, `assistant.js`); change if you want a different public address.
 
 ---
 

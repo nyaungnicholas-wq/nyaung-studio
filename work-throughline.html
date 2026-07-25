@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Throughline — Case Study | Nicholas</title>
+  <meta name="description" content="Delegate the work, track it, approve it — without the spreadsheet — A multi-tenant work-management platform built around one loop most tools ignore: a manager delegates a piece of work, th" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-throughline.html" />
+  <meta property="og:title" content="Throughline — Delegate the work, track it, approve it — without the spreadsheet" />
+  <meta property="og:description" content="Delegate the work, track it, approve it — without the spreadsheet — A multi-tenant work-management platform built around one loop most tools ignore: a manager delegates a piece of work, th" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=4" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Throughline","headline":"Throughline — Delegate the work, track it, approve it — without the spreadsheet","description":"A multi-tenant work-management platform built around one loop most tools ignore: a manager delegates a piece of work, the assignee moves it forward, and someone with authority approves it. Boards render as table, kanban, calendar or timeline, all projected from a single snapshot of the data.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Next.js 16, React 19, TypeScript, Drizzle ORM, Postgres, Tailwind v4","about":"SaaS Product"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">SaaS Product</span>
+        <h1 class="reveal" data-d="1">Throughline</h1>
+        <p class="lede reveal" data-d="2">Delegate the work, track it, approve it — without the spreadsheet</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-saas reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.5h.01"/><path d="M9 6.5h.01"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A multi-tenant work-management platform built around one loop most tools ignore: a manager delegates a piece of work, the assignee moves it forward, and someone with authority approves it. Boards render as table, kanban, calendar or timeline, all projected from a single snapshot of the data.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">7</span><span class="ml">state delegation machine, one mutator</span></div><div class="metric"><span class="mv">31</span><span class="ml">routes across the app</span></div><div class="metric"><span class="mv">0</span><span class="ml">config needed to run it locally</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>General project tools track that work exists but not who owes what to whom. The moment a team needs real delegation with an approval step, the process leaks into spreadsheets and chat — and nothing stops a person from quietly approving their own work.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Feature-complete and green across typecheck, lint, tests and production build. Runs with zero configuration locally — install, start, and a dev quick-login drops you into a seeded two-organisation demo.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>Delegation is modelled as an explicit seven-state machine with a single mutator function, so every transition is validated in one place and no-self-approval is enforced for every role including owners. Flexible per-board columns use a typed entity-attribute-value model rather than dynamic schema changes. Tenant isolation runs through one authorisation chokepoint, backed by a custom ESLint rule that fails the build if a component reaches for the database directly. The same code runs on an embedded Postgres locally and a hosted Postgres in production, with migrations serialised by an advisory lock so cold-starting instances can't race.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Feature-complete — build, lint, typecheck and full test suite all green</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Seven-state delegation machine with no-self-approval enforced for every role</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Table, kanban, calendar and timeline views all projected from one board snapshot</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Multi-tenant isolation through a single authorisation chokepoint, guarded by a custom ESLint rule</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Typed EAV model gives per-board custom columns without dynamic schema migrations</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Dual database driver — embedded Postgres locally, hosted Postgres in production, one codebase</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Advisory-lock migrations stop cold-starting serverless instances racing each other</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Next.js 16</span><span class="proj-tag">React 19</span><span class="proj-tag">TypeScript</span><span class="proj-tag">Drizzle ORM</span><span class="proj-tag">Postgres</span><span class="proj-tag">Tailwind v4</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-1042s-organizer.html"><div class="dir">← Previous</div><div class="nm">1042-S Organizer</div></a>
+          <a class="next" href="work-taxlens.html"><div class="dir">Next →</div><div class="nm">TaxLens</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=4"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=4"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

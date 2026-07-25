@@ -17,7 +17,7 @@
     { k: ['tech', 'stack', 'language', 'framework', 'tools'], a: `Next.js, React, TypeScript, Python, FastAPI, Three.js, GSAP, Remotion, Postgres — and Gemini / Claude / FLUX for the AI layer.` },
     { k: ['who', 'about', 'natalie', 'you', 'team', 'solo'], a: `Nicholas is a one-person product & AI studio run by Nicholas Nyaung — one builder, end to end. More on the <a href="about.html">About</a> page.` },
     { k: ['ai', 'agent', 'automat', 'llm', 'chatbot'], a: `AI agents are a core discipline — e.g. <a href="work-scoutnet.html">ScoutNet</a> (a lead scout that pitches) and <a href="work-jarvis.html">Jarvis</a> (a vision assistant). I embed agents that perceive, decide, and act.` },
-    { k: ['trad', 'quant', 'stock', 'invest', 'finance'], a: `<a href="work-stock-trader.html">Stock Trader V7</a> runs live on an Alpaca paper account (20.7% CAGR in backtest), plus a 26-year-backtested NQ futures suite.` },
+    { k: ['trad', 'quant', 'stock', 'invest', 'finance'], a: `<a href="work-stock-trader.html">Stock Trader V7</a> runs hands-off on an Alpaca paper account (19.0% CAGR validated at realistic costs, corrected down from an optimistic 20.7% headline), plus a 26-year-backtested NQ futures suite.` },
     { k: ['contact', 'email', 'reach', 'talk', 'call'], a: `Email <a href="mailto:${EMAIL}">${EMAIL}</a> or use the <a href="contact.html">Contact</a> form. Replies in 1–2 business days.` },
   ];
   const GREETING = `Hi — I'm the studio assistant. Ask me about services, pricing, the work, or how to start. 👋`;

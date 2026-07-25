@@ -1,4 +1,12 @@
 # Cloudflare Pages / Netlify headers
+#
+# NOTE (SEO / preview-domain indexing): the temporary Vercel preview host
+# (nyaung-studio.vercel.app) is de-indexed via a host-scoped X-Robots-Tag rule
+# in vercel.json (source "/(.*)" with has host == nyaung-studio.vercel.app).
+# This _headers file cannot scope by hostname, so DO NOT add a noindex here —
+# it would also block the canonical domain nicholasnyaung.com. If this site is
+# ever served for real from Cloudflare/Netlify on a preview subdomain, noindex
+# that preview domain in the host's dashboard instead.
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
