@@ -582,6 +582,35 @@ window.NS_PROJECTS = [
     "tier": "flagship"
   },
   {
+    "slug": "signaldeck",
+    "name": "SignalDeck",
+    "category": "Quant / Trading",
+    "tagline": "I built a trading signal, then proved it didn't work",
+    "description": "A local-only market-research platform built around measurement discipline rather than prediction. Its flagship directional model graded 48.1% on 13,044 independent symbol-days against a 54.6% majority-class baseline and automatically retired itself. The auditable machinery that caught it — a hash-chained prediction ledger, pre-registered claims, and matched nulls — is the actual deliverable.",
+    "problem": "Almost every trading system reports the accuracy it wants to report: pooled observations that inflate the sample, a 50% null that flatters any signal in a trending market, and a claimed edge that nothing independent ever re-checks. A number no process can falsify is decoration, not evidence.",
+    "approach": "Every prediction writes a hash-chained ledger row with its probability frozen at prediction time. Grading uses one observation per symbol, horizon and UTC day, against a walk-forward majority-class null rather than a coin flip, with verdicts read from the interval and never the point estimate. Claims are pre-registered — band tables, resolution rules and nulls frozen into the chain twelve days before the first observation could resolve, under a refusal rule written before the sample arrived. Rejections are recorded in the same ledger as findings.",
+    "outcome": "The discipline worked by catching its own author. The directional ensemble was graded at 48.1% over 13,044 independent observations against a 54.6% baseline, the whole interval below the null, and was switched off in code. What survived is structural persistence, not direction — and even there the most accurate conviction band carries a negative forward return, which the platform discloses on every payload rather than quietly omitting.",
+    "highlights": [
+      "Flagship directional model graded at 48.1% vs a 54.6% majority-class null and auto-retired — emitting: false, enforced in code",
+      "Hash-chained prediction ledger, 246,595 entries, probability frozen at prediction time",
+      "Six structural predictors pre-registered twelve days before their first possible grading, grader pinned by commit and file hash",
+      "Matched nulls killed the 52-week-high signal: 76.0–83.3% raw, but −3 to −9pp of skill against a volatility-matched baseline",
+      "The gap-fill signal was pulled from production after a day-0 conditioning bug dropped it from 72–87% to 45.1–60.6%",
+      "Discloses that its most accurate band (97.2%) carries a negative mean 21-day forward return of −0.76%"
+    ],
+    "metrics": [
+      { "value": "13,044", "label": "independent observations behind the failing verdict" },
+      { "value": "246,595", "label": "tamper-evident ledger entries" },
+      { "value": "166,285", "label": "weekly observations in the research corpus" }
+    ],
+    "result": "Proved its own flagship signal had negative skill — and shipped the machinery that proved it",
+    "techStack": ["Go", "SQLite", "Next.js", "Python", "Walk-forward validation"],
+    "status": "Built",
+    "url": null,
+    "tier": "flagship",
+    "custom": true
+  },
+  {
     "slug": "shanty-realestate",
     "name": "Shanty Soerjono — Realtor Site",
     "category": "Website",

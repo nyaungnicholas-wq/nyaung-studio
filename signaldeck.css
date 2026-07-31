@@ -1,0 +1,283 @@
+/* ============================================================
+   SIGNALDECK — page-scoped styles for work-signaldeck.html
+   Extends styles.css tokens. No new tokens, no light mode.
+   Accent semantics (fixed, never decorative):
+     cyan/indigo = validated structural finding
+     fuchsia     = the killed / retired signal
+     emerald     = process integrity
+     amber       = the honest-failure beats
+   ============================================================ */
+
+.sd {
+  --sd-amber: #FBBF24;
+  --sd-red:   #F87171;
+  --sd-act-pad: clamp(24px, 5vw, 64px);
+}
+
+/* The single WebGL surface. Fixed behind every act; one renderer, seven scenes. */
+#sd-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 600ms var(--ease);
+}
+body.sd-webgl #sd-canvas { opacity: 1; }
+
+.sd main { position: relative; z-index: 1; }
+
+/* ---------- act shell ---------- */
+.sd-act {
+  position: relative;
+  min-height: 100vh;
+  padding: 12vh 0;
+}
+/* The copy flows normally and the FIGURE is what pins (sticky, not GSAP-pinned).
+   Pinning the copy instead would break the moment an act's text is taller than
+   the viewport — it would scroll out from under its own sticky offset. This way
+   the layout never shifts and the page reads top to bottom with no JS at all. */
+.sd-act-inner {
+  display: grid;
+  gap: clamp(20px, 3vw, 40px);
+  align-items: start;
+}
+@media (min-width: 1024px) {
+  .sd-act-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .sd-act[data-wide="1"] .sd-act-inner { grid-template-columns: 1fr; }
+  .sd-stage { position: sticky; top: 110px; }
+}
+/* Scrub room: enough travel for the 3D to move through its states without
+   leaving a screenful of dead space under the copy. */
+.sd-act[data-scroll="1"] { min-height: 165vh; }
+
+.sd-copy { max-width: 60ch; }
+.sd-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 14px;
+}
+.sd-eyebrow .sd-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.sd-eyebrow[data-tone="killed"]   { color: var(--fuchsia); }
+.sd-eyebrow[data-tone="survived"] { color: var(--cyan); }
+.sd-eyebrow[data-tone="process"]  { color: var(--emerald); }
+.sd-eyebrow[data-tone="failure"]  { color: var(--sd-amber); }
+
+.sd-copy h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.2vw, 52px);
+  line-height: 1.05; letter-spacing: -0.03em;
+  margin: 0 0 16px;
+}
+.sd-copy p {
+  color: var(--muted);
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.65;
+  margin: 0 0 14px;
+}
+.sd-copy p strong { color: var(--text); font-weight: 600; }
+
+/* ---------- numbers ---------- */
+.sd-figs { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 6px; }
+.sd-fig {
+  flex: 1 1 150px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+.sd-fig .v {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.sd-fig .l { display: block; margin-top: 6px; font-size: 12.5px; line-height: 1.45; color: var(--muted-2); }
+.sd-fig[data-tone="killed"]   .v { color: var(--fuchsia); }
+.sd-fig[data-tone="survived"] .v { color: var(--cyan); }
+.sd-fig[data-tone="process"]  .v { color: var(--emerald); }
+.sd-fig[data-tone="failure"]  .v { color: var(--sd-amber); }
+
+/* Caveat band — every accuracy on this page carries one. */
+.sd-caveat {
+  display: flex; gap: 10px; align-items: flex-start;
+  border-left: 2px solid var(--sd-amber);
+  background: rgba(251, 191, 36, 0.05);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 12px 16px;
+  margin: 18px 0 0;
+  font-size: 13.5px; line-height: 1.6; color: var(--muted);
+}
+.sd-caveat svg { flex: none; width: 17px; height: 17px; margin-top: 1px; color: var(--sd-amber); }
+.sd-caveat[data-tone="process"] { border-left-color: var(--emerald); background: rgba(52, 211, 153, 0.05); }
+.sd-caveat[data-tone="process"] svg { color: var(--emerald); }
+
+.sd-source {
+  font-family: var(--font-mono);
+  font-size: 11.5px; color: var(--muted-2);
+  margin-top: 14px; line-height: 1.6;
+}
+/* File paths and identifiers are long unbroken tokens; without this they push
+   the page wider than a 375px viewport and force a horizontal scroll. */
+.sd code, .sd-source, .sd-caveat, .sd-reject p { overflow-wrap: anywhere; }
+.sd-act, .sd-copy, .sd-stage { min-width: 0; }
+
+/* ---------- the visual column ---------- */
+.sd-stage {
+  position: relative;
+  min-height: clamp(280px, 44vh, 520px);
+  display: flex; align-items: center; justify-content: center;
+}
+/* The static figure. Always in the DOM and always complete — it is the whole
+   narrative on mobile, without WebGL, and under reduced motion. JS hides it
+   only once a real WebGL context is running. */
+.sd-fallback {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+body.sd-webgl .sd-fallback { display: none; }
+/* With the figure hidden the stage is an empty spacer. On two-column acts it
+   still earns its half of the grid (the 3D shows through behind it); on
+   full-width acts it has nothing to reserve, so it collapses. */
+body.sd-webgl .sd-stage { min-height: 0; }
+body.sd-webgl .sd-act[data-wide="1"] .sd-stage { display: none; }
+.sd-fallback svg { display: block; width: 100%; height: auto; }
+.sd-fallback figcaption {
+  margin: 12px 2px 0;
+  font-size: 12.5px; line-height: 1.55; color: var(--muted-2);
+}
+
+/* ---------- act 1 hero ---------- */
+.sd-hero { min-height: 100vh; display: flex; align-items: center; }
+.sd-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 7vw, 88px);
+  line-height: 0.98; letter-spacing: -0.04em;
+  margin: 0 0 20px;
+}
+.sd-hero .sd-lede {
+  font-size: clamp(17px, 1.6vw, 22px);
+  line-height: 1.5; color: var(--muted); max-width: 46ch;
+}
+.sd-scrollcue {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 36px;
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted-2);
+}
+.sd-scrollcue svg { width: 16px; height: 16px; animation: sd-bob 2.4s var(--ease) infinite; }
+@keyframes sd-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* ---------- act 4 conviction slider ---------- */
+.sd-slider { margin: 22px 0 4px; }
+.sd-slider label {
+  display: block; margin-bottom: 10px;
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+.sd-slider input[type="range"] {
+  width: 100%; height: 30px; cursor: pointer;
+  background: transparent; -webkit-appearance: none; appearance: none;
+}
+.sd-slider input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--indigo), var(--cyan));
+}
+.sd-slider input[type="range"]::-moz-range-track {
+  height: 4px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--indigo), var(--cyan));
+}
+.sd-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 22px; height: 22px; margin-top: -9px;
+  border-radius: 50%; background: var(--text);
+  border: 3px solid var(--cyan);
+  transition: transform 180ms var(--ease);
+}
+.sd-slider input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--text); border: 3px solid var(--cyan);
+}
+.sd-slider input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.12); }
+.sd-slider input[type="range"]:focus-visible { outline: 2px solid var(--cyan); outline-offset: 6px; border-radius: 4px; }
+
+/* Band readout — accuracy AND its own forward return, never one without the other. */
+.sd-band {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  margin-top: 16px;
+}
+.sd-band > div {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 14px 16px;
+}
+.sd-band .k {
+  display: block; font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted-2); margin-bottom: 7px;
+}
+.sd-band .v { display: block; font-family: var(--font-mono); font-size: clamp(20px, 2.4vw, 27px); font-weight: 600; }
+.sd-band .sd-acc .v { color: var(--cyan); }
+.sd-band .sd-ret .v { color: var(--emerald); }
+.sd-band .sd-ret[data-neg="1"] .v { color: var(--sd-red); }
+.sd-band .ci { display: block; margin-top: 6px; font-family: var(--font-mono); font-size: 11.5px; color: var(--muted-2); }
+
+/* ---------- act 6 rejection ledger ---------- */
+.sd-rejects { display: grid; gap: 10px; margin-top: 20px; }
+.sd-reject {
+  background: var(--panel); border: 1px solid var(--line);
+  border-left: 2px solid var(--fuchsia);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 16px;
+}
+.sd-reject[data-kind="kept"] { border-left-color: var(--emerald); }
+.sd-reject h3 {
+  margin: 0 0 6px; font-size: 14.5px; font-weight: 600;
+  font-family: var(--font-body); letter-spacing: -0.01em;
+}
+.sd-reject .verdict {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--fuchsia); margin-right: 8px;
+}
+.sd-reject[data-kind="kept"] .verdict { color: var(--emerald); }
+.sd-reject p { margin: 0; font-size: 13px; line-height: 1.6; color: var(--muted); }
+
+/* ---------- act 7 close ---------- */
+.sd-close { text-align: center; padding: clamp(60px, 10vh, 120px) 0; }
+.sd-close h2 { max-width: 20ch; margin-inline: auto; }
+.sd-close .sd-copy { margin-inline: auto; text-align: center; }
+.sd-stackrow {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center; margin: 26px 0 30px;
+}
+.sd-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1023px) {
+  .sd-act-inner { position: static; }
+  .sd-act, .sd-act[data-scroll="1"] { min-height: 0; }
+  .sd-stage { min-height: 0; }
+}
+@media (max-width: 768px) {
+  .sd-band { grid-template-columns: 1fr; }
+  .sd-figs { gap: 8px; }
+  .sd-fig { flex: 1 1 100%; }
+}
+
+/* ---------- reduced motion: final state, no scrub, fully readable ---------- */
+@media (prefers-reduced-motion: reduce) {
+  #sd-canvas { display: none; }
+  body.sd-webgl .sd-fallback { display: block; }
+  .sd-act, .sd-act[data-scroll="1"] { min-height: 0; }
+  .sd-act-inner { position: static; }
+  .sd-scrollcue svg { animation: none; }
+  .sd-slider input[type="range"]::-webkit-slider-thumb { transition: none; }
+}

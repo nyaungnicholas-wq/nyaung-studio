@@ -151,9 +151,16 @@ ${SCRIPTS}
 </html>`;
 };
 
+// `custom: true` marks a project whose case-study page is hand-built (its own
+// scroll narrative and WebGL), so this generator must not overwrite it. It still
+// carries a full data.js entry, so it appears in the work grid and in its
+// neighbours' prev/next links exactly like a generated page.
+let written = 0, skipped = [];
 PROJECTS.forEach((p, i) => {
+  if (p.custom) { skipped.push(p.slug); return; }
   const prev = PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length];
   const next = PROJECTS[(i + 1) % PROJECTS.length];
   fs.writeFileSync(`work-${p.slug}.html`, head(p) + '\n' + body(p, prev, next));
+  written++;
 });
-console.log('generated', PROJECTS.length, 'case-study pages');
+console.log('generated', written, 'case-study pages' + (skipped.length ? ` — skipped hand-built: ${skipped.join(', ')}` : ''));
