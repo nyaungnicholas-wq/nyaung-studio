@@ -116,15 +116,17 @@ async function initScene() {
     uMouse: { value: new THREE.Vector2(0, 0) },   // cursor in NDC (-1..1)
     uRadius: { value: 0.34 }, uPush: { value: 2.6 },
     uSize: { value: 92.0 }, uPR: { value: Math.min(window.devicePixelRatio, 2) },
-    uOpacity: { value: 0.95 },
+    uOpacity: { value: 0.95 }, uTime: { value: 0 },
   };
   const stars = new THREE.Points(starGeo, new THREE.ShaderMaterial({
     uniforms: starUniforms, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
     vertexShader: `
-      attribute vec3 aColor; varying vec3 vColor;
-      uniform vec2 uMouse; uniform float uRadius, uPush, uSize, uPR;
+      attribute vec3 aColor; varying vec3 vColor; varying float vTw;
+      uniform vec2 uMouse; uniform float uRadius, uPush, uSize, uPR, uTime;
       void main(){
         vColor = aColor;
+        float seed = fract(sin(dot(position.xy, vec2(12.9898, 78.233))) * 43758.5453);
+        vTw = 0.78 + 0.22 * sin(uTime * 2.2 + seed * 6.2832);
         vec4 mv = modelViewMatrix * vec4(position, 1.0);
         vec4 clip = projectionMatrix * mv;
         vec2 ndc = clip.xy / clip.w;
@@ -137,15 +139,104 @@ async function initScene() {
         gl_PointSize = uSize * uPR / max(-mv.z, 0.1);
       }`,
     fragmentShader: `
-      varying vec3 vColor; uniform float uOpacity;
+      varying vec3 vColor; varying float vTw; uniform float uOpacity;
       void main(){
         float d = length(gl_PointCoord - 0.5);
         float a = smoothstep(0.5, 0.0, d);
-        gl_FragColor = vec4(vColor, a * uOpacity);
+        gl_FragColor = vec4(vColor, a * uOpacity * vTw);
       }`,
   }));
   stars.frustumCulled = false;
   scene.add(stars);
+
+  // ---- NEBULA BACKDROP: domain-warped noise clouds behind the starfield ----
+  const nebulaUniforms = {
+    uTime: { value: 0 }, uFlow: { value: 0 },
+    // gl_FragCoord is in drawing-buffer pixels (DPR-scaled), not CSS pixels
+    uRes: { value: renderer.getDrawingBufferSize(new THREE.Vector2()) },
+    uMouse: { value: new THREE.Vector2(0, 0) },
+  };
+  const nebula = new THREE.Mesh(
+    new THREE.PlaneGeometry(2, 2),
+    new THREE.ShaderMaterial({
+      uniforms: nebulaUniforms, depthWrite: false, depthTest: false,
+      vertexShader: `void main(){ gl_Position = vec4(position.xy, 0.999, 1.0); }`,
+      fragmentShader: `
+        uniform float uTime, uFlow; uniform vec2 uRes, uMouse;
+        float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+        float vnoise(vec2 p){
+          vec2 i = floor(p), f = fract(p);
+          f = f * f * (3.0 - 2.0 * f);
+          return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x),
+                     mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y);
+        }
+        float fbm(vec2 p){
+          mat2 rot = mat2(0.8253, 0.5646, -0.5646, 0.8253);
+          float v = 0.0, a = 0.5;
+          for (int i = 0; i < 3; i++) { v += a * vnoise(p); p = rot * p * 2.0 + vec2(1.7); a *= 0.5; }
+          return v / 0.875;
+        }
+        void main(){
+          vec2 uv = gl_FragCoord.xy / uRes;
+          vec2 p = (uv * 2.0 - 1.0) * vec2(uRes.x / uRes.y, 1.0);
+          p += uMouse * 0.04;                        // slight parallax
+          float t = uTime * (0.03 + uFlow * 0.08);
+          vec2 q = vec2(fbm(p * 0.55 + vec2(0.0, t)), fbm(p * 0.55 + vec2(5.2, 1.3) + t * 0.6));
+          float f = fbm(p * 0.55 + 2.6 * q + vec2(t * 0.4, 0.0));
+          vec3 col = vec3(0.012, 0.012, 0.02);
+          col = mix(col, vec3(0.152, 0.157, 0.371), smoothstep(0.25, 0.75, f) * 0.55);    // indigo cloud
+          col = mix(col, vec3(0.296, 0.204, 0.560), smoothstep(0.45, 0.9, q.x) * 0.45);   // violet fold
+          col = mix(col, vec3(0.470, 0.203, 0.610), smoothstep(0.72, 1.0, f) * 0.35);     // fuchsia core
+          col += vec3(0.086, 0.290, 0.380) * smoothstep(0.6, 0.95, q.y) * 0.12;           // cyan wisp
+          float vig = 1.0 - dot(uv - 0.5, uv - 0.5) * 1.1;
+          col *= clamp(vig, 0.0, 1.0);
+          gl_FragColor = vec4(min(col, 0.22), 1.0);
+        }`,
+    })
+  );
+  nebula.renderOrder = -1;
+  nebula.frustumCulled = false;
+  scene.add(nebula);
+
+  // ---- SHOOTING STARS: small pool of additive line meteors ----
+  const meteors = [];
+  if (!reduce) {
+    for (let i = 0; i < 7; i++) {
+      const g = new THREE.BufferGeometry();
+      g.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(6), 3));
+      const line = new THREE.Line(g, new THREE.LineBasicMaterial({
+        color: 0xfff0d0, transparent: true, opacity: 0,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      }));
+      line.frustumCulled = false;
+      scene.add(line);
+      meteors.push({ line, life: -(2 + Math.random() * 9), active: false,
+        pos: new THREE.Vector3(), dir: new THREE.Vector3(), speed: 0 });
+    }
+  }
+  function stepMeteors(dt) {
+    for (const mt of meteors) {
+      mt.life += dt;
+      if (mt.life < 0) continue;
+      if (!mt.active) {
+        // spawn on a far shell, heading roughly sideways-down
+        const th = Math.random() * TWO_PI, ph = Math.acos(2 * Math.random() - 1);
+        const r = 11 + Math.random() * 7;
+        mt.pos.set(r * Math.sin(ph) * Math.cos(th), r * Math.sin(ph) * Math.sin(th) * 0.6 + 4, r * Math.cos(ph) * 0.5 - 4);
+        mt.dir.set(-(0.5 + Math.random()), -(0.2 + Math.random() * 0.6), 0).normalize();
+        if (Math.random() < 0.5) mt.dir.x *= -1;
+        mt.speed = 16 + Math.random() * 10;
+        mt.active = true;
+      }
+      mt.pos.addScaledVector(mt.dir, mt.speed * dt);
+      const a = mt.line.geometry.attributes.position.array;
+      a[0] = mt.pos.x; a[1] = mt.pos.y; a[2] = mt.pos.z;
+      a[3] = mt.pos.x - mt.dir.x * 2.4; a[4] = mt.pos.y - mt.dir.y * 2.4; a[5] = mt.pos.z - mt.dir.z * 2.4;
+      mt.line.geometry.attributes.position.needsUpdate = true;
+      mt.line.material.opacity = Math.sin(Math.PI * Math.min(mt.life / 1.3, 1)) * 0.75;
+      if (mt.life > 1.3) { mt.active = false; mt.life = -(3 + Math.random() * 9); mt.line.material.opacity = 0; }
+    }
+  }
 
   // ---- GLASS CORE: custom GLSL fresnel + screen-space refraction of the starfield ----
   let glass = null, sceneRT = null;
@@ -250,7 +341,7 @@ async function initScene() {
   window.addEventListener('pagehide', () => {
     try {
       renderer.dispose();
-      [wire, morph, inner, stars, glow, glow2, glass].forEach(o => { if (!o) return; o.geometry && o.geometry.dispose(); o.material && o.material.dispose(); });
+      [wire, morph, inner, stars, glow, glow2, glass, nebula, ...meteors.map(m => m.line)].forEach(o => { if (!o) return; o.geometry && o.geometry.dispose(); o.material && o.material.dispose(); });
       if (group.userData.ring) { group.userData.ring.geometry.dispose(); group.userData.ring.material.dispose(); }
       if (sceneRT) sceneRT.dispose();
       dotTex.dispose();
@@ -261,6 +352,7 @@ async function initScene() {
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.getDrawingBufferSize(nebulaUniforms.uRes.value);
     if (composer) composer.setSize(window.innerWidth, window.innerHeight);
     if (bloom) bloom.setSize(window.innerWidth, window.innerHeight);
     if (sceneRT) { const dbs = renderer.getDrawingBufferSize(new THREE.Vector2()); sceneRT.setSize(dbs.x, dbs.y); if (glass) glass.material.uniforms.uRes.value.copy(dbs); }
@@ -273,7 +365,18 @@ async function initScene() {
     prog += (tgt - prog) * 0.075;
     setOpacity();
     const t = clock.getElapsedTime();
+    const dt = Math.min(t - (render._lt === undefined ? t : render._lt), 0.05);
+    render._lt = t;
     mouse.x += (mouse.tx - mouse.x) * 0.05; mouse.y += (mouse.ty - mouse.y) * 0.05;
+
+    // scroll velocity feeds stars, nebula flow, and bloom (hyperspace feel)
+    const vel = window.__lenis ? Math.min(Math.abs(window.__lenis.velocity || 0) / 35, 1) : 0;
+    starUniforms.uTime.value = t;
+    starUniforms.uSize.value = 92 * (1 + vel * 0.7);
+    nebulaUniforms.uTime.value = t;
+    nebulaUniforms.uFlow.value += (vel - nebulaUniforms.uFlow.value) * 0.08;
+    nebulaUniforms.uMouse.value.set(mouse.x, -mouse.y);
+    stepMeteors(dt);
 
     if (DRAMATIC) {
       group.rotation.y = t * 0.1 + prog * TWO_PI * 3;
@@ -351,9 +454,8 @@ async function initScene() {
 
     // bloom pulses with scroll velocity + click burst (and a gentle idle breath)
     if (bloom) {
-      const v = window.__lenis ? Math.min(Math.abs(window.__lenis.velocity || 0) / 35, 1) : 0;
       const base = DRAMATIC ? 0.95 : 0.72;
-      bloom.strength = base + v * 1.4 + burst * 0.7 + Math.sin(t * 1.4) * 0.14;
+      bloom.strength = base + vel * 1.4 + burst * 0.7 + Math.sin(t * 1.4) * 0.14;
     }
 
     // GLASS refraction: render the scene (minus the glass) to a target the glass samples
