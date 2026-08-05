@@ -10,7 +10,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://nicholasnyaung.com/work-signaldeck.html" />
   <meta property="og:title" content="SignalDeck — I built a trading signal, then proved it didn't work" />
-  <meta property="og:description" content="A market-research system whose flagship directional model graded 48.1% on 13,044 independent observations against a 54.6% baseline — and retired itself. The machinery that caught it is the work." />
+  <meta property="og:description" content="A market-research system whose flagship directional model graded 43.1% on 2,911 independent observations against a 56.8% baseline — and retired itself. The machinery that caught it is the work." />
   <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
@@ -23,8 +23,8 @@
   <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="styles.css?v=4" />
-  <link rel="stylesheet" href="signaldeck.css?v=1" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"SignalDeck","headline":"SignalDeck — I built a trading signal, then proved it didn't work","description":"A local-only market-research platform built around measurement discipline rather than prediction. Its flagship directional ensemble graded 48.1% on 13,044 independent symbol-days against a 54.6% majority-class baseline and was automatically retired. The auditable machinery that caught it — a hash-chained prediction ledger, pre-registered claims, and matched nulls — is the actual deliverable.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Go, SQLite, Next.js, Python, Three.js, walk-forward validation","about":"Quant / Trading"}</script>
+  <link rel="stylesheet" href="signaldeck.css?v=2" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"SignalDeck","headline":"SignalDeck — I built a trading signal, then proved it didn't work","description":"A local-only market-research platform built around measurement discipline rather than prediction. Its flagship directional ensemble graded 43.1% on 2,911 independent symbol-days against a 56.8% majority-class baseline and was automatically retired. The auditable machinery that caught it — a hash-chained prediction ledger, pre-registered claims, and matched nulls — is the actual deliverable.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Go, SQLite, Next.js, Python, Three.js, walk-forward validation","about":"Quant / Trading"}</script>
 </head>
 <body class="sd">
   <canvas id="sd-canvas" aria-hidden="true"></canvas>
@@ -41,11 +41,11 @@
             <h1 id="sd-h1">Most of this is unpredictable. Here is the proof.</h1>
             <p class="sd-lede">SignalDeck is a market-research platform I built to find a directional edge. It found that it did not have one — and said so, in public, against its own claim. This page is how that happened and what caught it.</p>
             <div class="sd-figs">
-              <div class="sd-fig" data-tone="failure"><span class="v" data-sd-count="48.1" data-sd-dp="1" data-sd-post="%">48.1%</span><span class="l">live accuracy of the flagship directional model</span></div>
-              <div class="sd-fig" data-tone="failure"><span class="v" data-sd-count="13044" data-sd-group="1">13,044</span><span class="l">independent symbol-day observations</span></div>
-              <div class="sd-fig" data-tone="failure"><span class="v" data-sd-count="54.6" data-sd-dp="1" data-sd-post="%">54.6%</span><span class="l">the majority-class baseline it had to beat</span></div>
+              <div class="sd-fig" data-tone="failure"><span class="v" data-sd-count="43.1" data-sd-dp="1" data-sd-post="%">43.1%</span><span class="l">live accuracy of the flagship directional model</span></div>
+              <div class="sd-fig" data-tone="failure"><span class="v" data-sd-count="2911" data-sd-group="1">2,911</span><span class="l">graded observations, one per symbol-day</span></div>
+              <div class="sd-fig" data-tone="failure"><span class="v" data-sd-count="56.8" data-sd-dp="1" data-sd-post="%">56.8%</span><span class="l">the majority-class baseline it had to beat</span></div>
             </div>
-            <p class="sd-source">Source: <code>PREDICTION_PROCESS.md</code> — Layer 6. Not a backtest: this is the live forward record.</p>
+            <p class="sd-source">Source: <code>STRATEGY_DECK.md</code> §2 — the live record, generated from <code>data/accuracy_registry.json</code> at the grade of 2026-08-04, not typed by hand. Not a backtest: this is the live forward record.</p>
             <span class="sd-scrollcue"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><polyline points="19 12 12 19 5 12"/></svg> Scroll</span>
           </div>
           <div class="sd-stage">
@@ -112,31 +112,31 @@
           <div class="sd-copy">
             <span class="sd-eyebrow" data-tone="killed"><span class="sd-dot"></span>Act 3 — the kill</span>
             <h2 id="sd-h3">The flagship model graded itself, failed, and switched itself off.</h2>
-            <p>The directional ensemble — the thing the whole platform was built to produce — accrued a live forward record of <strong>48.1% across 13,044 independent (symbol, horizon, UTC-day) observations</strong>. It was never judged against a coin flip. The honest competing model is the constant majority-class guess, which scored <strong>54.6%</strong> on the same days.</p>
+            <p>The directional ensemble — the thing the whole platform was built to produce — accrued a live forward record of <strong>43.1% across 2,911 independent (symbol, horizon, UTC-day) observations</strong>. It was never judged against a coin flip. The honest competing model is the constant majority-class guess, which scored <strong>56.8%</strong> on the same days.</p>
             <p>The entire confidence interval sits below that null. That is not "no edge found" — it is significant <strong>negative</strong> skill. <code>modelhealth</code> set <code>verdict: retired, emitting: false</code>. The model is off.</p>
             <div class="sd-figs">
-              <div class="sd-fig" data-tone="killed"><span class="v" data-sd-count="48.1" data-sd-dp="1" data-sd-post="%">48.1%</span><span class="l">live accuracy</span></div>
-              <div class="sd-fig" data-tone="killed"><span class="v" data-sd-count="-6.5" data-sd-dp="1" data-sd-post="pp">−6.5pp</span><span class="l">skill against the majority-class null</span></div>
+              <div class="sd-fig" data-tone="killed"><span class="v" data-sd-count="43.1" data-sd-dp="1" data-sd-post="%">43.1%</span><span class="l">live accuracy</span></div>
+              <div class="sd-fig" data-tone="killed"><span class="v" data-sd-count="-13.7" data-sd-dp="1" data-sd-post="pp">−13.7pp</span><span class="l">skill against the majority-class null</span></div>
               <div class="sd-fig" data-tone="killed"><span class="v">RETIRED</span><span class="l">emitting: false, enforced in code</span></div>
             </div>
             <div class="sd-caveat">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.5h.01"/></svg>
-              <span><strong>Inverting it is not a rescue, and the arithmetic is on record.</strong> Flipping 48.1% gives 51.9% — still 2.7 points <em>below</em> the 54.6% null. An inverted signal only clears that bar if the original sits under 45.4%. At 48.1% the ensemble is not anti-predictive, it is noise around the base rate. The API refuses <code>emitting: true</code> for any <code>-inverted</code>, <code>-relabeled</code> or <code>-flipped</code> variant unless it passes the full canary re-admission gate as a new model.</span>
+              <span><strong>Inverting it is not a rescue, and the arithmetic is on record.</strong> Flipping 43.1% gives 56.9% against a 56.8% null — a tenth of a point, on a record whose interval runs from 31.1% to 55.9%. An inverted signal only clears that bar if the original sits under 43.2%, and 43.1% clears it by a rounding error rather than a margin. Trading the flip means staking a tenth of a percentage point against an interval twenty-five points wide. The API refuses <code>emitting: true</code> for any <code>-inverted</code>, <code>-relabeled</code> or <code>-flipped</code> variant unless it passes the full canary re-admission gate as a new model.</span>
             </div>
-            <p class="sd-source">Source: <code>PREDICTION_PROCESS.md</code> — Layer 6 and "Why inversion is not a rescue"; enforcement in <code>daemon/internal/api/modelhealth.go</code>.</p>
+            <p class="sd-source">Source: <code>STRATEGY_DECK.md</code> §2 for the record and its interval; <code>PREDICTION_PROCESS.md</code> — Layer 6 and "Why inversion is not a rescue"; enforcement in <code>daemon/internal/api/modelhealth.go</code>.</p>
           </div>
           <div class="sd-stage">
             <figure class="sd-fallback">
               <svg viewBox="0 0 420 240" role="img" aria-labelledby="sd-f3t">
-                <title id="sd-f3t">A cumulative accuracy line drifting down from fifty percent and settling at 48.1 percent, well below both the fifty percent line and the 54.6 percent majority-class baseline.</title>
+                <title id="sd-f3t">A cumulative accuracy line drifting down from fifty percent and settling at 43.1 percent, well below both the fifty percent line and the 56.8 percent majority-class baseline.</title>
                 <line x1="40" y1="90" x2="400" y2="90" stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.85"/>
-                <text x="40" y="82" fill="#FBBF24" font-family="monospace" font-size="11">54.6% majority-class null</text>
+                <text x="40" y="82" fill="#FBBF24" font-family="monospace" font-size="11">56.8% majority-class null</text>
                 <line x1="40" y1="140" x2="400" y2="140" stroke="#8E8EA8" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>
                 <text x="40" y="134" fill="#8E8EA8" font-family="monospace" font-size="11">50% coin flip</text>
                 <path d="M40 140 C 90 132, 130 152, 170 143 C 215 133, 250 165, 290 158 C 330 152, 365 168, 400 166" fill="none" stroke="#C084FC" stroke-width="2.5"/>
                 <circle cx="400" cy="166" r="5" fill="#C084FC"/>
-                <text x="262" y="196" fill="#C084FC" font-family="monospace" font-size="12">48.1% — RETIRED</text>
-                <text x="40" y="222" fill="#8E8EA8" font-family="monospace" font-size="11">13,044 independent symbol-days →</text>
+                <text x="262" y="196" fill="#C084FC" font-family="monospace" font-size="12">43.1% — RETIRED</text>
+                <text x="40" y="222" fill="#8E8EA8" font-family="monospace" font-size="11">2,911 independent symbol-days →</text>
               </svg>
               <figcaption>The live prequential record. It never crosses back above the null, and the retirement is automatic — no grace period, no re-window, no threshold revision after the evidence arrived.</figcaption>
             </figure>
@@ -168,7 +168,7 @@
 
             <div class="sd-caveat">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16.5h.01"/></svg>
-              <span><strong>These are backtested claims, not a live record.</strong> Every structural predictor currently grades <code>PENDING</code> with 0 of the 30 required observations resolved — a 21-day horizon cannot be graded sooner than 2026-08-07. And the null is never 50%: trend persistence alone scores 54–57%. For <code>liquidity21</code>, a naive persistence rule scores the <em>same</em> 87.6% — the accuracy holds, the skill claim does not, and it ships saying so.</span>
+              <span><strong>These are backtested claims, not a live record.</strong> Every structural predictor currently grades <code>PENDING</code> with 0 of the 30 required observations resolved — 3,649 trend21 forecasts are on record and none of them can be graded before 2026-08-07, with first grading under the pre-registered protocol on 2026-08-14. A 21-day horizon cannot resolve sooner, and the waiting is the point. And the null is never 50%: trend persistence alone scores 54–57%. For <code>liquidity21</code>, a naive persistence rule scores the <em>same</em> 87.6% — the accuracy holds, the skill claim does not, and it ships saying so.</span>
             </div>
             <p class="sd-source">Source: <code>daemon/internal/structregime/structregime.go</code> (band tables), <code>data/accuracy_registry.json</code> (PENDING status). All three kinds were replicated 2026-07-17 by an independent re-implementation within two jackknife standard errors.</p>
           </div>
@@ -215,7 +215,7 @@
             <p><strong>Accuracy is a persistence statistic. It is never an expected return.</strong> "97.2% chance it stays above its 200-day average" and "this basket makes money" are different claims, and only the first one is true.</p>
             <div class="sd-caveat" data-tone="process">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong>This number has already been corrected once, upward in severity.</strong> The platform originally disclosed −0.39%. An adversarial review claimed the real figure was −2.05%. An in-repo replication — 976 symbols, conviction ≥0.9, non-overlapping 21-session windows, one call per symbol-day, n = 18,850 — measured <strong>−0.76%, 95% CI [−1.19%, −0.32%]</strong>. The reviewer's direction replicated; their magnitude did not, and −2.05% falls outside the interval. So the served number is the measurement: not the kinder original, and not the worse unreproduced figure. The interval is what to quote — the median call is only −0.05%, so the loss lives in a tail.</span>
+              <span><strong>This number has already been corrected once, upward in severity.</strong> The platform originally disclosed −0.39%. An adversarial review claimed the real figure was −2.05%. An in-repo replication — 976 symbols, conviction ≥0.9, non-overlapping 21-session windows, one call per symbol-day, n = 18,850 — measured <strong>−0.76%, 95% CI [−1.19%, −0.32%]</strong>. The reviewer's direction replicated; their magnitude did not, and −2.05% falls outside the interval. So the served number is the measurement: not the kinder original, and not the worse unreproduced figure. The interval is what to quote — the median call is only −0.05%, so the loss lives in a tail. The band was then re-measured a third time, on a universe rebuilt to include companies that have since died: survivorship inflation came to +1.0pp overall, and this band read 97.6% on the clean data. The bias was real and it was small, which is only knowable because someone went and looked.</span>
             </div>
             <p class="sd-source">Source: <code>daemon/internal/structregime/structregime.go</code> — <code>forwardReturnFor</code>, corrected 2026-07-26.</p>
           </div>
@@ -250,10 +250,10 @@
           <div class="sd-copy">
             <span class="sd-eyebrow" data-tone="process"><span class="sd-dot"></span>Act 6 — the machinery</span>
             <h2 id="sd-h6">None of that is impressive unless something forced it into the open.</h2>
-            <p>Every prediction writes a row to a hash-chained ledger with its probability frozen at prediction time — <strong>246,595 entries</strong>, tamper-evident. Six structural predictors were <strong>pre-registered</strong> on 2026-07-26, with their band tables, resolution rules, nulls and known weaknesses frozen into that chain <strong>twelve days before</strong> the first observation could resolve. The grader is pinned by commit and its file hash is frozen alongside; editing it appends a visible amendment rather than moving the goalposts.</p>
+            <p>Every prediction writes a row to a hash-chained ledger with its probability frozen at prediction time — <strong>326,957 entries</strong>, tamper-evident. Six structural predictors were <strong>pre-registered</strong> on 2026-07-26, with their band tables, resolution rules, nulls and known weaknesses frozen into that chain <strong>twelve days before</strong> the first observation could resolve. The grader is pinned by commit and its file hash is frozen alongside; editing it appends a visible amendment rather than moving the goalposts.</p>
             <p>The refusal rule was decided before the sample arrived: under 30 independent observations is <code>INSUFFICIENT</code>, and under 10 distinct UTC days no interval is published at all — because no interval means no verdict.</p>
             <div class="sd-figs">
-              <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="246595" data-sd-group="1">246,595</span><span class="l">hash-chained ledger entries</span></div>
+              <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="326957" data-sd-group="1">326,957</span><span class="l">rows in the hash-chained ledger</span></div>
               <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="12" data-sd-dp="0">12</span><span class="l">days claims were frozen before first grading</span></div>
               <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="7.9" data-sd-dp="1" data-sd-post="×">7.9×</span><span class="l">n-inflation the independence rule strips out</span></div>
             </div>
@@ -295,7 +295,7 @@
                 </g>
                 <text x="246" y="105" fill="#C084FC" font-family="monospace" font-size="11">rejection, recorded</text>
                 <text x="246" y="189" fill="#C084FC" font-family="monospace" font-size="11">rejection, recorded</text>
-                <text x="20" y="63" fill="#34D399" font-family="monospace" font-size="11">246,595 links</text>
+                <text x="20" y="63" fill="#34D399" font-family="monospace" font-size="11">326,957 links</text>
                 <text x="20" y="147" fill="#34D399" font-family="monospace" font-size="11">tamper-evident</text>
               </svg>
               <figcaption>The prediction ledger. Rejections occupy the same chain as confirmations — that is the property that makes the record auditable rather than promotional.</figcaption>
@@ -312,11 +312,11 @@
           <div class="sd-copy">
             <span class="sd-eyebrow" style="justify-content:center"><span class="sd-dot"></span>Act 7</span>
             <h2 id="sd-h7">A search that can prove itself wrong.</h2>
-            <p>A Go daemon ingesting and grading on a local SQLite store, a Next.js surface that refuses to render an accuracy without its band and its caveat, and a Python grader that re-runs the verdicts daily and is allowed to retire the platform's own flagship. Research corpus: <strong>166,285 weekly observations</strong> spanning <strong>341 independent market weeks</strong>.</p>
+            <p>A Go daemon ingesting and grading on a local SQLite store, a Next.js surface that refuses to render an accuracy without its band and its caveat, and a Python grader that re-runs the verdicts daily and is allowed to retire the platform's own flagship. Research corpus: <strong>1,854,228 rows</strong> of survivorship-aware universe membership, rebuilt point-in-time.</p>
             <div class="sd-figs" style="justify-content:center">
-              <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="166285" data-sd-group="1">166,285</span><span class="l">weekly observations in the research corpus</span></div>
-              <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="341" data-sd-group="1">341</span><span class="l">independent market weeks, 2019 onward</span></div>
-              <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="250921" data-sd-group="1">250,921</span><span class="l">graded prediction outcomes</span></div>
+              <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="1854228" data-sd-group="1">1,854,228</span><span class="l">rows in the survivorship-aware universe</span></div>
+              <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="19128" data-sd-group="1">19,128</span><span class="l">independent outcomes after de-duplication</span></div>
+              <div class="sd-fig" data-tone="process"><span class="v" data-sd-count="151924" data-sd-group="1">151,924</span><span class="l">raw outcomes before the independence rule</span></div>
             </div>
             <div class="sd-stackrow">
               <span class="proj-tag">Go</span><span class="proj-tag">SQLite</span><span class="proj-tag">Next.js</span><span class="proj-tag">Python</span><span class="proj-tag">Walk-forward validation</span><span class="proj-tag">Wilson &amp; Fisher-z intervals</span>
@@ -351,7 +351,7 @@
   <script src="data.js?v=5"></script>
   <script src="components.js?v=4"></script>
   <script src="app.js?v=4"></script>
-  <script type="module" src="signaldeck.js?v=1"></script>
+  <script type="module" src="signaldeck.js?v=2"></script>
   <script defer src="motion.js?v=5"></script>
   <script defer src="premium.js?v=4"></script>
   <script defer src="assistant.js?v=4"></script>

@@ -19,18 +19,24 @@ import * as THREE from 'three';
    ------------------------------------------------------------ */
 export const SIGNALDECK_FACTS = {
   // --- Act 3: the live directional record and its retirement ---
-  // SOURCE: signaldeck/PREDICTION_PROCESS.md, "Layer 6 — What it does with a failure"
+  // SOURCE: signaldeck/STRATEGY_DECK.md §2, the generated live_accuracy block
+  // (grade of 2026-08-04, from data/accuracy_registry.json). This supersedes the
+  // figures the page originally shipped: grading moved to one observation per
+  // (symbol, horizon, UTC-day), which cut n from 13,044 to 2,911.
   directional: {
-    accuracy: 0.481,          // 48.1% live
-    n: 13044,                 // independent (symbol, horizon, UTC-day) observations
-    nullAccuracy: 0.546,      // majority-class (not 50%) baseline
-    skillPP: -6.5,            // 48.1 - 54.6
+    accuracy: 0.431,          // 43.1% live
+    n: 2911,                  // graded observations, one per symbol/horizon/UTC-day
+    nullAccuracy: 0.568,      // majority-class (not 50%) baseline
+    skillPP: -13.7,           // 43.1 - 56.8
+    ciLow: 0.311,             // 95% interval, entirely below the null
+    ciHigh: 0.559,
+    distinctDays: 10,         // clears min_distinct_blocks, so an interval is published
     verdict: 'retired',       // internal/modelhealth -> emitting: false
     emitting: false,
-    // Inversion arithmetic, on record in the same section:
-    invertedAccuracy: 0.519,  // 1 - 0.481
-    invertedGapPP: -2.7,      // 51.9 - 54.6, still below the null
-    inversionUsefulBelow: 0.454, // 1 - 0.546
+    // Inversion arithmetic, recomputed on the current record:
+    invertedAccuracy: 0.569,  // 1 - 0.431
+    invertedGapPP: 0.1,       // 56.9 - 56.8, inside the noise of a 25-point interval
+    inversionUsefulBelow: 0.432, // 1 - 0.568
   },
 
   // --- Act 2: the arithmetic ceiling ---
@@ -55,7 +61,8 @@ export const SIGNALDECK_FACTS = {
   // record, and are labelled that way everywhere they render.
   structural: {
     status: 'PENDING — backtested claim, 0 of 30 required observations resolved',
-    firstGrade: '2026-08-07',
+    firstGrade: '2026-08-07',       // first resolvable evidence
+    firstProtocolGrade: '2026-08-14', // first grading under the pre-registered protocol
     trend21: {
       label: 'trend21 — same side of SMA200 in 21 sessions',
       cumulativeAll: 0.833,
@@ -98,10 +105,14 @@ export const SIGNALDECK_FACTS = {
 
   // --- Act 6: the machinery that catches the mistakes ---
   machinery: {
-    // SOURCE: measured read-only against signaldeck/data/signaldeck.db, 2026-07-27.
-    // PREDICTION_PROCESS.md Layer 5 documents the same table at 235k rows.
-    ledgerRows: 246595,
-    outcomeRows: 250921,
+    // SOURCE: measured read-only against signaldeck/data/signaldeck.db, 2026-08-05.
+    // A ledger only grows, so this figure is as-of; PREDICTION_PROCESS.md Layer 5
+    // documented the same table at 235k rows earlier.
+    ledgerRows: 326957,
+    // SOURCE: PREDICTION_PROCESS.md — invariant run, 151,924 raw outcomes
+    // collapsing to 19,128 independent ones (inflation 7.9x).
+    outcomeRows: 151924,
+    independentOutcomes: 19128,
     // SOURCE: PREDICTION_PROCESS.md Part 3 — registered 2026-07-26, first grade
     // 2026-08-07, 0 of 30 required observations resolved at registration.
     prereg: {
@@ -109,7 +120,10 @@ export const SIGNALDECK_FACTS = {
       firstGrade: '2026-08-07',
       frozenDays: 12,
       predictors: 6,
-      outstandingForecasts: 12529,
+      // Per-predictor counts, from STRATEGY_DECK.md's generated block. The old
+      // typed aggregate (12,529) was retired by the corpus itself — it had been
+      // stated two different ways in one document.
+      forecastsRecorded: { trend21: 3649, trend63: 3649, vol21: 3665, liquidity21: 3624 },
       graderCommit: '04395a2e8fec1e558cd8cfe0c12a50dbc360cabb',
       refusal: 'under 30 independent observations = INSUFFICIENT; under 10 distinct UTC days = no interval, and no interval means no verdict',
     },
@@ -130,8 +144,12 @@ export const SIGNALDECK_FACTS = {
   },
 
   // --- Act 7: scale ---
-  // SOURCE: measured read-only against signaldeck/data/signaldeck.db, 2026-07-27.
-  scale: { researchWeeks: 166285, distinctWeeks: 341 },
+  // SOURCE: signaldeck/STRATEGY_DECK.md — `universe_membership` measured at
+  // 1,854,228 rows after the survivorship backfill (proofs/P3A) and the
+  // point-in-time universe rebuild (proofs/P3B). The earlier weekly-observation
+  // framing (166,285 / 341 weeks) came from a 2026-07-27 audit and is not
+  // carried by the current corpus, so it is not quoted here.
+  scale: { universeRows: 1854228, independentOutcomes: 19128 },
 };
 
 const F = SIGNALDECK_FACTS;
@@ -349,8 +367,10 @@ function initWebGL() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 200);
     const STEPS = 200;
-    // A prequential walk that lands exactly on the measured 48.1% — the endpoint
-    // is the real number; the path to it is a rendering of accrual, not data.
+    // A prequential walk that lands exactly on the measured accuracy (43.1%) —
+    // the endpoint is the real number; the path to it is a rendering of accrual,
+    // not data. Both the endpoint and the null plane read from SIGNALDECK_FACTS,
+    // so a re-grade moves the scene without touching this function.
     const acc = [];
     let a = 0.5;
     for (let i = 0; i <= STEPS; i++) {

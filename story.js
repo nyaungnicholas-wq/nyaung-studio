@@ -10,7 +10,7 @@
       if (!injected) {
         const s = document.createElement('script');
         s.defer = true;
-        s.src = 'aurora.js?v=1';
+        s.src = 'aurora.js?v=3';
         document.head.appendChild(s);
         injected = true;
       }
@@ -119,7 +119,7 @@
       // Base gradient: #0B0410 to #1A0B2E
       vec3 baseTop = vec3(0.043, 0.016, 0.063);
       vec3 baseBottom = vec3(0.102, 0.043, 0.180);
-      vec3 base = mix(baseTop, baseBottom, uv.y);
+      vec3 base = mix(baseBottom, baseTop, uv.y);
       
       // Domain warping - slowed ~40%
       vec2 q = vec2(
@@ -144,13 +144,13 @@
       float band2 = smoothstep(0.3, 0.7, q.x);
       float band3 = smoothstep(0.5, 0.9, r.y);
       
-      vec3 col = base * 0.6;
+      vec3 col = base;
       col = mix(col, darkAmethyst, band1 * 0.7);
       col = mix(col, mutedViolet, band2 * 0.6);
       col = mix(col, glowingLavender, smoothstep(0.85, 1.0, f) * 0.3);
       
       // Luminance cap
-      col = clamp(col * 0.45, 0.0, 0.30);
+      col = min(col, 0.30);
       
       // Champagne-gold rim flares
       float flareField = smoothstep(0.72, 0.95, q.x * r.y) * 0.10;
@@ -211,6 +211,19 @@
         col += rimColor * rim;
       }
       
+
+      // Gold light streak — rare comet sweep, shared with aurora.js
+      if (fract(u_time/15.0) < 0.12) {
+        float sk = fract(u_time/15.0);
+        vec2 dir = normalize(vec2(0.8, -0.45));
+        vec2 linePos = mix(-dir, dir, sk/0.12);
+        vec2 toPoint = p - linePos;
+        float perpDist = abs(dot(toPoint, vec2(-dir.y, dir.x)));
+        float headDist = abs(dot(toPoint, dir));
+        float streak = exp(-perpDist*90.0) * exp(-headDist*4.0) * smoothstep(0.0,0.02,sk) * smoothstep(0.12,0.06,sk) * 0.35;
+        col += vec3(0.910, 0.784, 0.478) * streak;
+      }
+
       // Strong vignette - edges ~45% darker
       float vig = 1.0 - dot((uv - 0.5) * 1.2, (uv - 0.5) * 1.2);
       vig = clamp(pow(vig, 1.5), 0.0, 1.0);
@@ -282,6 +295,7 @@
     uniform vec2 u_res;
     uniform float u_p1, u_p2, u_p3;
     uniform vec2 u_mouse;
+    uniform vec3 u_click; // x, y (authored space), age seconds; age >= 99.0 = inactive
     uniform float u_dpr;
     varying vec3 v_col;
     varying float v_alpha;
@@ -323,6 +337,14 @@
       float dist = length(diff);
       if (dist > 0.001) {
         pos += normalize(diff) * 0.18 * exp(-dist * 4.0) * (1.0 - u_p2 * 0.5);
+      }
+
+      // Click pulse — an expanding ring displaces particles as it passes through
+      if (u_click.z < 2.0) {
+        vec2 cd = pos - u_click.xy;
+        float cl = length(cd);
+        float ring = exp(-abs(cl - u_click.z * 0.9) * 8.0) * exp(-u_click.z * 1.6);
+        if (cl > 0.001) pos += normalize(cd) * ring * 0.12;
       }
 
       // Aspect correction
@@ -398,6 +420,7 @@
   const u_p2 = gl.getUniformLocation(particleProg, 'u_p2');
   const u_p3 = gl.getUniformLocation(particleProg, 'u_p3');
   const u_mouse = gl.getUniformLocation(particleProg, 'u_mouse');
+  const u_click = gl.getUniformLocation(particleProg, 'u_click');
   const u_dpr = gl.getUniformLocation(particleProg, 'u_dpr');
 
   // Section progress helper
@@ -451,6 +474,17 @@
     ];
   };
   window.addEventListener('pointermove', pointermove, { passive: true });
+
+  // Click pulse state — clickAt shares the rAF/performance.now() clock (seconds)
+  let clickPt = [0, 0];
+  let clickAt = -99;
+  window.addEventListener('pointerdown', (e) => {
+    clickPt = [
+      ((e.clientX / window.innerWidth) * 2 - 1) * (window.innerWidth / window.innerHeight),
+      -(e.clientY / window.innerHeight) * 2 + 1
+    ];
+    clickAt = performance.now() * 0.001;
+  }, { passive: true });
 
   // Resize handling
   let dpr = Math.min(window.devicePixelRatio, 1.5) * 0.85;
@@ -508,6 +542,7 @@
     gl.uniform1f(u_p2, p2);
     gl.uniform1f(u_p3, p3);
     gl.uniform2f(u_mouse, mouse[0], mouse[1]);
+    gl.uniform3f(u_click, clickPt[0], clickPt[1], Math.min(time - clickAt, 99));
     gl.uniform1f(u_dpr, dpr);
     gl.drawArrays(gl.POINTS, 0, N);
 

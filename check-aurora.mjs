@@ -19,4 +19,11 @@ assert.match(src, /resize/, 'must handle resize');
 assert.match(src, /pointermove|mousemove/, 'must track cursor');
 assert.match(src, /fbm|noise/, 'must be noise-driven');
 assert.ok(!/from\s+['"]three/.test(src) && !/THREE\./.test(src), 'no Three.js');
+// interactive edition requirements
+assert.match(src, /u_trail/, 'cursor wake trail uniform');
+assert.match(src, /u_clicks/, 'click shockwave uniforms');
+assert.match(src, /pointerdown|click/, 'click listener');
+assert.match(src, /gl_PointCoord/, 'dust mote point sprites');
+assert.match(src, /gl\.POINTS/, 'dust mote draw pass');
+assert.match(src, /u_streak|streak/, 'gold light streak');
 console.log('aurora.js checks pass');
