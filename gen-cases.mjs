@@ -31,8 +31,9 @@ const SCRIPTS = `
   <script src="data.js?v=5"></script>
   <script src="components.js?v=4"></script>
   <script src="app.js?v=4"></script>
-  <script defer src="aurora.js?v=1"></script>
-  <script defer src="motion.js?v=5"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=6"></script>
   <script defer src="premium.js?v=4"></script>
   <script defer src="assistant.js?v=4"></script>
   <script defer src="interactive.js?v=4"></script>`;

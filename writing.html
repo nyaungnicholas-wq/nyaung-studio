@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Writing — Notes from the Build | Nicholas</title>
   <meta name="description" content="Build notes from Nicholas — how I think about shipping software solo: database-level guarantees, honest-by-design systems, self-correcting AI, and hands-off automation." />
-  <meta name="theme-color" content="#0B0410" />
+  <meta name="theme-color" content="#07070B" />
   <script>document.documentElement.classList.add('js');</script>
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://nicholasnyaung.com/writing.html" />
@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=5" />
+  <link rel="stylesheet" href="styles.css?v=6" />
   <script type="application/ld+json">
   { "@context": "https://schema.org", "@type": "Blog", "name": "Nicholas — Writing", "url": "https://nicholasnyaung.com/writing.html", "author": { "@type": "Person", "name": "Nicholas Nyaung" },
     "blogPost": [
@@ -130,8 +130,9 @@
   <script src="data.js?v=5"></script>
   <script src="components.js?v=4"></script>
   <script src="app.js?v=4"></script>
-  <script defer src="aurora.js?v=4"></script>
-  <script defer src="motion.js?v=5"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script type="module" src="scene.js?v=4"></script>
+  <script defer src="motion.js?v=6"></script>
   <script defer src="premium.js?v=4"></script>
   <script defer src="assistant.js?v=4"></script>
   <script defer src="interactive.js?v=4"></script>
