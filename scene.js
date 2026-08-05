@@ -116,7 +116,7 @@ async function initScene() {
     uMouse: { value: new THREE.Vector2(0, 0) },   // cursor in NDC (-1..1)
     uRadius: { value: 0.34 }, uPush: { value: 2.6 },
     uSize: { value: 92.0 }, uPR: { value: Math.min(window.devicePixelRatio, 2) },
-    uOpacity: { value: 0.95 }, uTime: { value: 0 },
+    uOpacity: { value: 0.85 }, uTime: { value: 0 },
   };
   const stars = new THREE.Points(starGeo, new THREE.ShaderMaterial({
     uniforms: starUniforms, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
@@ -126,7 +126,7 @@ async function initScene() {
       void main(){
         vColor = aColor;
         float seed = fract(sin(dot(position.xy, vec2(12.9898, 78.233))) * 43758.5453);
-        vTw = 0.78 + 0.22 * sin(uTime * 2.2 + seed * 6.2832);
+        vTw = 0.88 + 0.10 * sin(uTime * 1.1 + seed * 6.2832);
         vec4 mv = modelViewMatrix * vec4(position, 1.0);
         vec4 clip = projectionMatrix * mv;
         vec2 ndc = clip.xy / clip.w;
@@ -233,7 +233,7 @@ async function initScene() {
       a[0] = mt.pos.x; a[1] = mt.pos.y; a[2] = mt.pos.z;
       a[3] = mt.pos.x - mt.dir.x * 2.4; a[4] = mt.pos.y - mt.dir.y * 2.4; a[5] = mt.pos.z - mt.dir.z * 2.4;
       mt.line.geometry.attributes.position.needsUpdate = true;
-      mt.line.material.opacity = Math.sin(Math.PI * Math.min(mt.life / 1.3, 1)) * 0.75;
+      mt.line.material.opacity = Math.sin(Math.PI * Math.min(mt.life / 1.3, 1)) * 0.45;
       if (mt.life > 1.3) { mt.active = false; mt.life = -(1 + Math.random() * 3.5); mt.line.material.opacity = 0; }
     }
   }
@@ -372,7 +372,7 @@ async function initScene() {
     // scroll velocity feeds stars, nebula flow, and bloom (hyperspace feel)
     const vel = window.__lenis ? Math.min(Math.abs(window.__lenis.velocity || 0) / 35, 1) : 0;
     starUniforms.uTime.value = t;
-    starUniforms.uSize.value = 92 * (1 + vel * 0.7);
+    starUniforms.uSize.value = 92 * (1 + vel * 0.25);
     nebulaUniforms.uTime.value = t;
     nebulaUniforms.uFlow.value += (vel - nebulaUniforms.uFlow.value) * 0.08;
     nebulaUniforms.uMouse.value.set(mouse.x, -mouse.y);
@@ -454,8 +454,8 @@ async function initScene() {
 
     // bloom pulses with scroll velocity + click burst (and a gentle idle breath)
     if (bloom) {
-      const base = DRAMATIC ? 0.95 : 0.72;
-      bloom.strength = base + vel * 1.4 + burst * 0.7 + Math.sin(t * 1.4) * 0.14;
+      const base = DRAMATIC ? 0.68 : 0.5;
+      bloom.strength = base + vel * 0.45 + burst * 0.35 + Math.sin(t * 0.9) * 0.05;
     }
 
     // GLASS refraction: render the scene (minus the glass) to a target the glass samples
