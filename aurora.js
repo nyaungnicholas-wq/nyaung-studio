@@ -181,6 +181,39 @@
         col += rimColor * rim;
       }
       
+      // === PORTABLE:RINGS-RAYS === (uses only: p, uv, u_time, mouseOffset, col)
+      {
+        vec3 lav = vec3(0.655, 0.545, 0.859);
+        vec3 gold = vec3(0.910, 0.784, 0.478);
+        // halo ring 1 — thin rotating ellipse, iridescent stroke
+        vec2 c1 = vec2(-0.55, 0.35) + mouseOffset * 0.05;
+        float a1 = u_time * 0.03;
+        vec2 l1 = p - c1;
+        vec2 q1 = vec2(l1.x*cos(a1) - l1.y*sin(a1), l1.x*sin(a1) + l1.y*cos(a1));
+        float rd1 = abs(length(q1 * vec2(1.0, 1.9)) - 0.62);
+        float ringsGlow = exp(-rd1*rd1*2600.0) * 0.055;
+        col += mix(lav, gold, 0.5 + 0.5*sin(atan(q1.y, q1.x)*2.0 + u_time*0.15)) * ringsGlow;
+        // halo ring 2
+        vec2 c2 = vec2(0.65, -0.45) + mouseOffset * 0.03;
+        float a2 = -u_time * 0.021 + 1.5;
+        vec2 l2 = p - c2;
+        vec2 q2 = vec2(l2.x*cos(a2) - l2.y*sin(a2), l2.x*sin(a2) + l2.y*cos(a2));
+        float rd2 = abs(length(q2 * vec2(1.0, 1.9)) - 0.78);
+        float ring2Glow = exp(-rd2*rd2*2600.0) * 0.055;
+        col += mix(lav, gold, 0.5 + 0.5*sin(atan(q2.y, q2.x)*2.0 - u_time*0.12)) * ring2Glow;
+        // god rays — 3 soft shafts from the top-left, slow sway
+        vec2 rayOrigin = vec2(-1.3, 1.15);
+        vec2 rayV = p - rayOrigin;
+        for (int k = 0; k < 3; k++) {
+          float ak = -0.9 + float(k)*0.18 + 0.04*sin(u_time*0.11 + float(k)*2.1);
+          float along = dot(rayV, vec2(cos(ak), sin(ak)));
+          float perp = abs(dot(rayV, vec2(-sin(ak), cos(ak))));
+          float godRay = exp(-perp*perp*55.0) * smoothstep(0.0, 0.9, along) * exp(-along*0.9);
+          col += vec3(0.42, 0.36, 0.62) * godRay * 0.05;
+        }
+      }
+      // === END-PORTABLE ===
+
       // Gold light streak (greppable variable "streak")
       float streak = 0.0;
       if (fract(u_time/15.0) < 0.12) {
@@ -344,7 +377,7 @@
   const dustIndexLoc = gl.getAttribLocation(dustProgram, 'a_index');
   
   // Generate dust motes
-  const MOTE_COUNT = 800;
+  const MOTE_COUNT = 1100;
   const moteSeeds = new Float32Array(MOTE_COUNT * 4);
   for (let i = 0; i < MOTE_COUNT; i++) {
     moteSeeds[i*4] = Math.random();
@@ -365,6 +398,86 @@
   gl.bindBuffer(gl.ARRAY_BUFFER, moteIndexBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, moteIndex, gl.STATIC_DRAW);
   
+  // Constellation web — drifting nodes joined by faint lavender threads
+  const webVs = `
+    attribute vec3 a_line;
+    varying float v_a;
+    void main() { gl_Position = vec4(a_line.xy * 2.0 - 1.0, 0.0, 1.0); v_a = a_line.z; }
+  `;
+  const webFs = `
+    precision mediump float;
+    varying float v_a;
+    void main() { gl_FragColor = vec4(vec3(0.655, 0.545, 0.859) * v_a * 0.16, v_a * 0.16); }
+  `;
+  const webVsShader = createShader(gl.VERTEX_SHADER, webVs);
+  const webFsShader = createShader(gl.FRAGMENT_SHADER, webFs);
+  if (!webVsShader || !webFsShader) return;
+  const webProgram = gl.createProgram();
+  gl.attachShader(webProgram, webVsShader);
+  gl.attachShader(webProgram, webFsShader);
+  gl.linkProgram(webProgram);
+  if (!gl.getProgramParameter(webProgram, gl.LINK_STATUS)) {
+    console.warn('Web program link failed:', gl.getProgramInfoLog(webProgram));
+    gl.deleteProgram(webProgram);
+    return;
+  }
+  const webLineLoc = gl.getAttribLocation(webProgram, 'a_line');
+
+  const WEB_NODES = 90;
+  const webNodes = [];
+  for (let i = 0; i < WEB_NODES; i++) {
+    const a = Math.random() * Math.PI * 2;
+    webNodes.push({ x: Math.random(), y: Math.random(), vx: Math.cos(a) * 0.008, vy: Math.sin(a) * 0.008 });
+  }
+  const WEB_MAX_VERTS = 2400;
+  const webVerts = new Float32Array(WEB_MAX_VERTS * 3);
+  const webBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, webBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, webVerts.byteLength, gl.DYNAMIC_DRAW);
+
+  function stepWeb(dt) {
+    for (let i = 0; i < WEB_NODES; i++) {
+      const n = webNodes[i];
+      const dx = n.x - mouseX, dy = n.y - mouseY;
+      const d = Math.max(Math.hypot(dx, dy), 0.001);
+      const f = 0.35 * Math.exp(-d * 6.0) * dt;
+      n.vx += (dx / d) * f; n.vy += (dy / d) * f;
+      const sp = Math.hypot(n.vx, n.vy);
+      if (sp > 0.05) { n.vx *= 0.05 / sp; n.vy *= 0.05 / sp; }
+      n.x += n.vx * dt; n.y += n.vy * dt;
+      if (n.x < 0) { n.x = 0; n.vx = Math.abs(n.vx); }
+      if (n.x > 1) { n.x = 1; n.vx = -Math.abs(n.vx); }
+      if (n.y < 0) { n.y = 0; n.vy = Math.abs(n.vy); }
+      if (n.y > 1) { n.y = 1; n.vy = -Math.abs(n.vy); }
+    }
+  }
+
+  function drawWeb() {
+    let c = 0;
+    // ponytail: O(n^2) pair scan — 90 nodes = 4005 pairs/frame, fine; spatial hash if nodes ever grow
+    for (let i = 0; i < WEB_NODES; i++) for (let j = i + 1; j < WEB_NODES; j++) {
+      const a = webNodes[i], b = webNodes[j];
+      const dx = a.x - b.x, dy = a.y - b.y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 0.16 && c + 6 <= WEB_MAX_VERTS * 3) {
+        const al = 1 - d / 0.16;
+        webVerts[c++] = a.x; webVerts[c++] = a.y; webVerts[c++] = al;
+        webVerts[c++] = b.x; webVerts[c++] = b.y; webVerts[c++] = al;
+      }
+    }
+    if (!c) return;
+    gl.useProgram(webProgram);
+    gl.bindBuffer(gl.ARRAY_BUFFER, webBuffer);
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, webVerts.subarray(0, c));
+    gl.enableVertexAttribArray(webLineLoc);
+    gl.vertexAttribPointer(webLineLoc, 3, gl.FLOAT, false, 0, 0);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE);
+    gl.drawArrays(gl.LINES, 0, c / 3);
+    gl.disable(gl.BLEND);
+    gl.disableVertexAttribArray(webLineLoc);
+  }
+
   let mouseX = 0.5, mouseY = 0.35;
   let targetMouseX = 0.5, targetMouseY = 0.35;
   let scrollY = window.scrollY;
@@ -437,8 +550,10 @@
     
     gl.disableVertexAttribArray(dustSeedLoc);
     gl.disableVertexAttribArray(dustIndexLoc);
+
+    drawWeb();
   }
-  
+
   function getScrollProgress() {
     const docHeight = document.documentElement.scrollHeight;
     const winHeight = window.innerHeight;
@@ -550,7 +665,10 @@
     
     gl.disableVertexAttribArray(dustSeedLoc);
     gl.disableVertexAttribArray(dustIndexLoc);
-    
+
+    stepWeb(dt);
+    drawWeb();
+
     requestAnimationFrame(frame);
   }
   

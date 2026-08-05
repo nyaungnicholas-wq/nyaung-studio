@@ -26,4 +26,12 @@ assert.match(src, /pointerdown|click/, 'click listener');
 assert.match(src, /gl_PointCoord/, 'dust mote point sprites');
 assert.match(src, /gl\.POINTS/, 'dust mote draw pass');
 assert.match(src, /u_streak|streak/, 'gold light streak');
+// layer-3 requirements
+assert.match(src, /gl\.LINES/, 'constellation web line pass');
+assert.match(src, /WEB_NODES|webNodes/, 'constellation node simulation');
+assert.match(src, /PORTABLE:RINGS-RAYS/, 'portable rings+rays block marker');
+assert.match(src, /END-PORTABLE/, 'portable block end marker');
+assert.match(src, /haloRing|ring1|rings/, 'halo rings');
+assert.match(src, /godRay|rays/, 'god rays');
+assert.match(src, /1100/, 'mote density bump');
 console.log('aurora.js checks pass');

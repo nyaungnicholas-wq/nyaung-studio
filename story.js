@@ -10,7 +10,7 @@
       if (!injected) {
         const s = document.createElement('script');
         s.defer = true;
-        s.src = 'aurora.js?v=3';
+        s.src = 'aurora.js?v=4';
         document.head.appendChild(s);
         injected = true;
       }
@@ -211,6 +211,39 @@
         col += rimColor * rim;
       }
       
+
+      // === PORTABLE:RINGS-RAYS === (uses only: p, uv, u_time, mouseOffset, col)
+      {
+        vec3 lav = vec3(0.655, 0.545, 0.859);
+        vec3 gold = vec3(0.910, 0.784, 0.478);
+        // halo ring 1 — thin rotating ellipse, iridescent stroke
+        vec2 c1 = vec2(-0.55, 0.35) + mouseOffset * 0.05;
+        float a1 = u_time * 0.03;
+        vec2 l1 = p - c1;
+        vec2 q1 = vec2(l1.x*cos(a1) - l1.y*sin(a1), l1.x*sin(a1) + l1.y*cos(a1));
+        float rd1 = abs(length(q1 * vec2(1.0, 1.9)) - 0.62);
+        float ringsGlow = exp(-rd1*rd1*2600.0) * 0.055;
+        col += mix(lav, gold, 0.5 + 0.5*sin(atan(q1.y, q1.x)*2.0 + u_time*0.15)) * ringsGlow;
+        // halo ring 2
+        vec2 c2 = vec2(0.65, -0.45) + mouseOffset * 0.03;
+        float a2 = -u_time * 0.021 + 1.5;
+        vec2 l2 = p - c2;
+        vec2 q2 = vec2(l2.x*cos(a2) - l2.y*sin(a2), l2.x*sin(a2) + l2.y*cos(a2));
+        float rd2 = abs(length(q2 * vec2(1.0, 1.9)) - 0.78);
+        float ring2Glow = exp(-rd2*rd2*2600.0) * 0.055;
+        col += mix(lav, gold, 0.5 + 0.5*sin(atan(q2.y, q2.x)*2.0 - u_time*0.12)) * ring2Glow;
+        // god rays — 3 soft shafts from the top-left, slow sway
+        vec2 rayOrigin = vec2(-1.3, 1.15);
+        vec2 rayV = p - rayOrigin;
+        for (int k = 0; k < 3; k++) {
+          float ak = -0.9 + float(k)*0.18 + 0.04*sin(u_time*0.11 + float(k)*2.1);
+          float along = dot(rayV, vec2(cos(ak), sin(ak)));
+          float perp = abs(dot(rayV, vec2(-sin(ak), cos(ak))));
+          float godRay = exp(-perp*perp*55.0) * smoothstep(0.0, 0.9, along) * exp(-along*0.9);
+          col += vec3(0.42, 0.36, 0.62) * godRay * 0.05;
+        }
+      }
+      // === END-PORTABLE ===
 
       // Gold light streak — rare comet sweep, shared with aurora.js
       if (fract(u_time/15.0) < 0.12) {
