@@ -1,5 +1,5 @@
-// Liquid aurora / iridescent background
-// Replaces old Three.js space scene — site-wide animated background
+// Luxury aurora / iridescent background
+// $100k aesthetic: deep moody purples, liquid silk, champagne-gold flares, bokeh glass spheres
 
 (function() {
   const canvas = document.getElementById('hero-canvas');
@@ -41,7 +41,6 @@
     }
     
     float fbm(vec2 p) {
-      // 4 octaves, ~0.6rad rotation per octave, normalized to 0..1
       mat2 rot = mat2(0.8253, 0.5646, -0.5646, 0.8253);
       float f = 0.0;
       float amp = 0.5;
@@ -58,76 +57,125 @@
       vec2 p = uv * 2.0 - 1.0;
       p.x *= u_res.x / u_res.y;
       
-      // Mouse influence
-      vec2 mousePos = u_mouse * 2.0 - 1.0;
-      mousePos.x *= u_res.x / u_res.y;
-      float mouseDist = length(p - mousePos);
-      vec2 mouseOffset = vec2(0.0);
-      if (mouseDist > 0.0) {
-        mouseOffset = normalize(p - mousePos) * 0.35 * exp(-mouseDist * 3.5);
-      }
+      // Mouse parallax
+      vec2 mouseNorm = u_mouse - 0.5;
+      float aspect = u_res.x / u_res.y;
+      vec2 mouseOffset = mouseNorm * vec2(aspect, 1.0);
       
-      // Time and scroll influence
-      float t = u_time * 0.08 + u_vel * 0.25;
-      float scrollShift = u_scroll * 1.4; // ~80 degrees
-      p += mouseOffset;
+      // Time and scroll
+      float t = u_time * 0.048 + u_vel * 0.25;
+      float scrollShift = u_scroll * 1.4;
       
-      // Domain warping
+      // Base gradient: #0B0410 to #1A0B2E
+      vec3 baseTop = vec3(0.043, 0.016, 0.063);
+      vec3 baseBottom = vec3(0.102, 0.043, 0.180);
+      vec3 base = mix(baseTop, baseBottom, uv.y);
+      
+      // Domain warping - slowed ~40%
       vec2 q = vec2(
-        fbm(p + vec2(scrollShift, t * 0.3)),
-        fbm(p + vec2(5.2, 1.3) + vec2(scrollShift, t * 0.3))
+        fbm(p * 0.8 + vec2(scrollShift, t * 0.18)),
+        fbm(p * 0.8 + vec2(5.2, 1.3) + vec2(scrollShift, t * 0.18))
       );
       
       vec2 r = vec2(
-        fbm(p + 2.2 * q + vec2(1.7, 9.2) + vec2(scrollShift, t * 0.12)),
-        fbm(p + 2.2 * q + vec2(8.3, 2.8) + vec2(scrollShift, t * 0.1))
+        fbm(p * 0.8 + 2.2 * q + vec2(1.7, 9.2) + vec2(scrollShift, t * 0.072)),
+        fbm(p * 0.8 + 2.2 * q + vec2(8.3, 2.8) + vec2(scrollShift, t * 0.06))
       );
       
-      float f = fbm(p + 2.4 * r);
+      float f = fbm(p * 0.8 + 2.4 * r + mouseOffset * 0.015);
       
-      // Color palette
-      vec3 deepBase = vec3(0.024, 0.024, 0.035); // #060609
-      vec3 indigo = vec3(0.388, 0.400, 0.945); // #6366f1
-      vec3 violet = vec3(0.506, 0.549, 0.973); // #818cf8
-      vec3 fuchsia = vec3(0.753, 0.518, 0.988); // #c084fc
-      vec3 magenta = vec3(0.910, 0.475, 0.976); // #e879f9
-      vec3 cyan = vec3(0.220, 0.741, 0.969); // #38bdf8
+      // Luxury color palette - low saturation
+      vec3 darkAmethyst = vec3(0.165, 0.082, 0.282);
+      vec3 mutedViolet = vec3(0.298, 0.169, 0.478);
+      vec3 glowingLavender = vec3(0.655, 0.545, 0.859);
       
-      // Color mixing
-      float colorMix1 = smoothstep(0.1, 0.4, f);
-      float colorMix2 = smoothstep(0.3, 0.7, q.x);
-      float colorMix3 = smoothstep(0.5, 0.9, r.y);
+      // Color bands with max luminance ~0.30
+      float band1 = smoothstep(0.1, 0.4, f);
+      float band2 = smoothstep(0.3, 0.7, q.x);
+      float band3 = smoothstep(0.5, 0.9, r.y);
       
-      vec3 col = mix(deepBase, indigo, colorMix1);
-      col = mix(col, violet, colorMix2 * 0.8);
-      col = mix(col, fuchsia, colorMix3 * 0.6);
-      col = mix(col, magenta, smoothstep(0.7, 1.0, f) * 0.5);
+      vec3 col = base * 0.6;
+      col = mix(col, darkAmethyst, band1 * 0.7);
+      col = mix(col, mutedViolet, band2 * 0.6);
+      col = mix(col, glowingLavender, smoothstep(0.85, 1.0, f) * 0.3);
       
-      // Cyan accent in dark areas
-      float darkAccent = smoothstep(0.0, 0.3, 1.0 - f) * smoothstep(0.0, 0.2, f);
-      col += cyan * darkAccent * 0.15;
+      // Luminance cap
+      col = clamp(col * 0.45, 0.0, 0.30);
       
-      // Brightness control (keep low)
-      float brightness = 0.3 * colorMix1 + 0.25 * colorMix2 + 0.2 * colorMix3;
-      brightness += u_vel * 0.08;
-      brightness = clamp(brightness, 0.0, 0.35);
-      col *= brightness + 0.15;
+      // Champagne-gold rim flares
+      float flareField = smoothstep(0.72, 0.95, q.x * r.y) * 0.10;
+      col += vec3(0.910, 0.784, 0.478) * flareField;
       
-      // Mouse glow
-      if (mouseDist < 0.25) {
-        float glow = smoothstep(0.25, 0.0, mouseDist) * 0.08;
-        col += violet * glow;
+      // Bokeh glass spheres - 4 hardcoded
+      struct Sphere {
+        vec2 center;
+        float radius;
+        float depth;
+        float speedX;
+        float speedY;
+        float phaseX;
+        float phaseY;
+      };
+      
+      Sphere spheres[4];
+      spheres[0] = Sphere(vec2(-0.7, 0.5), 0.18, 0.25, 0.08, 0.06, 0.0, 1.5);
+      spheres[1] = Sphere(vec2(0.6, -0.4), 0.26, 0.5, 0.06, 0.09, 1.5, 3.0);
+      spheres[2] = Sphere(vec2(-0.5, -0.6), 0.34, 0.75, 0.05, 0.07, 3.0, 4.5);
+      spheres[3] = Sphere(vec2(0.8, 0.7), 0.5, 1.0, 0.03, 0.04, 4.5, 6.0);
+      
+      for (int i = 0; i < 4; i++) {
+        Sphere s = spheres[i];
+        
+        // Eased sine drift
+        float tX = fract(u_time * s.speedX + s.phaseX);
+        float easeX = smoothstep(0.0, 1.0, tX);
+        float tY = fract(u_time * s.speedY + s.phaseY);
+        float easeY = smoothstep(0.0, 1.0, tY);
+        
+        vec2 drift = vec2(
+          sin(easeX * 6.2832) * 0.08,
+          cos(easeY * 6.2832) * 0.06
+        );
+        
+        // Parallax
+        vec2 parallax = mouseOffset * mix(0.02, 0.08, s.depth);
+        vec2 sphereCenter = s.center + drift + parallax;
+        
+        float dist = length(p - sphereCenter);
+        float blurFactor = mix(2.0, 4.0, 1.0 - s.depth);
+        float disc = exp(- (dist * dist) / (s.radius * s.radius * blurFactor));
+        
+        // Interior brightening
+        float interior = disc * 0.04 * s.depth;
+        col += col * interior;
+        
+        // Iridescent rim — a thin ring, must fade back OFF outside the sphere
+        float rim = smoothstep(s.radius * 0.85, s.radius * 0.96, dist)
+                  * (1.0 - smoothstep(s.radius * 0.96, s.radius * 1.06, dist)) * 0.05;
+        float angle = atan(p.y - sphereCenter.y, p.x - sphereCenter.x);
+        vec3 rimColor = mix(
+          vec3(0.655, 0.545, 0.859),
+          vec3(0.910, 0.784, 0.478),
+          (sin(angle) + 1.0) * 0.5
+        );
+        col += rimColor * rim;
       }
       
-      // Vignette
-      vec2 vigUv = uv;
-      float vig = 1.0 - dot((vigUv - 0.5) * 1.2, (vigUv - 0.5) * 1.2);
+      // Strong vignette - edges ~45% darker
+      float vig = 1.0 - dot((uv - 0.5) * 1.2, (uv - 0.5) * 1.2);
       vig = clamp(pow(vig, 1.5), 0.0, 1.0);
-      col *= vig * 0.65 + 0.35;
+      col *= mix(0.55, 1.0, vig);
       
-      // Film grain
-      float grain = hash(uv + fract(u_time)) * 0.024 - 0.012;
+      // Film grain - 3%
+      float grain = (hash(uv + fract(u_time)) - 0.5) * 0.06;
       col += grain;
+      
+      // Scroll warmth - subtle gold bias at bottom
+      float warmth = u_scroll * 0.02 * (1.0 - uv.y);
+      col += vec3(0.02, 0.01, 0.0) * warmth;
+      
+      // Velocity lift
+      col += vec3(u_vel * 0.04);
       
       gl_FragColor = vec4(col, 1.0);
     }
@@ -197,7 +245,6 @@
     canvas.width = window.innerWidth * scale;
     canvas.height = window.innerHeight * scale;
     gl.viewport(0, 0, canvas.width, canvas.height);
-    // resizing clears the buffer; the static (reduced-motion) frame must be redrawn
     if (prefersReducedMotion && startTime !== null) drawStatic();
   }
 
@@ -220,7 +267,7 @@
   // Event listeners
   function onPointerMove(e) {
     targetMouseX = e.clientX / window.innerWidth;
-    targetMouseY = 1.0 - (e.clientY / window.innerHeight); // Flip Y for GL
+    targetMouseY = 1.0 - (e.clientY / window.innerHeight);
   }
   
   function onScroll() {
@@ -270,7 +317,6 @@
   document.addEventListener('visibilitychange', onVisibility, { passive: true });
   
   if (prefersReducedMotion) {
-    // Draw one frame and stop
     startTime = 0;
     mouseX = targetMouseX;
     mouseY = targetMouseY;

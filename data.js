@@ -888,7 +888,8 @@ window.NS_PROJECTS = [
     ],
     "status": "Built",
     "url": null,
-    "tier": "flagship"
+    "tier": "flagship",
+    "custom": true
   },
   {
     "slug": "shanty-realestate",
