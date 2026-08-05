@@ -210,7 +210,7 @@ async function initScene() {
       }));
       line.frustumCulled = false;
       scene.add(line);
-      meteors.push({ line, life: -(2 + Math.random() * 9), active: false,
+      meteors.push({ line, life: -(0.5 + Math.random() * 3), active: false,
         pos: new THREE.Vector3(), dir: new THREE.Vector3(), speed: 0 });
     }
   }
@@ -234,7 +234,7 @@ async function initScene() {
       a[3] = mt.pos.x - mt.dir.x * 2.4; a[4] = mt.pos.y - mt.dir.y * 2.4; a[5] = mt.pos.z - mt.dir.z * 2.4;
       mt.line.geometry.attributes.position.needsUpdate = true;
       mt.line.material.opacity = Math.sin(Math.PI * Math.min(mt.life / 1.3, 1)) * 0.75;
-      if (mt.life > 1.3) { mt.active = false; mt.life = -(3 + Math.random() * 9); mt.line.material.opacity = 0; }
+      if (mt.life > 1.3) { mt.active = false; mt.life = -(1 + Math.random() * 3.5); mt.line.material.opacity = 0; }
     }
   }
 
