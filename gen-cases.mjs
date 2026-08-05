@@ -25,15 +25,14 @@ const leftArrow = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" strok
 const extIcon = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
 
 const SCRIPTS = `
-  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="data.js?v=4"></script>
+  <script src="data.js?v=5"></script>
   <script src="components.js?v=4"></script>
   <script src="app.js?v=4"></script>
-  <script type="module" src="scene.js?v=4"></script>
-  <script defer src="motion.js?v=4"></script>
+  <script defer src="aurora.js?v=1"></script>
+  <script defer src="motion.js?v=5"></script>
   <script defer src="premium.js?v=4"></script>
   <script defer src="assistant.js?v=4"></script>
   <script defer src="interactive.js?v=4"></script>`;
@@ -68,7 +67,6 @@ const head = (p) => {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
-  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="stylesheet" href="styles.css?v=4" />
   <script type="application/ld+json">${JSON.stringify(ld)}</script>

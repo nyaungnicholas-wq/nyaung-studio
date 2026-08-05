@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flow — Case Study | Nicholas</title>
+  <meta name="description" content="Local voice dictation that types cleaned-up text into any focused window — A self-hosted voice dictation tool: hold a hotkey, talk, release. Speech is transcribed on the machine's own CPU with fa" />
+  <meta name="theme-color" content="#0B0410" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-flow.html" />
+  <meta property="og:title" content="Flow — Local voice dictation that types cleaned-up text into any focused window" />
+  <meta property="og:description" content="Local voice dictation that types cleaned-up text into any focused window — A self-hosted voice dictation tool: hold a hotkey, talk, release. Speech is transcribed on the machine's own CPU with fa" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Flow","headline":"Flow — Local voice dictation that types cleaned-up text into any focused window","description":"A self-hosted voice dictation tool: hold a hotkey, talk, release. Speech is transcribed on the machine's own CPU with faster-whisper, a language-model pass strips filler words and fixes punctuation, and the cleaned text is typed straight into whatever window has focus — Slack, an editor, an email. A local replacement for a paid dictation subscription, with the audio never leaving the box.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, faster-whisper, pynput, sounddevice, pyperclip","about":"Developer Tool"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Developer Tool</span>
+        <h1 class="reveal" data-d="1">Flow</h1>
+        <p class="lede reveal" data-d="2">Local voice dictation that types cleaned-up text into any focused window</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-tool reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M13 15h4"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A self-hosted voice dictation tool: hold a hotkey, talk, release. Speech is transcribed on the machine's own CPU with faster-whisper, a language-model pass strips filler words and fixes punctuation, and the cleaned text is typed straight into whatever window has focus — Slack, an editor, an email. A local replacement for a paid dictation subscription, with the audio never leaving the box.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">0</span><span class="ml">recorded audio that leaves the machine</span></div><div class="metric"><span class="mv">2</span><span class="ml">hotkey modes — dictate and rewrite</span></div><div class="metric"><span class="mv">4</span><span class="ml">standalone checks, one end-to-end</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Many voice dictation tools require paid subscriptions and send audio to cloud servers, raising privacy concerns for users who dictate frequently. A local solution is needed that maintains accuracy and convenience without relying on internet connectivity or sharing personal speech data with external services.</p></div>
+        <div class="feature"><h3>What I built</h3><p>The tool is fully functional and runs locally with all processing on the machine. It includes end-to-end checks for audio capture, transcription, polishing, and injection. Custom dictionaries and snippets can be configured, and it handles edge cases like LLM unavailability by falling back to offline cleanup.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>Flow uses pynput for global hotkey listening, where holding Ctrl+Alt records audio via sounddevice. On release, faster-whisper transcribes the audio locally on CPU with int8 compute and configurable threads. The raw text is sent to a local OmniRoute gateway for cleanup with a LLM (e.g., gemini-3.1-flash-lite), which corrects punctuation and removes fillers. If the LLM fails or is slow, it falls back to regex-based filler stripping. The cleaned text is injected by copying to clipboard and simulating Ctrl+V, ensuring compatibility with any application. The entire pipeline runs on a worker thread to prevent keyboard freezing during transcription, and truncated LLM responses are discarded to avoid partial text.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Running locally as a replacement for a paid dictation subscription — audio stays on the machine</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Speech recognition runs on the machine's own CPU — the recorded audio never leaves the box</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Two hotkey modes — dictate at the cursor, or rewrite the text currently selected</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>LLM cleanup pass corrects punctuation and removes filler words</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Injects text into any application via clipboard and keyboard simulation</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Worker thread pipeline prevents keyboard freezing during transcription</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Fallback to regex filler stripping if LLM is unavailable or slow</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">faster-whisper</span><span class="proj-tag">pynput</span><span class="proj-tag">sounddevice</span><span class="proj-tag">pyperclip</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-equity-direction-study.html"><div class="dir">← Previous</div><div class="nm">Equity Direction Study</div></a>
+          <a class="next" href="work-ae-to-remotion.html"><div class="dir">Next →</div><div class="nm">AE to Remotion</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=5"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script defer src="aurora.js?v=1"></script>
+  <script defer src="motion.js?v=5"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

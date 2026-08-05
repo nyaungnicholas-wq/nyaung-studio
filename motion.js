@@ -86,7 +86,17 @@
       });
     }
 
-    // 5) CONTACT: form fields cascade up as the form enters
+    // 5) HOME #moment: hold the "shipped" beat while the particle N assembles (story.js)
+    const moment = document.querySelector('#moment');
+    if (moment) {
+      ScrollTrigger.create({ trigger: moment, start: 'top top', end: '+=80%', pin: true });
+      gsap.fromTo('.moment-inner', { scale: 0.92, opacity: 0.15 }, {
+        scale: 1, opacity: 1, ease: 'none',
+        scrollTrigger: { trigger: moment, start: 'top 75%', end: 'top top', scrub: true },
+      });
+    }
+
+    // 6) CONTACT: form fields cascade up as the form enters
     //    (fields are NOT .reveal elements, so this won't fight the IO reveal system)
     const form = document.getElementById('contact-form');
     if (form) {

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AE to Remotion — Case Study | Nicholas</title>
+  <meta name="description" content="Motion graphics written as code instead of dragged on a timeline — A translation layer that maps After Effects concepts onto Remotion, so motion graphics can be written as React component" />
+  <meta name="theme-color" content="#0B0410" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-ae-to-remotion.html" />
+  <meta property="og:title" content="AE to Remotion — Motion graphics written as code instead of dragged on a timeline" />
+  <meta property="og:description" content="Motion graphics written as code instead of dragged on a timeline — A translation layer that maps After Effects concepts onto Remotion, so motion graphics can be written as React component" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"AE to Remotion","headline":"AE to Remotion — Motion graphics written as code instead of dragged on a timeline","description":"A translation layer that maps After Effects concepts onto Remotion, so motion graphics can be written as React components instead of hand-animated in a timeline. Video becomes something that can be version-controlled, diffed, reviewed, parameterised, and re-rendered by a machine on a schedule. An eight-second showcase composition is built entirely on the toolkit.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"React, Remotion, TypeScript, SVG","about":"Developer Tool"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Developer Tool</span>
+        <h1 class="reveal" data-d="1">AE to Remotion</h1>
+        <p class="lede reveal" data-d="2">Motion graphics written as code instead of dragged on a timeline</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-tool reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M13 15h4"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A translation layer that maps After Effects concepts onto Remotion, so motion graphics can be written as React components instead of hand-animated in a timeline. Video becomes something that can be version-controlled, diffed, reviewed, parameterised, and re-rendered by a machine on a schedule. An eight-second showcase composition is built entirely on the toolkit.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">1920×1080</span><span class="ml">showcase render, 60fps</span></div><div class="metric"><span class="mv">600</span><span class="ml">frames driven entirely by code</span></div><div class="metric"><span class="mv">~4 min</span><span class="ml">to render the full showcase</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Motion graphics normally live inside a visual timeline, where every animation is hand-tweaked in a binary project file. That file cannot be diffed, reviewed, or generated — which makes changing a single word across fifty videos a manual job, and makes automated rendering impossible. Moving that work into code sounds obvious until you try it: the timeline concepts an editor relies on have no direct equivalent in a React renderer.</p></div>
+        <div class="feature"><h3>What I built</h3><p>Built and rendering. The showcase composition outputs an eight-second intro at 1920×1080 and 60fps — 600 frames, roughly four minutes of render time — and the project type-checks clean. The concept map in the README states plainly which After Effects features do not carry over, including 3D layers, rather than leaving the gaps to be discovered mid-project.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The toolkit rebuilds the After Effects vocabulary as React primitives. Null objects become components that apply a transform to their children and publish the composed world transform on context, which is what makes inverse parenting possible — a child that deliberately ignores its parent reads that context and applies the inverse. Adjustment layers use a backdrop-filter on a sibling painted above the layers it grades, so the effect applies to everything beneath it without wrapping it. Track mattes are SVG masks driving a CSS mask-image, supporting alpha, luma and inverted-luma modes, with the inverted case handled by a white backing rectangle and a difference blend. Keyframes take the same four bezier control values as the After Effects speed graph, and overshoot presets use a real spring solver rather than a baked curve.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>A working translation layer — the showcase intro is rendered entirely from React code</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Null objects and parenting rebuilt as React context, including deliberate inverse parenting</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Adjustment layers implemented with backdrop-filter on a sibling painted above the graded layers</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Track mattes via SVG masks in alpha, luma and inverted-luma modes</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Keyframes take the same four bezier control values as the After Effects speed graph</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Overshoot and bounce use a real spring solver rather than a baked easing curve</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Every animation is frame-relative, so a sequence can be retimed without re-keying it</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">React</span><span class="proj-tag">Remotion</span><span class="proj-tag">TypeScript</span><span class="proj-tag">SVG</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-flow.html"><div class="dir">← Previous</div><div class="nm">Flow</div></a>
+          <a class="next" href="work-1042s-organizer.html"><div class="dir">Next →</div><div class="nm">1042-S Organizer</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=5"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script defer src="aurora.js?v=1"></script>
+  <script defer src="motion.js?v=5"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

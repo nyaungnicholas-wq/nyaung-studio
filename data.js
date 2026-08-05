@@ -9,6 +9,174 @@
    ============================================================ */
 window.NS_PROJECTS = [
   {
+    "slug": "tickstream",
+    "name": "TickStream",
+    "category": "Quant / Trading",
+    "tagline": "Merging live crypto order books from multiple exchanges into one real-time view",
+    "description": "TickStream is a consolidated crypto order book written in Go. It ingests live feeds from Coinbase and Kraken, reconstructs each exchange's order book correctly from snapshots and updates, and merges them into a single unified view. This allows traders to see the best available prices across connected exchanges in real-time.",
+    "problem": "For cryptocurrency traders, having a unified view of order books from multiple exchanges is essential for making informed decisions. However, each exchange sends data in its own format, messages arrive out of order, and gaps can occur due to network issues. Merging these feeds into a consistent, real-time view without errors or delays is technically challenging, as it requires handling data integrity, synchronization, and concurrency without blocking readers.",
+    "approach": "TickStream uses a single writer engine that processes order-book updates from each exchange in a dedicated goroutine. Each feed decodes and normalizes messages, sending them to the engine via a bounded channel. The engine applies updates to per-venue books, verifies integrity using checksums (like CRC32 for Kraken), and resyncs from fresh snapshots on failures. It consolidates the books into a single best bid and offer. The system publishes a new immutable snapshot after each update, allowing any number of readers to access the data wait-free via an atomic pointer load. This design avoids locks and ensures readers never block the writer. Key challenges included ensuring snapshot immutability (not reusing memory across publishes), handling full channels without blocking (dropping frames and resyncing), and maintaining correctness during high-throughput scenarios.",
+    "outcome": "TickStream is built and tested, with measured end-to-end apply latency of 7.4 µs at p50 and a wait-free read path at 41 ns. It has been verified with concurrent assertion tests for immutability, checksum tests, and a full apply-semantics matrix. The system is open-sourced on GitHub, demonstrating a working implementation of a consolidated order book in Go.",
+    "highlights": [
+      "Wait-free read path using atomic pointer loads, with p50 latency of 41 ns",
+      "Immutable snapshot publication ensures readers never see torn data",
+      "Bounded channel hand-off drops frames on full buffer to prevent writer blocking",
+      "Checksum verification (CRC32 for Kraken) triggers full resync on mismatch",
+      "Concurrent assertion tests enforce snapshot immutability invariant",
+      "Measured end-to-end apply latency with coordinated-omission-aware benchmarks"
+    ],
+    "metrics": [
+      {
+        "value": "7.4 µs",
+        "label": "median end-to-end apply latency"
+      },
+      {
+        "value": "41 ns",
+        "label": "median wait-free book read"
+      },
+      {
+        "value": "200,000",
+        "label": "samples behind the measurement"
+      }
+    ],
+    "result": "A working consolidated order book with measured latencies, built in Go and open-sourced",
+    "techStack": [
+      "Go",
+      "WebSocket",
+      "HdrHistogram"
+    ],
+    "status": "Built",
+    "url": "https://github.com/nyaungnicholas-wq/tickstream",
+    "tier": "flagship"
+  },
+  {
+    "slug": "equity-direction-study",
+    "name": "Equity Direction Study",
+    "category": "Quant / Trading",
+    "tagline": "Honest evaluation of machine-learning equity direction forecasts",
+    "description": "A quantitative research study examining whether gradient-boosted trees can predict five-day equity price direction better than logistic regression, using technical features on five liquid U.S. instruments. The contribution lies in its rigorous evaluation with walk-forward validation, threshold analysis, transaction costs, and naive baselines, revealing that the apparent edge does not survive scrutiny.",
+    "problem": "In quantitative finance, machine-learning models often show promising backtest results, but these can be misleading due to overfitting, improper validation, and ignoring transaction costs. Investors need a way to distinguish real predictive power from statistical noise, especially in efficient markets where edges are hard to find and even harder to sustain.",
+    "approach": "The study pre-specifies two models—logistic regression and XGBoost—to predict five-day direction from eleven technical features on five instruments. It uses purged expanding-window cross-validation through 2024 with a five-date purge gap, then evaluates on an untouched 2025 holdout. Hard work included implementing moving-block bootstrap for uncertainty, decomposing the simulated portfolio return to show it relies on three periods, and calculating statistical power to reveal the design was underpowered by roughly a factor of five. The approach follows a rigorous backtesting protocol to ensure honest reporting.",
+    "outcome": "The study concludes with negative results: neither model achieved a ROC-AUC above 0.5 on the holdout, both were beaten by naive baselines, and the economic return was an artifact of three days. The comparison between models is inconclusive due to insufficient statistical power. The contribution is a documented pre-specified negative result and a demonstration of honest evaluation techniques.",
+    "highlights": [
+      "Pre-specified models with an untouched 2025 holdout year to prevent overfitting",
+      "Both models performed worse than an always-up rule with statistical significance",
+      "Economic return decomposed to show 95.4% of excess return came from just three periods",
+      "Power calculation revealed the design was underpowered by roughly a factor of five",
+      "Adherence to the Arnott-Harvey-Markowitz backtesting protocol for honest evaluation",
+      "Comparison includes proper scoring rules and naive baselines, not just accuracy"
+    ],
+    "metrics": [
+      {
+        "value": "0.460",
+        "label": "holdout ROC-AUC — worse than a coin flip"
+      },
+      {
+        "value": "95.4%",
+        "label": "of the excess return came from three days"
+      },
+      {
+        "value": "28.3 pts",
+        "label": "smallest gap the design could have detected"
+      }
+    ],
+    "result": "No predictive edge found; apparent economic result is an artifact of three days and does not survive scrutiny",
+    "techStack": [
+      "Python",
+      "XGBoost",
+      "pandas",
+      "scikit-learn"
+    ],
+    "status": "Built",
+    "url": null,
+    "tier": "standard"
+  },
+  {
+    "slug": "flow",
+    "name": "Flow",
+    "category": "Developer Tool",
+    "tagline": "Local voice dictation that types cleaned-up text into any focused window",
+    "description": "A self-hosted voice dictation tool: hold a hotkey, talk, release. Speech is transcribed on the machine's own CPU with faster-whisper, a language-model pass strips filler words and fixes punctuation, and the cleaned text is typed straight into whatever window has focus — Slack, an editor, an email. A local replacement for a paid dictation subscription, with the audio never leaving the box.",
+    "problem": "Many voice dictation tools require paid subscriptions and send audio to cloud servers, raising privacy concerns for users who dictate frequently. A local solution is needed that maintains accuracy and convenience without relying on internet connectivity or sharing personal speech data with external services.",
+    "approach": "Flow uses pynput for global hotkey listening, where holding Ctrl+Alt records audio via sounddevice. On release, faster-whisper transcribes the audio locally on CPU with int8 compute and configurable threads. The raw text is sent to a local OmniRoute gateway for cleanup with a LLM (e.g., gemini-3.1-flash-lite), which corrects punctuation and removes fillers. If the LLM fails or is slow, it falls back to regex-based filler stripping. The cleaned text is injected by copying to clipboard and simulating Ctrl+V, ensuring compatibility with any application. The entire pipeline runs on a worker thread to prevent keyboard freezing during transcription, and truncated LLM responses are discarded to avoid partial text.",
+    "outcome": "The tool is fully functional and runs locally with all processing on the machine. It includes end-to-end checks for audio capture, transcription, polishing, and injection. Custom dictionaries and snippets can be configured, and it handles edge cases like LLM unavailability by falling back to offline cleanup.",
+    "highlights": [
+      "Speech recognition runs on the machine's own CPU — the recorded audio never leaves the box",
+      "Two hotkey modes — dictate at the cursor, or rewrite the text currently selected",
+      "LLM cleanup pass corrects punctuation and removes filler words",
+      "Injects text into any application via clipboard and keyboard simulation",
+      "Worker thread pipeline prevents keyboard freezing during transcription",
+      "Fallback to regex filler stripping if LLM is unavailable or slow"
+    ],
+    "metrics": [
+      {
+        "value": "0",
+        "label": "recorded audio that leaves the machine"
+      },
+      {
+        "value": "2",
+        "label": "hotkey modes — dictate and rewrite"
+      },
+      {
+        "value": "4",
+        "label": "standalone checks, one end-to-end"
+      }
+    ],
+    "result": "Running locally as a replacement for a paid dictation subscription — audio stays on the machine",
+    "techStack": [
+      "Python",
+      "faster-whisper",
+      "pynput",
+      "sounddevice",
+      "pyperclip"
+    ],
+    "status": "Built",
+    "url": null,
+    "tier": "standard"
+  },
+  {
+    "slug": "ae-to-remotion",
+    "name": "AE to Remotion",
+    "category": "Developer Tool",
+    "tagline": "Motion graphics written as code instead of dragged on a timeline",
+    "description": "A translation layer that maps After Effects concepts onto Remotion, so motion graphics can be written as React components instead of hand-animated in a timeline. Video becomes something that can be version-controlled, diffed, reviewed, parameterised, and re-rendered by a machine on a schedule. An eight-second showcase composition is built entirely on the toolkit.",
+    "problem": "Motion graphics normally live inside a visual timeline, where every animation is hand-tweaked in a binary project file. That file cannot be diffed, reviewed, or generated — which makes changing a single word across fifty videos a manual job, and makes automated rendering impossible. Moving that work into code sounds obvious until you try it: the timeline concepts an editor relies on have no direct equivalent in a React renderer.",
+    "approach": "The toolkit rebuilds the After Effects vocabulary as React primitives. Null objects become components that apply a transform to their children and publish the composed world transform on context, which is what makes inverse parenting possible — a child that deliberately ignores its parent reads that context and applies the inverse. Adjustment layers use a backdrop-filter on a sibling painted above the layers it grades, so the effect applies to everything beneath it without wrapping it. Track mattes are SVG masks driving a CSS mask-image, supporting alpha, luma and inverted-luma modes, with the inverted case handled by a white backing rectangle and a difference blend. Keyframes take the same four bezier control values as the After Effects speed graph, and overshoot presets use a real spring solver rather than a baked curve.",
+    "outcome": "Built and rendering. The showcase composition outputs an eight-second intro at 1920×1080 and 60fps — 600 frames, roughly four minutes of render time — and the project type-checks clean. The concept map in the README states plainly which After Effects features do not carry over, including 3D layers, rather than leaving the gaps to be discovered mid-project.",
+    "highlights": [
+      "Null objects and parenting rebuilt as React context, including deliberate inverse parenting",
+      "Adjustment layers implemented with backdrop-filter on a sibling painted above the graded layers",
+      "Track mattes via SVG masks in alpha, luma and inverted-luma modes",
+      "Keyframes take the same four bezier control values as the After Effects speed graph",
+      "Overshoot and bounce use a real spring solver rather than a baked easing curve",
+      "Every animation is frame-relative, so a sequence can be retimed without re-keying it"
+    ],
+    "metrics": [
+      {
+        "value": "1920×1080",
+        "label": "showcase render, 60fps"
+      },
+      {
+        "value": "600",
+        "label": "frames driven entirely by code"
+      },
+      {
+        "value": "~4 min",
+        "label": "to render the full showcase"
+      }
+    ],
+    "result": "A working translation layer — the showcase intro is rendered entirely from React code",
+    "techStack": [
+      "React",
+      "Remotion",
+      "TypeScript",
+      "SVG"
+    ],
+    "status": "Built",
+    "url": null,
+    "tier": "standard"
+  },
+  {
     "slug": "1042s-organizer",
     "name": "1042-S Organizer",
     "category": "Developer Tool",
@@ -26,12 +194,26 @@ window.NS_PROJECTS = [
       "Filename sanitisation strips control characters and normalises paths to prevent stray writes"
     ],
     "metrics": [
-      { "value": "101", "label": "assertions across 5 test suites" },
-      { "value": "600", "label": "randomised documents fuzz-tested" },
-      { "value": "20/20", "label": "names read off the real IRS form" }
+      {
+        "value": "101",
+        "label": "assertions across 5 test suites"
+      },
+      {
+        "value": "600",
+        "label": "randomised documents fuzz-tested"
+      },
+      {
+        "value": "20/20",
+        "label": "names read off the real IRS form"
+      }
     ],
     "result": "Shipped to a paying client and proven on their Acrobat — open-sourced with a full test suite",
-    "techStack": ["Acrobat JavaScript", "Node", "pdf-lib", "pdfjs-dist"],
+    "techStack": [
+      "Acrobat JavaScript",
+      "Node",
+      "pdf-lib",
+      "pdfjs-dist"
+    ],
     "status": "Live",
     "url": "https://github.com/nyaungnicholas-wq/1042s-organizer",
     "tier": "flagship"
@@ -54,12 +236,28 @@ window.NS_PROJECTS = [
       "Advisory-lock migrations stop cold-starting serverless instances racing each other"
     ],
     "metrics": [
-      { "value": "7", "label": "state delegation machine, one mutator" },
-      { "value": "31", "label": "routes across the app" },
-      { "value": "0", "label": "config needed to run it locally" }
+      {
+        "value": "7",
+        "label": "state delegation machine, one mutator"
+      },
+      {
+        "value": "31",
+        "label": "routes across the app"
+      },
+      {
+        "value": "0",
+        "label": "config needed to run it locally"
+      }
     ],
     "result": "Feature-complete — build, lint, typecheck and full test suite all green",
-    "techStack": ["Next.js 16", "React 19", "TypeScript", "Drizzle ORM", "Postgres", "Tailwind v4"],
+    "techStack": [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Drizzle ORM",
+      "Postgres",
+      "Tailwind v4"
+    ],
     "status": "Built",
     "url": null,
     "tier": "flagship"
@@ -82,12 +280,27 @@ window.NS_PROJECTS = [
       "Self-healing container bootstrap re-seeds the database on integrity failure"
     ],
     "metrics": [
-      { "value": "147", "label": "countries in the explorer" },
-      { "value": "34,819", "label": "treaty withholding rows ingested" },
-      { "value": "86/86", "label": "grounding evaluation passed" }
+      {
+        "value": "147",
+        "label": "countries in the explorer"
+      },
+      {
+        "value": "34,819",
+        "label": "treaty withholding rows ingested"
+      },
+      {
+        "value": "86/86",
+        "label": "grounding evaluation passed"
+      }
     ],
     "result": "Live and public — grounded answers across 147 countries, sources shown",
-    "techStack": ["Python", "FastAPI", "SQLite", "React", "Docker"],
+    "techStack": [
+      "Python",
+      "FastAPI",
+      "SQLite",
+      "React",
+      "Docker"
+    ],
     "status": "Live",
     "url": "https://n1ch0las-taxlens.hf.space",
     "tier": "flagship"
@@ -110,12 +323,28 @@ window.NS_PROJECTS = [
       "Built from adversarially-reviewed specs with pinned architectural decisions"
     ],
     "metrics": [
-      { "value": "331", "label": "tests green across Python and TypeScript" },
-      { "value": "3", "label": "applications on one shared foundation" },
-      { "value": "2", "label": "runs, byte-identical output" }
+      {
+        "value": "331",
+        "label": "tests green across Python and TypeScript"
+      },
+      {
+        "value": "3",
+        "label": "applications on one shared foundation"
+      },
+      {
+        "value": "2",
+        "label": "runs, byte-identical output"
+      }
     ],
     "result": "All three units built and browser-verified — reproducibility proven to six decimals",
-    "techStack": ["Next.js 16", "React 19", "TypeScript", "Python", "FastAPI", "pandas"],
+    "techStack": [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Python",
+      "FastAPI",
+      "pandas"
+    ],
     "status": "Built",
     "url": null,
     "tier": "flagship"
@@ -137,12 +366,27 @@ window.NS_PROJECTS = [
       "Dark-first dense interface built for professionals, not casual browsers"
     ],
     "metrics": [
-      { "value": "11", "label": "live data sources" },
-      { "value": "29", "label": "routes, ~60 pages" },
-      { "value": "49/49", "label": "tests green" }
+      {
+        "value": "11",
+        "label": "live data sources"
+      },
+      {
+        "value": "29",
+        "label": "routes, ~60 pages"
+      },
+      {
+        "value": "49/49",
+        "label": "tests green"
+      }
     ],
     "result": "Deployed and live with eleven data sources feeding it",
-    "techStack": ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "Recharts"],
+    "techStack": [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind v4",
+      "Recharts"
+    ],
     "status": "Live",
     "url": "https://lotline-nine.vercel.app",
     "tier": "standard"
@@ -163,11 +407,21 @@ window.NS_PROJECTS = [
       "Shipped as a demand test first, product second"
     ],
     "metrics": [
-      { "value": "7", "label": "ideas eliminated before choosing this one" },
-      { "value": "0", "label": "income data leaves the browser" }
+      {
+        "value": "7",
+        "label": "ideas eliminated before choosing this one"
+      },
+      {
+        "value": "0",
+        "label": "income data leaves the browser"
+      }
     ],
     "result": "Live as a demand test — a working calculator earning the signup",
-    "techStack": ["HTML", "CSS", "Vanilla JS"],
+    "techStack": [
+      "HTML",
+      "CSS",
+      "Vanilla JS"
+    ],
     "status": "Live",
     "url": "https://nyaungnicholas-wq.github.io/creatorledger",
     "tier": "standard"
@@ -188,11 +442,23 @@ window.NS_PROJECTS = [
       "Verified end to end without spending generation credits or posting anything"
     ],
     "metrics": [
-      { "value": "3", "label": "tenants configured" },
-      { "value": "0", "label": "credits spent at rest" }
+      {
+        "value": "3",
+        "label": "tenants configured"
+      },
+      {
+        "value": "0",
+        "label": "credits spent at rest"
+      }
     ],
     "result": "Full pipeline verified in dry-run — deliberately not armed to publish yet",
-    "techStack": ["FastAPI", "Python", "React 19", "Vite", "Tailwind v4"],
+    "techStack": [
+      "FastAPI",
+      "Python",
+      "React 19",
+      "Vite",
+      "Tailwind v4"
+    ],
     "status": "Prototype",
     "url": null,
     "tier": "standard"
@@ -491,18 +757,18 @@ window.NS_PROJECTS = [
     "name": "Stock Trader V7",
     "category": "Quant / Trading",
     "tagline": "Sector rotation that trades itself — and the honest numbers behind it",
-    "description": "A systematic equity engine running leveraged sector rotation off momentum and volatility targeting. The V7 \"PUSH-20\" strategy has traded hands-off on an Alpaca paper account since June 9, 2026. Its headline backtest was later re-run under an independent validation harness, which found the original figure optimistic — the corrected numbers are the ones published here.",
-    "problem": "Discretionary trading is inconsistent and eats your time. Most \"systems\" never actually run unattended — they live in a backtest notebook and die there. And most published backtests quietly flatter themselves through optimistic cost assumptions, which is how a strategy looks great on paper and disappoints in practice.",
-    "approach": "The engine ranks sectors by momentum, sizes positions with volatility targeting, then applies leverage. Execution runs as a two-speed loop: a 60-second cycle checks open positions and order fills, while a separate daily cycle recomputes signals and rotates the book. The more interesting work was the validation pass — re-running the strategy through its own engine at a realistic 10 basis points of slippage instead of the original 5, then attacking it with walk-forward testing, a timing-luck study across six different start months, and a parameter sweep to check whether the configuration sat on a knife edge.",
-    "outcome": "The validation corrected the headline down: real performance is 19.0% CAGR against a −36.6% max drawdown, not the 20.7% / −30% originally published. The strategy itself held up — it beat the benchmark in all five walk-forward sub-periods, varied by only 0.8 percentage points across six start months, and sat on smooth parameter surfaces rather than a knife edge, so it is genuinely not overfit. Its real weakness is sharp whipsaw corrections, where it loses roughly 1.6× the benchmark. Three separate attempts to fix that all failed, which is documented rather than hidden.",
+    "description": "A systematic equity engine running leveraged sector rotation off momentum and volatility targeting. The V7 \"PUSH-20\" strategy has traded hands-off on an Alpaca paper account since June 9, 2026. Its headline backtest was re-run under an independent validation harness, then put through a formal overfitting audit in August 2026 — both passes corrected the story, and the corrected version is the one published here.",
+    "problem": "Discretionary trading is inconsistent and eats your time. Most \"systems\" never actually run unattended — they live in a backtest notebook and die there. And most published backtests quietly flatter themselves through optimistic cost assumptions and through the dozens of variations that were tried and never mentioned, which is how a strategy looks great on paper and disappoints in practice.",
+    "approach": "The engine ranks sectors by momentum, sizes positions with volatility targeting, then applies leverage. Execution runs as a two-speed loop: a 60-second cycle checks open positions and order fills, while a separate daily cycle recomputes signals and rotates the book. The more interesting work was the two rounds of self-criticism. The first re-ran the strategy at a realistic 10 basis points of slippage instead of the original 5, then attacked it with walk-forward testing, a timing-luck study across six different start months, and a parameter sweep. The second, in August 2026, applied a Deflated Sharpe Ratio and a Probability of Backtest Overfitting analysis — the standard tests for whether a result is simply the best of many things that were tried.",
+    "outcome": "The validation corrected the headline down: real performance is 19.0% CAGR against a −36.6% max drawdown, not the 20.7% / −30% originally published. The August overfitting audit then split the result in two. The direction is real — a Deflated Sharpe Ratio of 0.9991 says the edge is very unlikely to be an artefact of having tried many variations. The precision is not: many different risk-dial settings fit the history about equally well, so the specific tuned values are not identifiable from the data and should not be treated as optimal. Two independent simulators also disagree on trading-cost assumptions, which is logged as open rather than resolved quietly.",
     "highlights": [
       "19.0% CAGR / −36.6% max drawdown, validated at realistic 10 bps slippage",
+      "Deflated Sharpe Ratio of 0.9991 — the edge survives correction for how many variants were tried",
+      "The risk-dial tuning is NOT identifiable from the data, and the write-up says so plainly",
       "Original 20.7% / −30% headline found optimistic and publicly corrected",
-      "Beat the benchmark in 5 of 5 walk-forward sub-periods",
-      "Timing-luck study: only 0.8pp spread across six different start months",
-      "Parameter sweeps show smooth surfaces — not overfit to a knife-edge configuration",
+      "Beat the benchmark in 5 of 5 walk-forward sub-periods, with a 0.8pp spread across six start months",
       "Known weakness documented: loses ~1.6× the benchmark in fast whipsaw selloffs",
-      "Trades hands-off on Alpaca paper via launchd, with slippage tracking"
+      "Trades hands-off on Alpaca paper on a scheduled loop, with slippage tracking"
     ],
     "metrics": [
       {
@@ -514,15 +780,15 @@ window.NS_PROJECTS = [
         "label": "max drawdown (validated)"
       },
       {
-        "value": "5/5",
-        "label": "walk-forward periods beating SPY"
+        "value": "0.9991",
+        "label": "deflated Sharpe — the edge survives"
       },
       {
-        "value": "0.8pp",
-        "label": "spread across six start months"
+        "value": "5/5",
+        "label": "walk-forward periods beating SPY"
       }
     ],
-    "result": "Validated honestly — 19.0% CAGR after correcting my own optimistic headline",
+    "result": "The direction is real, the fine-tuning is not — and the audit that found that is published too",
     "techStack": [
       "Python",
       "pandas",
@@ -540,15 +806,15 @@ window.NS_PROJECTS = [
     "name": "NQ Futures Quant Suite",
     "category": "Quant / Trading",
     "tagline": "Proving what a Nasdaq-only system can't do, then shipping what it can",
-    "description": "A 30-year research programme on systematically trading the Nasdaq-100. The brief asked for 30%+ annual returns from a single instrument. The interesting result is the proof that it doesn't exist \u2014 and the strategy that does, published with its costs, its caveats and its failure modes attached.",
+    "description": "A 30-year research programme on systematically trading the Nasdaq-100. The brief asked for 30%+ annual returns from a single instrument. The interesting result is the proof that it doesn't exist — and the strategy that does, published with its costs, its caveats and its failure modes attached.",
     "problem": "The brief was 30%+ CAGR trading the Nasdaq alone, with drawdowns kept small. Most backtests answering a brief like that quietly flatter themselves: they ignore financing on borrowed money, assume free execution, peek at data they wouldn't have had, or tune parameters until one lucky configuration looks brilliant. The real question was not how good a number I could produce, but which numbers survive honest accounting.",
     "approach": "The strategy counts how many of the 63, 126 and 252-day returns are positive and maps that vote to a target exposure, gates leverage on the 200-day moving average, scales position size to hit a 30% volatility target, halves the leverage cap whenever equity sits more than 10% below its high-water mark, and only trades when leverage drifts far enough to be worth the cost. Every signal is lagged a full day. Financing is charged at the T-bill rate on borrowed notional and idle margin earns T-bills, so leverage costs what leverage actually costs. The configuration was then split in and out of sample, walked forward, and pushed through a Monte Carlo to find how often the drawdown budget breaks.",
-    "outcome": "The shipped configuration returns 16.1% annually against a 32.9% maximum drawdown over 30 years, with the out-of-sample period scoring better than the in-sample \u2014 the opposite of an overfitting signature. Buy-and-hold over the same window returns 13.2% but with an 82.9% drawdown, so the edge is risk containment rather than raw return. Two harder claims were proven false: 30%+ CAGR on this instrument is unreachable at the available Sharpe without ruinous volatility, and 25% CAGR inside a 20% drawdown budget is impossible \u2014 the honest frontier maximum is 12.2%. The strategy is also ported to TradingView Pine Script and published open-source alongside the research.",
+    "outcome": "The shipped configuration returns 16.1% annually against a 32.9% maximum drawdown over 30 years, with the out-of-sample period scoring better than the in-sample — the opposite of an overfitting signature. Buy-and-hold over the same window returns 13.2% but with an 82.9% drawdown, so the edge is risk containment rather than raw return. Two harder claims were proven false: 30%+ CAGR on this instrument is unreachable at the available Sharpe without ruinous volatility, and 25% CAGR inside a 20% drawdown budget is impossible — the honest frontier maximum is 12.2%. The strategy is also ported to TradingView Pine Script and published open-source alongside the research.",
     "highlights": [
-      "16.1% CAGR / \u221232.9% max drawdown over 30 years, financing and costs modelled",
-      "Out-of-sample Sharpe 0.75 beats in-sample 0.66 \u2014 no overfitting signature",
+      "16.1% CAGR / −32.9% max drawdown over 30 years, financing and costs modelled",
+      "Out-of-sample Sharpe 0.75 beats in-sample 0.66 — no overfitting signature",
       "Proved 30%+ CAGR on a single index is unreachable, rather than claiming it",
-      "Proved 25% CAGR under a \u221220% drawdown budget impossible; real frontier max is 12.2%",
+      "Proved 25% CAGR under a −20% drawdown budget impossible; real frontier max is 12.2%",
       "Rejected after testing: shorting, leverage caps above 5x, indicator stacks, fixed R:R stops",
       "Ported to TradingView Pine Script, with every deviation from the Python documented"
     ],
@@ -558,7 +824,7 @@ window.NS_PROJECTS = [
         "label": "CAGR, 30yr, costs modelled"
       },
       {
-        "value": "\u221232.9%",
+        "value": "−32.9%",
         "label": "max drawdown"
       },
       {
@@ -567,10 +833,10 @@ window.NS_PROJECTS = [
       },
       {
         "value": "30 yrs",
-        "label": "backtest span, 1996\u20132026"
+        "label": "backtest span, 1996–2026"
       }
     ],
-    "result": "16.1% CAGR over 30 years \u2014 and a proof the 30% brief was impossible",
+    "result": "16.1% CAGR over 30 years — and a proof the 30% brief was impossible",
     "techStack": [
       "Python",
       "NumPy",
@@ -585,50 +851,77 @@ window.NS_PROJECTS = [
     "slug": "signaldeck",
     "name": "SignalDeck",
     "category": "Quant / Trading",
-    "tagline": "I built a trading signal, then proved it didn't work",
-    "description": "A local-only market-research platform built around measurement discipline rather than prediction. Its flagship directional model graded 48.1% on 13,044 independent symbol-days against a 54.6% majority-class baseline and automatically retired itself. The auditable machinery that caught it — a hash-chained prediction ledger, pre-registered claims, and matched nulls — is the actual deliverable.",
-    "problem": "Almost every trading system reports the accuracy it wants to report: pooled observations that inflate the sample, a 50% null that flatters any signal in a trending market, and a claimed edge that nothing independent ever re-checks. A number no process can falsify is decoration, not evidence.",
-    "approach": "Every prediction writes a hash-chained ledger row with its probability frozen at prediction time. Grading uses one observation per symbol, horizon and UTC day, against a walk-forward majority-class null rather than a coin flip, with verdicts read from the interval and never the point estimate. Claims are pre-registered — band tables, resolution rules and nulls frozen into the chain twelve days before the first observation could resolve, under a refusal rule written before the sample arrived. Rejections are recorded in the same ledger as findings.",
-    "outcome": "The discipline worked by catching its own author. The directional ensemble was graded at 48.1% over 13,044 independent observations against a 54.6% baseline, the whole interval below the null, and was switched off in code. What survived is structural persistence, not direction — and even there the most accurate conviction band carries a negative forward return, which the platform discloses on every payload rather than quietly omitting.",
+    "tagline": "A market-research platform built to catch itself being wrong",
+    "description": "A market-measurement and research-record platform built around measurement discipline rather than prediction. It records live data, computes scores, and grades its own predictions against a protocol fixed before the outcomes were known, retiring what fails. It is not an auto-trader, has no broker connection, and executes nothing.",
+    "problem": "Most trading systems report the accuracy they want to report: pooled observations that inflate the sample, a null that flatters any signal in a trending market, and a claimed edge that nothing independent ever re-checks. A number no process can falsify is decoration, not evidence.",
+    "approach": "Every prediction writes a hash-chained ledger row with its probability frozen at prediction time. Grading uses one observation per symbol, horizon, and UTC day against a walk-forward majority-class null. Claims are pre-registered with resolution rules and nulls frozen into the chain before the first observation could resolve. The system enforces multiple-testing corrections, survivorship and point-in-time data repairs (with quantified residuals for 2023-2025), a documentation gate in CI that blocks claim drift, a self-grading user-experience rubric, and a simplified reading mode for non-specialists. The directional ensemble was auto-retired by a pre-registered rule when its live interval fell below the baseline.",
+    "outcome": "The platform has demonstrated a working measurement and retirement process, but not predictive skill on live data. The directional family was graded at 43.1% on 2,911 graded observations against a 56.8% baseline and auto-retired. The structural predictors (trend21, vol21, liquidity21) are pending, with first grading under the pre-registered protocol not until 2026-08-14. The project holds no live capital and executes no trades.",
     "highlights": [
-      "Flagship directional model graded at 48.1% vs a 54.6% majority-class null and auto-retired — emitting: false, enforced in code",
-      "Hash-chained prediction ledger, 246,595 entries, probability frozen at prediction time",
-      "Six structural predictors pre-registered twelve days before their first possible grading, grader pinned by commit and file hash",
-      "Matched nulls killed the 52-week-high signal: 76.0–83.3% raw, but −3 to −9pp of skill against a volatility-matched baseline",
-      "The gap-fill signal was pulled from production after a day-0 conditioning bug dropped it from 72–87% to 45.1–60.6%",
-      "Discloses that its most accurate band (97.2%) carries a negative mean 21-day forward return of −0.76%"
+      "Hash-chained prediction ledger — every probability is frozen and tamper-evident at the moment it is recorded",
+      "Directional ensemble graded at 43.1% vs a 56.8% null and auto-retired by a pre-registered rule",
+      "Multiple-testing controls and pre-registered claims to stop the system fooling itself",
+      "Survivorship and point-in-time data repairs with quantified residuals, documented in CI",
+      "Self-grading rubric and simplified reading mode for non-specialists",
+      "Bias controls that are built and in force, including drift monitoring, canary rollout, and data-quality checks"
     ],
     "metrics": [
-      { "value": "13,044", "label": "independent observations behind the failing verdict" },
-      { "value": "246,595", "label": "tamper-evident ledger entries" },
-      { "value": "166,285", "label": "weekly observations in the research corpus" }
+      {
+        "value": "-13.7pp",
+        "label": "measured skill — so the signal was retired"
+      },
+      {
+        "value": "1,854,228",
+        "label": "rows in the survivorship-aware universe"
+      },
+      {
+        "value": "3,649",
+        "label": "forecasts recorded, awaiting their grading date"
+      }
     ],
-    "result": "Proved its own flagship signal had negative skill — and shipped the machinery that proved it",
-    "techStack": ["Go", "SQLite", "Next.js", "Python", "Walk-forward validation"],
+    "result": "The platform's only defensible claim is procedural, not predictive: it grades its own predictions and retires what fails",
+    "techStack": [
+      "Go",
+      "SQLite",
+      "Next.js",
+      "Python",
+      "Walk-forward validation"
+    ],
     "status": "Built",
     "url": null,
-    "tier": "flagship",
-    "custom": true
+    "tier": "flagship"
   },
   {
     "slug": "shanty-realestate",
     "name": "Shanty Soerjono — Realtor Site",
     "category": "Website",
-    "tagline": "A live, motion-driven probate-realtor platform",
-    "description": "A Next.js marketing site for a probate and trust specialist realtor serving LA County and Orange County. The homepage leans hard into motion: parallax, a 3D house model, constellation effects. Behind it runs an inbound funnel that turns visitors into leads through forms, gated content, and an AI probate assistant. Live in production.",
-    "problem": "A probate and trust specialist realtor needed real inbound leads in a niche most agents ignore. A brochure site wouldn't cut it. Probate sellers show up mid-process with specific questions, so the site had to answer those questions and route the lead into follow-up instead of just listing a phone number.",
-    "approach": "Built on Next.js 16 and React 19. The homepage motion layers Framer Motion parallax, a Three.js 3D home, and constellation effects. The AI probate assistant runs on Gemini with an automatic NIM fallback, so a model outage degrades to a backup provider rather than a dead chat. Lead capture is decoupled from any single CRM. A form submission fans out to env-gated Resend, HubSpot, Brevo, and Sheets sinks, so each destination toggles on with its own credentials and missing keys skip that sink instead of breaking the form. Captured leads drop into automated nurture sequences split by intent across probate, buyer, and attorney paths. Deployment runs on Vercel with DNS pointed from GoDaddy.",
-    "outcome": "Shipped and live in production at shanty-realestate.com since June 2026. The motion-rich site, the Gemini-with-NIM-fallback probate assistant, the multi-sink lead funnel across Resend, HubSpot, Brevo, and Sheets, and the three intent-based nurture sequences are all running on a real business domain.",
+    "tagline": "A live probate-realtor platform, and the print book that goes with it",
+    "description": "A Next.js marketing site for a probate and trust specialist realtor serving LA County and Orange County. The homepage leans hard into motion: parallax, a 3D house model, constellation effects. Behind it runs an inbound funnel that turns visitors into leads through forms, gated content, and an AI probate assistant. Live in production, and the engagement has since extended into print — a 16-page probate guide built from the same approved copy.",
+    "problem": "A probate and trust specialist realtor needed real inbound leads in a niche most agents ignore. A brochure site wouldn't cut it. Probate sellers show up mid-process with specific questions, so the site had to answer those questions and route the lead into follow-up instead of just listing a phone number. The print guide had the opposite constraint: it goes to people dealing with a death in the family and a court process, so not a word of the approved copy could drift.",
+    "approach": "Built on Next.js 16 and React 19. The homepage motion layers Framer Motion parallax, a Three.js 3D home, and constellation effects. The AI probate assistant runs on Gemini with an automatic NIM fallback, so a model outage degrades to a backup provider rather than a dead chat. Lead capture is decoupled from any single CRM. A form submission fans out to env-gated Resend, HubSpot, Brevo, and Sheets sinks, so each destination toggles on with its own credentials and missing keys skip that sink instead of breaking the form. The print guide is built the same way software is: the approved copy lives in one plain-text file, the layout is generated from it, and a checker compares every line of that file against the rendered pages — a single missing or reworded line fails the build.",
+    "outcome": "Shipped and live in production at shanty-realestate.com since June 2026, with the probate assistant, the multi-sink lead funnel, and three intent-based nurture sequences all running on a real business domain. The 16-page \"Understanding Probate\" guide followed in August 2026 — print-ready at 8×11 portrait, paginated as a multiple of four so it saddle-stitches into a booklet with no blank leaves.",
     "highlights": [
       "AI probate assistant on Gemini with an automatic NIM fallback",
       "Lead capture fans out to env-gated Resend, HubSpot, Brevo & Sheets sinks",
       "Framer Motion parallax, a Three.js 3D home, and constellation effects",
       "Automated nurture sequences split into probate, buyer, and attorney paths",
-      "Next.js 16 / React 19, deployed on Vercel with GoDaddy DNS",
+      "16-page print guide generated from one copy file, with a build-time checker enforcing it verbatim",
       "Live in production on the realtor's real domain since June 2026"
     ],
-    "metrics": [],
-    "result": "Live in production at shanty-realestate.com since Jun 2026",
+    "metrics": [
+      {
+        "value": "16",
+        "label": "print pages, saddle-stitch ready"
+      },
+      {
+        "value": "4",
+        "label": "lead sinks, each independently toggled"
+      },
+      {
+        "value": "3",
+        "label": "nurture paths by visitor intent"
+      }
+    ],
+    "result": "Live at shanty-realestate.com since Jun 2026 — and the same client came back for print",
     "techStack": [
       "Next.js 16",
       "React 19",
@@ -820,6 +1113,7 @@ window.NS_PROJECTS = [
     "tier": "standard"
   }
 ];
+
 
 /* ============================================================
    TESTIMONIALS — fill these in with REAL client quotes to make

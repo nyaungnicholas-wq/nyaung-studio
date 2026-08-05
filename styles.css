@@ -11,8 +11,8 @@
 /* ---------- Tokens ---------- */
 :root {
   /* surfaces */
-  --bg:           #060609;
-  --bg-2:         #0B0B12;
+  --bg:           #0B0410;
+  --bg-2:         #150A26;
   --panel:        #10101A;
   --panel-2:      #15151F;
   --line:         rgba(255,255,255,0.07);
@@ -79,9 +79,9 @@ body::before {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(900px 560px at 12% -8%, rgba(99,102,241,0.26), transparent 60%),
-    radial-gradient(820px 620px at 100% 4%, rgba(192,132,252,0.20), transparent 56%),
-    radial-gradient(760px 760px at 50% 120%, rgba(56,189,248,0.12), transparent 60%);
+    radial-gradient(900px 560px at 12% -8%, rgba(76,43,122,0.30), transparent 60%),
+    radial-gradient(820px 620px at 100% 4%, rgba(167,139,219,0.16), transparent 56%),
+    radial-gradient(760px 760px at 50% 120%, rgba(232,200,122,0.07), transparent 60%);
   pointer-events: none;
   animation: ambient-drift 22s ease-in-out infinite alternate;
 }
@@ -95,8 +95,8 @@ body::after {
   inset: 0;
   z-index: -2;
   background-image:
-    linear-gradient(rgba(129,140,248,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(129,140,248,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(167,139,219,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167,139,219,0.04) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);
   -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 78%);

@@ -168,7 +168,7 @@
     const pages = [
       { label: 'Home', sub: 'Start here', href: 'index.html', icon: I.page },
       { label: 'About', sub: 'Nicholas Nyaung', href: 'about.html', icon: I.page },
-      { label: 'Work', sub: 'All 14 projects', href: 'work.html', icon: I.page },
+      { label: 'Work', sub: 'All 26 projects', href: 'work.html', icon: I.page },
       { label: 'Services', sub: 'What I do + pricing', href: 'services.html', icon: I.page },
       { label: 'Writing', sub: 'Notes from the build', href: 'writing.html', icon: I.page },
       { label: 'Now', sub: 'Current focus', href: 'now.html', icon: I.page },

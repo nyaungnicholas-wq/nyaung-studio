@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equity Direction Study — Case Study | Nicholas</title>
+  <meta name="description" content="Honest evaluation of machine-learning equity direction forecasts — A quantitative research study examining whether gradient-boosted trees can predict five-day equity price direction bette" />
+  <meta name="theme-color" content="#0B0410" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-equity-direction-study.html" />
+  <meta property="og:title" content="Equity Direction Study — Honest evaluation of machine-learning equity direction forecasts" />
+  <meta property="og:description" content="Honest evaluation of machine-learning equity direction forecasts — A quantitative research study examining whether gradient-boosted trees can predict five-day equity price direction bette" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Equity Direction Study","headline":"Equity Direction Study — Honest evaluation of machine-learning equity direction forecasts","description":"A quantitative research study examining whether gradient-boosted trees can predict five-day equity price direction better than logistic regression, using technical features on five liquid U.S. instruments. The contribution lies in its rigorous evaluation with walk-forward validation, threshold analysis, transaction costs, and naive baselines, revealing that the apparent edge does not survive scrutiny.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, XGBoost, pandas, scikit-learn","about":"Quant / Trading"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Quant / Trading</span>
+        <h1 class="reveal" data-d="1">Equity Direction Study</h1>
+        <p class="lede reveal" data-d="2">Honest evaluation of machine-learning equity direction forecasts</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-quant reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A quantitative research study examining whether gradient-boosted trees can predict five-day equity price direction better than logistic regression, using technical features on five liquid U.S. instruments. The contribution lies in its rigorous evaluation with walk-forward validation, threshold analysis, transaction costs, and naive baselines, revealing that the apparent edge does not survive scrutiny.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">0.460</span><span class="ml">holdout ROC-AUC — worse than a coin flip</span></div><div class="metric"><span class="mv">95.4%</span><span class="ml">of the excess return came from three days</span></div><div class="metric"><span class="mv">28.3 pts</span><span class="ml">smallest gap the design could have detected</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>In quantitative finance, machine-learning models often show promising backtest results, but these can be misleading due to overfitting, improper validation, and ignoring transaction costs. Investors need a way to distinguish real predictive power from statistical noise, especially in efficient markets where edges are hard to find and even harder to sustain.</p></div>
+        <div class="feature"><h3>What I built</h3><p>The study concludes with negative results: neither model achieved a ROC-AUC above 0.5 on the holdout, both were beaten by naive baselines, and the economic return was an artifact of three days. The comparison between models is inconclusive due to insufficient statistical power. The contribution is a documented pre-specified negative result and a demonstration of honest evaluation techniques.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The study pre-specifies two models—logistic regression and XGBoost—to predict five-day direction from eleven technical features on five instruments. It uses purged expanding-window cross-validation through 2024 with a five-date purge gap, then evaluates on an untouched 2025 holdout. Hard work included implementing moving-block bootstrap for uncertainty, decomposing the simulated portfolio return to show it relies on three periods, and calculating statistical power to reveal the design was underpowered by roughly a factor of five. The approach follows a rigorous backtesting protocol to ensure honest reporting.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>No predictive edge found; apparent economic result is an artifact of three days and does not survive scrutiny</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Pre-specified models with an untouched 2025 holdout year to prevent overfitting</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Both models performed worse than an always-up rule with statistical significance</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Economic return decomposed to show 95.4% of excess return came from just three periods</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Power calculation revealed the design was underpowered by roughly a factor of five</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Adherence to the Arnott-Harvey-Markowitz backtesting protocol for honest evaluation</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Comparison includes proper scoring rules and naive baselines, not just accuracy</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">XGBoost</span><span class="proj-tag">pandas</span><span class="proj-tag">scikit-learn</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-tickstream.html"><div class="dir">← Previous</div><div class="nm">TickStream</div></a>
+          <a class="next" href="work-flow.html"><div class="dir">Next →</div><div class="nm">Flow</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=5"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script defer src="aurora.js?v=1"></script>
+  <script defer src="motion.js?v=5"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

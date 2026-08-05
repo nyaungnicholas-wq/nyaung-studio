@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jarvis — Case Study | Nicholas</title>
   <meta name="description" content="An Iron Man–style assistant that builds holograms — A voice-driven personal AI assistant with a holographic fabrication engine. It sees through a camera with Gemini vision " />
-  <meta name="theme-color" content="#07070B" />
+  <meta name="theme-color" content="#0B0410" />
   <script>document.documentElement.classList.add('js');</script>
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://nicholasnyaung.com/work-jarvis.html" />
@@ -20,9 +20,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
-  <link rel="modulepreload" href="https://unpkg.com/three@0.160.0/build/three.module.js" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=4" />
+  <link rel="stylesheet" href="styles.css?v=5" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Jarvis","headline":"Jarvis — An Iron Man–style assistant that builds holograms","description":"A voice-driven personal AI assistant with a holographic fabrication engine. It sees through a camera with Gemini vision and runs on an always-on wake word. Hand it a reference image and it turns that into a 3D hologram, then designs and renders its own builds. Each result gets compared against the reference, with fixes hot-swapped in a self-correction loop.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, FastAPI, Gemini, Three.js, Depth Anything V2, WebGL","about":"AI Agent"}</script>
 </head>
 <body>
@@ -84,15 +83,14 @@
     </section>
   </main>
 
-  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="data.js?v=4"></script>
+  <script src="data.js?v=5"></script>
   <script src="components.js?v=4"></script>
   <script src="app.js?v=4"></script>
-  <script type="module" src="scene.js?v=4"></script>
-  <script defer src="motion.js?v=4"></script>
+  <script defer src="aurora.js?v=1"></script>
+  <script defer src="motion.js?v=5"></script>
   <script defer src="premium.js?v=4"></script>
   <script defer src="assistant.js?v=4"></script>
   <script defer src="interactive.js?v=4"></script>

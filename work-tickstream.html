@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TickStream — Case Study | Nicholas</title>
+  <meta name="description" content="Merging live crypto order books from multiple exchanges into one real-time view — TickStream is a consolidated crypto order book written in Go. It ingests live feeds from Coinbase and Kraken, reconstruc" />
+  <meta name="theme-color" content="#0B0410" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-tickstream.html" />
+  <meta property="og:title" content="TickStream — Merging live crypto order books from multiple exchanges into one real-time view" />
+  <meta property="og:description" content="Merging live crypto order books from multiple exchanges into one real-time view — TickStream is a consolidated crypto order book written in Go. It ingests live feeds from Coinbase and Kraken, reconstruc" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=5" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"TickStream","headline":"TickStream — Merging live crypto order books from multiple exchanges into one real-time view","description":"TickStream is a consolidated crypto order book written in Go. It ingests live feeds from Coinbase and Kraken, reconstructs each exchange's order book correctly from snapshots and updates, and merges them into a single unified view. This allows traders to see the best available prices across connected exchanges in real-time.","url":"https://github.com/nyaungnicholas-wq/tickstream","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Go, WebSocket, HdrHistogram","about":"Quant / Trading"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Quant / Trading</span>
+        <h1 class="reveal" data-d="1">TickStream</h1>
+        <p class="lede reveal" data-d="2">Merging live crypto order books from multiple exchanges into one real-time view</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          <a class="btn btn-ghost" href="https://github.com/nyaungnicholas-wq/tickstream" target="_blank" rel="noopener" style="padding:8px 16px">Visit live <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-quant reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>TickStream is a consolidated crypto order book written in Go. It ingests live feeds from Coinbase and Kraken, reconstructs each exchange's order book correctly from snapshots and updates, and merges them into a single unified view. This allows traders to see the best available prices across connected exchanges in real-time.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">7.4 µs</span><span class="ml">median end-to-end apply latency</span></div><div class="metric"><span class="mv">41 ns</span><span class="ml">median wait-free book read</span></div><div class="metric"><span class="mv">200,000</span><span class="ml">samples behind the measurement</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>For cryptocurrency traders, having a unified view of order books from multiple exchanges is essential for making informed decisions. However, each exchange sends data in its own format, messages arrive out of order, and gaps can occur due to network issues. Merging these feeds into a consistent, real-time view without errors or delays is technically challenging, as it requires handling data integrity, synchronization, and concurrency without blocking readers.</p></div>
+        <div class="feature"><h3>What I built</h3><p>TickStream is built and tested, with measured end-to-end apply latency of 7.4 µs at p50 and a wait-free read path at 41 ns. It has been verified with concurrent assertion tests for immutability, checksum tests, and a full apply-semantics matrix. The system is open-sourced on GitHub, demonstrating a working implementation of a consolidated order book in Go.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>TickStream uses a single writer engine that processes order-book updates from each exchange in a dedicated goroutine. Each feed decodes and normalizes messages, sending them to the engine via a bounded channel. The engine applies updates to per-venue books, verifies integrity using checksums (like CRC32 for Kraken), and resyncs from fresh snapshots on failures. It consolidates the books into a single best bid and offer. The system publishes a new immutable snapshot after each update, allowing any number of readers to access the data wait-free via an atomic pointer load. This design avoids locks and ensures readers never block the writer. Key challenges included ensuring snapshot immutability (not reusing memory across publishes), handling full channels without blocking (dropping frames and resyncing), and maintaining correctness during high-throughput scenarios.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>A working consolidated order book with measured latencies, built in Go and open-sourced</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Wait-free read path using atomic pointer loads, with p50 latency of 41 ns</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Immutable snapshot publication ensures readers never see torn data</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Bounded channel hand-off drops frames on full buffer to prevent writer blocking</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Checksum verification (CRC32 for Kraken) triggers full resync on mismatch</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Concurrent assertion tests enforce snapshot immutability invariant</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Measured end-to-end apply latency with coordinated-omission-aware benchmarks</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Go</span><span class="proj-tag">WebSocket</span><span class="proj-tag">HdrHistogram</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-fintwit-dashboard.html"><div class="dir">← Previous</div><div class="nm">Investor Alpha Hub</div></a>
+          <a class="next" href="work-equity-direction-study.html"><div class="dir">Next →</div><div class="nm">Equity Direction Study</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=5"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+  <script defer src="aurora.js?v=1"></script>
+  <script defer src="motion.js?v=5"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>
