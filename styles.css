@@ -889,3 +889,58 @@ body.grabbing, body.grabbing * { cursor: grabbing !important; }
 .mobile-menu.open { display: flex; }
 .mobile-menu a { padding: 13px 16px; border-radius: 12px; color: var(--muted); font-weight: 500; }
 .mobile-menu a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+
+/* ---------- Work page: category bands ---------- */
+.work-band {
+  margin-top: 72px;
+  margin-bottom: 8px;
+}
+.work-band:first-child {
+  margin-top: 0;
+}
+.work-band-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.work-band-head h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.work-band-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--line), transparent);
+}
+.work-band-count {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  color: var(--muted);
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+}
+@media (max-width: 760px) {
+  .work-band {
+    margin-top: 48px;
+  }
+  .work-band-head h2 {
+    font-size: clamp(1.3rem, 5vw, 1.7rem);
+  }
+}
+/* Selected work + archive + showreel (2026-11-04) */
+.work-selected { margin-bottom: 56px; }
+.selected-grid, #featured-grid { grid-template-columns: repeat(2, 1fr); }
+.work-archive { border-top: 1px solid rgba(255,255,255,.12); padding-top: 28px; }
+.work-archive-summary { cursor: pointer; font-size: 1.15rem; font-weight: 600; padding: 10px 0 18px; list-style-position: inside; }
+.work-archive-summary:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.work-archive[open] .work-archive-summary { margin-bottom: 18px; }
+.reel-frame { max-width: 400px; margin: 0 auto; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); background: #000; }
+.reel-frame video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; }
+@media (max-width: 760px) { .selected-grid, #featured-grid { grid-template-columns: 1fr; } }
+.work-archive .work-band:first-of-type { margin-top: 0; }

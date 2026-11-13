@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quant Lab — Case Study | Nicholas</title>
+  <meta name="description" content="Four studies that report the walk-forward number, not the sweep — Four research-grade quantitative finance projects — EMA crossover backtest, Monte Carlo option pricing, risk parity port" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-quant-lab.html" />
+  <meta property="og:title" content="Quant Lab — Four studies that report the walk-forward number, not the sweep" />
+  <meta property="og:description" content="Four studies that report the walk-forward number, not the sweep — Four research-grade quantitative finance projects — EMA crossover backtest, Monte Carlo option pricing, risk parity port" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Quant Lab","headline":"Quant Lab — Four studies that report the walk-forward number, not the sweep","description":"Four research-grade quantitative finance projects — EMA crossover backtest, Monte Carlo option pricing, risk parity portfolio, and Sharpe optimizer — sharing a common core of data loading, performance metrics, and plotting. Each uses real Yahoo Finance data cached offline and reports results against benchmarks with guardrails against overfitting including walk-forward evaluation, block bootstrap confidence intervals, and deflated Sharpe ratios that account for multiple testing across all tickers.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, pandas, NumPy, SciPy, Matplotlib","about":"Quant & Research"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Quant &amp; Research</span>
+        <h1 class="reveal" data-d="1">Quant Lab</h1>
+        <p class="lede reveal" data-d="2">Four studies that report the walk-forward number, not the sweep</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-quant reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>Four research-grade quantitative finance projects — EMA crossover backtest, Monte Carlo option pricing, risk parity portfolio, and Sharpe optimizer — sharing a common core of data loading, performance metrics, and plotting. Each uses real Yahoo Finance data cached offline and reports results against benchmarks with guardrails against overfitting including walk-forward evaluation, block bootstrap confidence intervals, and deflated Sharpe ratios that account for multiple testing across all tickers.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">10.450584</span><span class="ml">black-scholes reference value</span></div><div class="metric"><span class="mv">204</span><span class="ml">total passing tests</span></div><div class="metric"><span class="mv">1e-6</span><span class="ml">erc risk contribution tolerance</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Quantitative finance research often overfits to in-sample parameter sweeps, ignores transaction costs, and reports inflated Sharpe ratios without correcting for multiple testing or serial correlation in returns. Standard bootstraps destroy return autocorrelation, yielding falsely narrow confidence intervals. Covariance estimation noise turns risk parity into equal weight silently. Optimizers frequently fail to beat equal-weight portfolios out of sample. These issues make published backtests unreliable and strategies fragile in production.</p></div>
+        <div class="feature"><h3>What I built</h3><p>All 204 tests pass (core 51, EMA 34, Monte Carlo 44, risk parity 39, Sharpe 36). Monte Carlo converges to Black-Scholes 10.450584 with control variate reducing standard error over 5x. ERC solver equalizes risk contributions to 1e-6. Tangency portfolio beats 20,000 random portfolios on Sharpe; minimum-variance has lowest volatility. Backtests verified free of lookahead via future-price perturbation. Block bootstrap widens correctly with block length on AR(1) series. The optimizer often does not beat equal weight out of sample, which is reported honestly.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>A shared core (qlab/) provides data loading with synthetic GBM fallback, metrics including CAGR, Sharpe, Sortino, max drawdown, and guardrails: block bootstrap confidence intervals that preserve serial correlation, deflated Sharpe ratios tracking cumulative trials across all tickers in outputs/trial_ledger.json, and probabilistic Sharpe ratios. EMA crossover uses walk-forward grid search with one-bar signal shift and basis-point turnover costs. Monte Carlo prices European options with antithetic variates and a control variate (discounted stock price) cutting standard error over 5x versus Black-Scholes 10.450584, plus common-random-number Greeks. Risk parity solves the true ERC problem via log-barrier convex optimization with EWMA and Ledoit-Wolf shrinkage covariance, rebalancing monthly with costs. Sharpe optimizer constructs the efficient frontier, tangency and minimum-variance portfolios, a Michaud resampled frontier, and a train/test split versus equal weight.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>204 checks passing; deflated Sharpe charged against the full 70-trial search, not one run</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>A shared core handles data loading, metrics, and plotting with guardrails including block bootstrap confidence intervals and deflated Sharpe ratios that accumulate trial counts across all tickers in a persistent ledger.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>EMA crossover uses walk-forward evaluation with one-bar signal shift and basis-point turnover costs, reporting the out-of-sample result rather than the best in-sample parameter cell.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Monte Carlo option pricing converges to the exact Black-Scholes value 10.450584 using antithetic variates and a control variate that cuts standard error by more than 5x.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Risk parity solves the true Equal Risk Contribution problem via log-barrier convex optimization with selectable covariance estimators, equalizing risk contributions to within 1e-6.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Sharpe optimizer constructs the efficient frontier with a Michaud resampled frontier and train/test split, and the tangency portfolio must beat 20,000 random portfolios on Sharpe in tests.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>All 204 tests pass offline on synthetic data, including lookahead verification via future-price perturbation and block bootstrap validation on AR(1) series.</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">pandas</span><span class="proj-tag">NumPy</span><span class="proj-tag">SciPy</span><span class="proj-tag">Matplotlib</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-execution-layer.html"><div class="dir">← Previous</div><div class="nm">Execution Layer</div></a>
+          <a class="next" href="work-futures-trader.html"><div class="dir">Next →</div><div class="nm">NQ Futures Quant Suite</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=6"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=6"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script type="module" src="scene.js?v=7"></script>
+  <script defer src="motion.js?v=6"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

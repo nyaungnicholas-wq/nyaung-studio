@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dogear — Case Study | Nicholas</title>
+  <meta name="description" content="Ten photos in, one paper-scrapbook reel out — A paper-scrapbook reel template: ten photo slots, 13.7 seconds, 1080x1920, 411 frames at 30fps. Drop ten photos into a f" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-dogear.html" />
+  <meta property="og:title" content="Dogear — Ten photos in, one paper-scrapbook reel out" />
+  <meta property="og:description" content="Ten photos in, one paper-scrapbook reel out — A paper-scrapbook reel template: ten photo slots, 13.7 seconds, 1080x1920, 411 frames at 30fps. Drop ten photos into a f" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Dogear","headline":"Dogear — Ten photos in, one paper-scrapbook reel out","description":"A paper-scrapbook reel template: ten photo slots, 13.7 seconds, 1080x1920, 411 frames at 30fps. Drop ten photos into a folder, run one command, and the reel comes out cut to a fixed beat structure. It was reverse-engineered from a popular editing-app template rather than designed from scratch.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, NumPy, SciPy, FFmpeg","about":"Motion & Content"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Motion &amp; Content</span>
+        <h1 class="reveal" data-d="1">Dogear</h1>
+        <p class="lede reveal" data-d="2">Ten photos in, one paper-scrapbook reel out</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-content reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10.5 9.2v5.6l4.5-2.8z"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A paper-scrapbook reel template: ten photo slots, 13.7 seconds, 1080x1920, 411 frames at 30fps. Drop ten photos into a folder, run one command, and the reel comes out cut to a fixed beat structure. It was reverse-engineered from a popular editing-app template rather than designed from scratch.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">411 frames</span><span class="ml">at 30fps, tiled with no gaps</span></div><div class="metric"><span class="mv">13.7 s</span><span class="ml">fixed reel length at 1080x1920</span></div><div class="metric"><span class="mv">10</span><span class="ml">photo slots, every one enforced to appear</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Templates inside consumer editing apps are manual work. Each photo is dragged into place by hand, and the timing that makes the result read as stop-motion is invisible in the interface. Reproducing one is slow, inconsistent between attempts, and any later change means redoing the edit. To make the look repeatable, the beat grid, the card sizes and the transitions all have to be recovered from the reference and written down as parameters instead of gestures.</p></div>
+        <div class="feature"><h3>What I built</h3><p>The template renders 411 frames at 30fps from ten input photos and one command. A check script enforces the two invariants that matter: the beats must tile the timeline exactly with no gap or overlap, and every slot from one to ten must appear at least once. Paper sound effects mix over an optional music bed, and a frame-limit flag renders just the opening two seconds in about six seconds of work instead of ninety.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The reel is a list of beats that tile the timeline exactly, each beat naming a frame range and which photo slot it shows. Four named mechanisms carry the motion: DeckRiffle counts a centred card through the slots on the beat, ZoomFlick hands a card to the next size with a single frame of averaged zoom blur, PaperWad crushes the hero card into a wad of creased paper over three frames, and StripSpread swaps tall strip cards side by side. Photos are centre-cropped to the slot aspect rather than squashed, and a missing slot falls back to a numbered placeholder plate.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>A 13.7-second 1080x1920 reel from ten photos and one command</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Beats tile the timeline exactly and the check script fails the render if they stop tiling.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Four named mechanisms carry the motion: DeckRiffle, ZoomFlick, PaperWad and StripSpread.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Photos are centre-cropped to each slot's aspect ratio, never squashed to fit.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>A missing photo slot falls back to a numbered placeholder plate instead of breaking the render.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The reference was measured at roughly 89 BPM, one beat every 0.670s or 20.1 frames at 30fps.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>A frame-limit flag renders the opening two seconds in about six seconds instead of ninety.</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">NumPy</span><span class="proj-tag">SciPy</span><span class="proj-tag">FFmpeg</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-discipline-reels.html"><div class="dir">← Previous</div><div class="nm">Discipline Reels</div></a>
+          <a class="next" href="work-finance-book.html"><div class="dir">Next →</div><div class="nm">Money, Finally Explained</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=6"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=6"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script type="module" src="scene.js?v=7"></script>
+  <script defer src="motion.js?v=6"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

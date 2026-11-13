@@ -1,32 +1,24 @@
-<!DOCTYPE html>
-<html lang="en" data-page="home">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nicholas — Independent Product &amp; AI Studio</title>
-  <meta name="description" content="Nicholas is a one-person product & AI studio. I design, build, and ship complete software solo — SaaS, AI agents, trading systems, websites, and content engines. 26 products shipped, 7 live in production." />
-  <meta name="theme-color" content="#07070B" />
-  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Nicholas Nyaung — Independent Product &amp; AI Builder</title>
+  <meta name="description" content="Nicholas Nyaung is a one-person product & AI studio. I design, build and ship complete software solo — SaaS, AI agents, trading systems and websites.">
+  <meta name="theme-color" content="#050506">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://nicholasnyaung.com/" />
   <link rel="canonical" href="https://nicholasnyaung.com/" />
   <meta property="og:title" content="Nicholas — Independent Product & AI Studio" />
-  <meta property="og:description" content="One builder. Twenty-six products, shipped end to end. SaaS · AI agents · trading systems · websites · content engines." />
+  <meta property="og:description" content="One builder. Thirty-three products, shipped end to end. Quant research · Products · AI agents · Motion &amp; content · Tools &amp; websites." />
   <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Nicholas — Independent Product & AI Studio" />
-  <meta name="twitter:description" content="One builder. Twenty-six products, shipped end to end." />
+  <meta name="twitter:description" content="One builder. Thirty-three products, shipped end to end." />
   <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
-  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-  <link rel="stylesheet" href="styles.css?v=6" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,193 +29,372 @@
     ]
   }
   </script>
-  <!-- Privacy-friendly analytics — activates once you create the site in Plausible (or swap for GA). -->
-  <script defer data-domain="nicholasnyaung.com" src="https://plausible.io/js/script.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="v2/v2.css?v=1">
+  <link rel="stylesheet" href="v2/panel.css?v=1">
+  <script>document.documentElement.classList.add('js');/* if the 3D never starts (CDN down, script error), drop to the static layout after 12 s */setTimeout(function(){var l=document.getElementById('loader');if(l&&!l.classList.contains('done')){document.documentElement.classList.add('no-gl','loaded');l.classList.add('done');}},12000);</script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }</script>
 </head>
 <body>
-  <canvas id="hero-canvas" aria-hidden="true"></canvas>
-
-  <main id="top">
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <span class="hero-badge reveal"><span class="dot"></span> Open for new projects · 2026</span>
-      <h1 class="reveal" data-d="1">
-        <span class="line grad-text">I take ideas</span>
-        <span class="line brand-text">all the way to live.</span>
-      </h1>
-      <p class="lede reveal" data-d="2">
-        I'm a one-person product &amp; AI studio. I do the design and the engineering, I set up the
-        infrastructure, and I handle the boring parts most people would rather pass off. Start to finish, it's just me.
-      </p>
-      <div class="hero-actions reveal" data-d="3">
-        <a href="contact.html" class="btn btn-primary btn-lg">Start a project
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="work.html" class="btn btn-ghost btn-lg">See the work</a>
-      </div>
-      <div class="hero-stats reveal" data-d="4">
-        <div class="hero-stat"><div class="n"><span data-count="26">0</span></div><div class="l">Products shipped</div></div>
-        <div class="hero-stat"><div class="n"><span data-count="7">0</span></div><div class="l">Live in production</div></div>
-        <div class="hero-stat"><div class="n"><span data-count="2">0</span></div><div class="l">Paying clients shipped</div></div>
-        <div class="hero-stat"><div class="n"><span data-count="6">0</span></div><div class="l">Disciplines, solo</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="proof-band" aria-label="Live in production">
-    <div class="wrap">
-      <span class="hp-label">Live in production right now</span>
-      <a class="hp-chip" href="https://shanty-realestate.com" target="_blank" rel="noopener"><span class="sd"></span> shanty-realestate.com</a>
-      <a class="hp-chip" href="https://lotline-nine.vercel.app" target="_blank" rel="noopener"><span class="sd"></span> Lotline · property intelligence</a>
-      <a class="hp-chip" href="https://n1ch0las-taxlens.hf.space" target="_blank" rel="noopener"><span class="sd"></span> TaxLens · 147 countries</a>
-      <a class="hp-chip" href="https://github.com/nyaungnicholas-wq/1042s-organizer" target="_blank" rel="noopener"><span class="sd"></span> 1042-S Organizer · shipped to client</a>
-      <span class="hp-chip"><span class="sd"></span> MINTSET · posts daily</span>
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Next.js</span><span>React</span><span>TypeScript</span><span>Python</span><span>FastAPI</span><span>Three.js</span><span>GSAP</span><span>Remotion</span><span>Postgres</span><span>Node</span><span>Gemini</span><span>Claude</span>
-      <span>Next.js</span><span>React</span><span>TypeScript</span><span>Python</span><span>FastAPI</span><span>Three.js</span><span>GSAP</span><span>Remotion</span><span>Postgres</span><span>Node</span><span>Gemini</span><span>Claude</span>
+  <a class="skip" href="#work">Skip to work</a>
+  <div id="loader" aria-hidden="true">
+    <div class="ld-inner">
+      <span class="ld-label">LOADING</span>
+      <span class="ld-bar"><i></i></span>
+      <span class="ld-pct">000</span>
     </div>
   </div>
-
-  <!-- CAPABILITIES -->
-  <section id="capabilities">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">What I build</span>
-        <h2>Six disciplines. One person who actually ships them.</h2>
-        <p>SaaS platforms, autonomous AI agents, quant trading systems, motion-rich websites, content engines, and dev tools — each built end to end, from data model to production.</p>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <header class="nav">
+    <a class="nav-name" href="#hero">NICHOLAS NYAUNG</a>
+    <div class="nav-right">
+      <a class="nav-talk" href="#/contact">LET'S TALK<span class="dot" aria-hidden="true"></span></a>
+      <button id="menu-btn" class="nav-menu" aria-expanded="false" aria-controls="menu">MENU <span class="burger" aria-hidden="true"><i></i><i></i></span></button>
+    </div>
+  </header>
+  <nav id="menu" aria-label="Site">
+    <ol>
+      <li><a href="#work"><span>01</span>WORK</a></li>
+      <li><a href="#/about"><span>02</span>ABOUT</a></li>
+      <li><a href="#/services"><span>03</span>SERVICES</a></li>
+      <li><a href="#/writing"><span>04</span>WRITING</a></li>
+      <li><a href="#/now"><span>05</span>NOW</a></li>
+      <li><a href="#/contact"><span>06</span>CONTACT</a></li>
+    </ol>
+    <p class="menu-foot">NYAUNGNICHOLAS@GMAIL.COM</p>
+  </nav>
+  <div id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" hidden>
+    <div class="pn-bar"><span class="pn-crumb" id="panel-crumb"></span><button class="pn-close" id="panel-close" type="button">CLOSE <span aria-hidden="true">×</span></button></div>
+    <div class="pn-scroll" id="panel-scroll"><div class="pn-body" id="panel-body"></div></div>
+  </div>
+  <main>
+    <section id="hero" aria-label="Intro">
+      <div class="stage">
+        <div class="hero-left">
+          <h1 class="hero-name">NICHOLAS<br>NYAUNG</h1>
+          <p class="hero-sub">// PORTFOLIO <span>©2026</span></p>
+        </div>
+        <p class="hero-right">INDEPENDENT PRODUCT &amp; AI BUILDER. I DESIGN, ENGINEER AND SHIP SOFTWARE SOLO — FROM DATA MODEL TO PRODUCTION.</p>
+        <img class="fallback-portrait" src="v2/img/portrait.png" alt="Portrait of Nicholas Nyaung" width="1086" height="1118">
+        <span class="scroll-cue" aria-hidden="true">SCROLL</span>
       </div>
-      <div class="bento">
-        <div class="bento-card col-3 row-2 reveal">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-          <h3>SaaS platforms</h3>
-          <p>Multi-tenant web products with auth, billing, dashboards, and the unglamorous plumbing that makes them real — lead capture, nurture engines, and pipelines.</p>
-          <div style="margin-top:auto;padding-top:24px;display:flex;gap:8px;flex-wrap:wrap">
-            <span class="proj-tag">LeadNet</span><span class="proj-tag">ReachNet</span><span class="proj-tag">GrowNet</span><span class="proj-tag">Investor Alpha Hub</span>
+    </section>
+    <section id="work" aria-labelledby="work-h" tabindex="-1">
+      <div class="stage">
+        <div class="wl">
+          <h2 id="work-h" class="wl-h">SELECTED WORK</h2>
+          <ol class="wl-list">
+            <li class="wl-item is-active"><a href="#/work/taxlens"><span class="wl-n">[01]</span> TAXLENS</a></li>
+            <li class="wl-item"><a href="#/work/shanty-realestate"><span class="wl-n">[02]</span> SHANTY SOERJONO — REALTOR</a></li>
+            <li class="wl-item"><a href="#/work/lotline"><span class="wl-n">[03]</span> LOTLINE</a></li>
+            <li class="wl-item"><a href="#/work/signaldeck"><span class="wl-n">[04]</span> SIGNALDECK</a></li>
+          </ol>
+          <a class="more wl-all" href="#/archive">&gt; FULL ARCHIVE</a>
+        </div>
+        <div class="wl-caps">
+          <div class="wl-cap is-active">
+            <p class="cap-k">AI AGENTS</p>
+            <p class="cap-t">CROSS-BORDER TAX ANSWERS THAT CITE THEIR OWN SOURCES.</p>
+            <p class="cap-l"><a class="more" href="#/work/taxlens">&gt; CASE STUDY</a> <a class="more" href="https://n1ch0las-taxlens.hf.space" target="_blank" rel="noopener">&gt; LIVE</a></p>
+          </div>
+          <div class="wl-cap">
+            <p class="cap-k">TOOLS &amp; WEBSITES</p>
+            <p class="cap-t">A LIVE PROBATE-REALTOR PLATFORM, AND THE PRINT BOOK THAT GOES WITH IT.</p>
+            <p class="cap-l"><a class="more" href="#/work/shanty-realestate">&gt; CASE STUDY</a> <a class="more" href="https://shanty-realestate.com" target="_blank" rel="noopener">&gt; LIVE</a></p>
+          </div>
+          <div class="wl-cap">
+            <p class="cap-k">PRODUCTS</p>
+            <p class="cap-t">WHAT A PROPERTY IS WORTH, COSTS TO OWN, AND COSTS TO FIX.</p>
+            <p class="cap-l"><a class="more" href="#/work/lotline">&gt; CASE STUDY</a> <a class="more" href="https://lotline-nine.vercel.app" target="_blank" rel="noopener">&gt; LIVE</a></p>
+          </div>
+          <div class="wl-cap">
+            <p class="cap-k">QUANT &amp; RESEARCH</p>
+            <p class="cap-t">A MARKET-RESEARCH PLATFORM BUILT TO CATCH ITSELF BEING WRONG.</p>
+            <p class="cap-l"><a class="more" href="#/work/signaldeck">&gt; CASE STUDY</a></p>
           </div>
         </div>
-        <div class="bento-card col-3 reveal" data-d="1">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1a3 3 0 0 0-3 3 3 3 0 0 0 0 6 3 3 0 0 0 3 3v1a3 3 0 0 0 6 0v-1a3 3 0 0 0 3-3 3 3 0 0 0 0-6 3 3 0 0 0-3-3V5a3 3 0 0 0-3-3z"/></svg></div>
-          <h3>Autonomous AI agents</h3>
-          <p>Agents that perceive, decide, and act — a vision assistant that builds holograms, a lead scout that pitches, a fleet that monitors itself.</p>
-        </div>
-        <div class="bento-card col-3 reveal" data-d="2">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-          <h3>Quant &amp; trading systems</h3>
-          <p>Backtested, risk-managed strategies — one running live and hands-free on a paper account, scheduled to trade on its own.</p>
-        </div>
-        <div class="bento-card col-3 reveal" data-d="1">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-          <h3>High-craft websites</h3>
-          <p>Motion-rich, 3D, conversion-built — including a real-estate site live in production.</p>
-        </div>
-        <div class="bento-card col-3 reveal" data-d="2">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-          <h3>Content engines</h3>
-          <p>Autonomous short-form video factories that render and post on a schedule — <span class="mono-inline">24/7</span>, no human in the loop.</p>
+        <div class="wl-fallback">
+          <img src="v2/img/work-taxlens.jpg" alt="TaxLens homepage" loading="lazy" width="1440" height="900">
+          <img src="v2/img/work-shanty.jpg" alt="Shanty Soerjono realtor site homepage" loading="lazy" width="1440" height="900">
+          <img src="v2/img/work-lotline.jpg" alt="Lotline homepage" loading="lazy" width="1440" height="900">
+          <img src="v2/img/work-signaldeck.jpg" alt="SignalDeck case study page" loading="lazy" width="1440" height="900">
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- FEATURED WORK -->
-  <section id="work-featured">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Selected work</span>
-        <h2>The work speaks first.</h2>
-        <p>Real products, not concepts. Live in production, tested as a client, running hands-off. Here's a selection of what I've built.</p>
-      </div>
-      <div class="proj-grid" id="featured-grid"></div>
-      <div style="margin-top:38px" class="reveal">
-        <a href="work.html" class="btn btn-ghost btn-lg">See all 26 projects
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FULL-SCREEN 3D MOMENT -->
-  <section id="moment" class="moment">
-    <div class="wrap moment-inner">
-      <span class="eyebrow reveal" style="justify-content:center">No team · No handoffs</span>
-      <h2 class="moment-line">Built end&nbsp;to&nbsp;end.<br /><span class="brand-text">Shipped for real.</span></h2>
-      <p class="moment-sub reveal">Every pixel, every endpoint, every deploy — one builder, all the way through.</p>
-    </div>
-  </section>
-
-  <!-- SERVICES TEASER -->
-  <section id="services-teaser">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">Work with the studio</span>
-        <h2>Need it built? I build the whole thing.</h2>
-        <p>From a single feature to a full product launch — strategy, design, engineering, and the parts most people leave half-finished. One point of contact, start to ship.</p>
-      </div>
-      <div class="feature-grid">
-        <div class="feature reveal"><h3>Product builds</h3><p>Full-stack SaaS &amp; web apps — data model, auth, billing, dashboards, and the edge cases that decide whether software survives real users.</p></div>
-        <div class="feature reveal" data-d="1"><h3>AI &amp; automation</h3><p>Autonomous agents and pipelines that do real work — scoring, drafting, self-correcting — running hands-off on Gemini, Claude, and FLUX.</p></div>
-        <div class="feature reveal" data-d="2"><h3>Websites &amp; growth</h3><p>Motion and 3D sites that convert, plus content engines that script, render, and post on their own.</p></div>
-      </div>
-      <div style="margin-top:34px" class="reveal">
-        <a href="services.html" class="btn btn-ghost btn-lg">Explore services
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS (auto-hidden until real quotes are added to data.js) -->
-  <section id="testimonials" style="display:none">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">What clients say</span>
-        <h2>Trusted to ship.</h2>
-      </div>
-      <div class="feature-grid" id="testimonials-grid"></div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="contact-cta" class="cta-band">
-    <div class="wrap">
-      <div class="cta-card reveal">
-        <span class="eyebrow" style="justify-content:center">Let's build</span>
-        <h2>Let's build something<br /><span class="brand-text">that ships.</span></h2>
-        <p>Client work, partnerships, or a product you've been meaning to start. Tell me what you have in mind — I'll tell you exactly how I'd build it.</p>
-        <div class="cta-actions">
-          <a href="contact.html" class="btn btn-primary btn-lg">Start a project
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="work.html" class="btn btn-ghost btn-lg">See the work</a>
+    </section>
+    <section id="about" aria-labelledby="about-h">
+      <div class="stage">
+        <div class="panel">
+          <h2 id="about-h">ABOUT ME</h2>
+          <p>I'M A ONE-PERSON PRODUCT &amp; AI STUDIO. I DO THE DESIGN AND THE ENGINEERING, SET UP THE INFRASTRUCTURE, AND HANDLE THE BORING PARTS MOST PEOPLE WOULD RATHER PASS OFF. START TO FINISH, IT'S JUST ME.</p>
+          <a class="more" href="#/about">&gt; LEARN MORE</a>
         </div>
       </div>
+    </section>
+    <section id="clients" aria-labelledby="clients-h">
+      <div class="stage">
+        <div class="panel">
+          <h2 id="clients-h">THE MAP</h2>
+          <p>EVERY PART OF THE STUDIO, SEEN FROM ABOVE. PICK A BUILDING, OR KEEP SCROLLING TO LAND ON THE RED ONE.</p>
+          <a class="more" href="#contact">&gt; SKIP TO CONTACT</a>
+        </div>
+        <nav class="mm" aria-label="Site map">
+          <a class="mm-node" href="#/archive"><span class="mm-dot" aria-hidden="true"></span><span class="mm-tag"><span class="mm-n">01</span>WORK</span><span class="mm-desc">ALL 33 PROJECTS</span></a>
+          <a class="mm-node" href="#/about"><span class="mm-dot" aria-hidden="true"></span><span class="mm-tag"><span class="mm-n">02</span>ABOUT</span><span class="mm-desc">WHO BUILDS IT</span></a>
+          <a class="mm-node" href="#/services"><span class="mm-dot" aria-hidden="true"></span><span class="mm-tag"><span class="mm-n">03</span>SERVICES</span><span class="mm-desc">WHAT I BUILD, AND HOW</span></a>
+          <a class="mm-node" href="#/writing"><span class="mm-dot" aria-hidden="true"></span><span class="mm-tag"><span class="mm-n">04</span>WRITING</span><span class="mm-desc">NOTES FROM THE BUILD</span></a>
+          <a class="mm-node" href="#/now"><span class="mm-dot" aria-hidden="true"></span><span class="mm-tag"><span class="mm-n">05</span>NOW</span><span class="mm-desc">WHAT I'M WORKING ON</span></a>
+          <a class="mm-node mm-red" href="#/contact"><span class="mm-dot" aria-hidden="true"></span><span class="mm-tag"><span class="mm-n">06</span>CONTACT</span><span class="mm-desc">LET'S TALK</span></a>
+        </nav>
+      </div>
+    </section>
+    <section id="contact" aria-labelledby="contact-h">
+      <div class="stage">
+        <div class="cx">
+          <div class="cx-left">
+            <p class="cx-k"><span class="cx-n">06</span>CONTACT</p>
+            <h2 id="contact-h" class="cx-h">Let's talk about your next project.</h2>
+            <p class="cx-lede">I'm Nicholas — I design and build products end to end, solo. Whether you have a tight spec or a rough idea you can't shake, send it over. The more concrete you are about what success looks like, the faster I can tell you if I'm the right person to build it.</p>
+            <dl class="cx-facts">
+              <div><dt>Availability</dt><dd><span class="cx-live" aria-hidden="true"></span>Taking on a small number of product, AI-agent, and website builds.</dd></div>
+              <div><dt>Reply time</dt><dd>I reply to every serious inquiry within 1–2 business days.</dd></div>
+              <div><dt>Email</dt><dd><a href="mailto:nyaungnicholas@gmail.com">nyaungnicholas@gmail.com</a></dd></div>
+              <div><dt>Code</dt><dd><a href="https://github.com/nyaungnicholas-wq" target="_blank" rel="noopener">github.com/nyaungnicholas-wq</a></dd></div>
+            </dl>
+            <ol class="cx-steps" aria-label="What happens next">
+              <li><span>01</span>I actually read it</li>
+              <li><span>02</span>A straight answer</li>
+              <li><span>03</span>A real conversation</li>
+            </ol>
+          </div>
+          <div class="cx-right">
+            <p class="cx-form-k">Start a project</p>
+            <form class="pn-form cx-form" id="contact-form" novalidate>
+    <div class="pn-hp" aria-hidden="true">
+      <label for="f-company">Company (leave this empty)</label>
+      <input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off">
     </div>
-  </section>
+    <div class="pn-field-row">
+      <div class="pn-field">
+        <label for="f-name">Your name</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required aria-required="true" aria-describedby="f-name-error">
+        <span class="pn-error" id="f-name-error" role="alert"></span>
+      </div>
+      <div class="pn-field">
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="f-email-error">
+        <span class="pn-error" id="f-email-error" role="alert"></span>
+      </div>
+    </div>
+    <div class="pn-field-row">
+      <div class="pn-field">
+        <label for="f-type">Project type</label>
+        <select id="f-type" name="type">
+          <option>SaaS product</option>
+          <option>AI agent / automation</option>
+          <option>Quant / trading system</option>
+          <option>Website / web app</option>
+          <option>Content engine</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="pn-field">
+        <label for="f-budget">Budget / timeline</label>
+        <input id="f-budget" name="budget" type="text" placeholder="e.g. ~$8k, 6 weeks">
+      </div>
+    </div>
+    <div class="pn-field">
+      <label for="f-message">What are you trying to build?</label>
+      <textarea id="f-message" name="message" required aria-required="true" aria-describedby="f-message-error" placeholder="The problem, who it's for, and what success looks like."></textarea>
+      <span class="pn-error" id="f-message-error" role="alert"></span>
+    </div>
+    <button type="submit" class="pn-submit">Send message</button>
+    <p class="pn-note" id="form-note" role="status"></p>
+  </form>
+          </div>
+        </div>
+        <footer class="ft">
+          <a href="#hero">BACK TO TOP ↑</a>
+          <span>© 2026 NICHOLAS NYAUNG. ALL RIGHTS RESERVED</span>
+          <span>NICHOLASNYAUNG.COM</span>
+        </footer>
+      </div>
+    </section>
   </main>
+  <!-- in-page panels (panel.js clones these) -->
+  <template id="tpl-about"><h2 class="pn-title">One builder. Thirty-three products. Shipped end to end.</h2><p class="pn-lede">I'm a one-person product and AI studio. I take an idea from an empty file to something that actually runs in production, and I don't stop at the demo. The design, the code, the servers, the unglamorous parts — all of it is me.</p><section class="pn-sec"><h3 class="pn-h">About Nicholas</h3><div class="pn-grid"><div class="pn-cell"><p>I'm Nicholas Nyaung. I build software fast, and I build the whole thing — the parts a company would normally split across five different specialists. I started this studio because I got tired of waiting. Waiting for the right team, the budget, somebody's sign-off. It was always easier to just build the tool I needed than to wait for someone else to. Do that enough times and you end up with thirty-three products shipped across five different areas.</p><p>The range is the point. GrowNet is a growth platform that runs inbound and outbound together, with a lock down in the database so two automations can never fight over the same person — I ran the whole loop twice myself, as the client, before I trusted it. LeadNet catches leads so reliably that even when billing lapses, it keeps catching them; they wait in a vault until you come back. ReachNet does cold email the honest way: someone replies or unsubscribes, the sending stops, no dark patterns. And Investor Alpha Hub follows 28+ institutional investors across seven categories, pulled from nine different sources.</p><p>Then it widens out. ScoutNet hunts down local businesses, scores them, and writes and sends real pitches. Jarvis is a voice assistant with a holographic build engine — it renders its own 3D models, checks them against a reference image, and fixes its own mistakes. On the quant side, Stock Trader V7 has traded hands-off on an Alpaca paper account since June 2026. Its backtest originally read 20.7% CAGR; I re-ran it under an independent validation harness at realistic costs, found that optimistic, and published the corrected 19.0% against a -36.6% max drawdown instead. Next to it sits a futures system I tested across 26 years of data. The realtor site I built for Shanty Soerjono is live at shanty-realestate.com — motion, 3D, the works, with an AI probate assistant built in. And MINTSET, my finance-content engine, posts every single day without me lifting a finger.</p><p>One thing runs through all of it. Every product was built solo, start to finish, and the ones that count are running in production right now. I don't hand off the hard 20 percent to somebody else. I'm the one who designs the screens, writes the backend, sets up the servers, and stays on the hook when the thing actually has to work.</p></div></div></section><section class="pn-sec"><h3 class="pn-h">Principles</h3><div class="pn-grid"><div class="pn-cell"><h3 class="pn-h">Ship it, then prove it</h3><p>A product isn't real until it runs in production. Seven of mine do — two paying clients, a property-intelligence app, a grounded tax assistant, a creator finance tool, a trading engine, and a content engine posting daily. I'd rather ship one thing that works than demo ten that don't.</p></div><div class="pn-cell"><h3 class="pn-h">Honest by design</h3><p>ReachNet stops sending the moment someone unsubscribes. LeadNet never holds your data hostage. The honest behavior is built into the system, not bolted on as policy — because the system is the only thing that actually enforces it.</p></div><div class="pn-cell"><h3 class="pn-h">End to end, no handoffs</h3><p>Design, frontend, backend, infrastructure, the AI layer — I own the whole stack. Nothing falls through the cracks between specialists because there are no cracks. There's just me, and the thing has to work.</p></div></div></section><section class="pn-sec"><h3 class="pn-h">By the numbers</h3><div class="pn-stats"><div class="pn-stat"><span class="pn-stat-v">21</span><span class="pn-stat-l">products shipped, all built solo</span></div><div class="pn-stat"><span class="pn-stat-v">7</span><span class="pn-stat-l">live in production today</span></div><div class="pn-stat"><span class="pn-stat-v">6</span><span class="pn-stat-l">disciplines, from SaaS to quant</span></div><div class="pn-stat"><span class="pn-stat-v">26yr</span><span class="pn-stat-l">backtest behind the trading suite</span></div></div></section><section class="pn-sec"><h3 class="pn-h">How I work</h3><div class="pn-grid"><div class="pn-cell"><h3 class="pn-h">Frame the real problem</h3><p>Before any code, I get specific about what success looks like and what would make it fail. A growth platform that lets two automations collide isn't a feature gap — it's the whole problem. I find that early.</p></div><div class="pn-cell"><h3 class="pn-h">Build the whole thing</h3><p>I move quickly because I'm not coordinating across a team — and I build the full slice, not a prototype. Frontend, backend, infra, and the AI layer come together at once, so what you see is what actually runs.</p></div><div class="pn-cell"><h3 class="pn-h">Ship &amp; stay accountable</h3><p>I verify against reality — full loops, live deploys, real backtests — and put it in production. When something's running for real, I'm the one who keeps it running. That's the job.</p></div></div></section><p class="pn-links"><a class="more" href="#/contact">&gt; Start a project</a></p></template>
+  <template id="tpl-services">
+  <h2 class="pn-title">Hire one builder who ships the whole thing.</h2>
+  <p class="pn-lede">I build production software end to end — the product, the AI, the frontend, and the data systems holding it up. Thirty-three projects shipped solo. Seven of them live right now. No handoffs, no agency markup, no "let me loop in a contractor for that part." You get a working product, not a slide deck.</p>
 
-  <!-- MODAL -->
-  <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-label="Project details">
-    <div class="modal" id="modal-body"></div>
+  <section class="pn-sec">
+    <h3 class="pn-h">What I offer</h3>
+    <div class="pn-grid">
+      <div class="pn-cell">
+        <h3 class="pn-h">Product builds — SaaS &amp; web apps</h3>
+        <p>Full-stack products, from an empty repo to a running service. Multi-tenant data models, auth, billing, dashboards — and the edge cases that decide whether software survives real users. I ship it tested the way an actual client would use it.</p>
+        <ul class="pn-list">
+          <li>Next.js, React, TypeScript, Postgres, FastAPI</li>
+          <li>Multi-tenant architecture, auth, billing, dashboards</li>
+          <li>Verified end to end — not demo-ware</li>
+        </ul>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">AI agents &amp; automation</h3>
+        <p>Agents that do real work, not chat wrappers. They discover, score, draft, and check their own output. Built on Gemini, Claude, and FLUX, and wired into pipelines that run without me watching them.</p>
+        <ul class="pn-list">
+          <li>Autonomous agents with scoring, drafting &amp; self-correction</li>
+          <li>LLM pipelines on Gemini, Claude, FLUX</li>
+          <li>Hands-off automation that runs unattended</li>
+        </ul>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Websites &amp; growth engines</h3>
+        <p>Sites that move and convert. Motion, 3D, an AI assistant where it actually earns its place. Plus content engines that script, render, and post on their own. Three.js, GSAP, and Remotion, all pointed at one clear outcome.</p>
+        <ul class="pn-list">
+          <li>Motion &amp; 3D with Three.js and GSAP</li>
+          <li>Cinematic WebGL across 30+ page sites</li>
+          <li>Autonomous content engines built on Remotion</li>
+        </ul>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Quant &amp; data systems</h3>
+        <p>Trading and data systems you can measure instead of guess at — strategy, backtesting, and the data pipeline feeding them. One of them runs live and hands-off today.</p>
+        <ul class="pn-list">
+          <li>Backtested strategies with live paper deployment</li>
+          <li>26-year historical testing &amp; risk modeling</li>
+          <li>Data aggregation across multiple live sources</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pn-sec">
+    <h3 class="pn-h">How the work gets done</h3>
+    <p>A tight process built for momentum.</p>
+    <div class="pn-grid">
+      <div class="pn-cell">
+        <h3 class="pn-h">Frame</h3>
+        <p>We figure out what you're actually trying to win: the user, the outcome, the one constraint that really matters. You walk away with a scoped plan and a clear definition of done, not a vague brief.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Design</h3>
+        <p>Architecture and interface, settled before a line of production code. The data model, the stack, the flow a user walks through. It goes fast because one person holds the whole picture.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Build</h3>
+        <p>Then I build it end to end — frontend, backend, AI, and data, all in one pair of hands. You see working software early and often, not a status report.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Ship</h3>
+        <p>I test it the way a real user would, then deploy. You get a running product and the keys to it. And I stay on the hook when it has to keep working.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pn-sec">
+    <h3 class="pn-h">Engagements</h3>
+    <p>Ways to work together.</p>
+    <div class="pn-grid">
+      <div class="pn-cell">
+        <h3 class="pn-h">Project</h3>
+        <p>Fixed scope, fixed outcome. Best when you already know what you need — an MVP, a site, an agent, a trading system. We frame it, agree on what done means, and I ship it. You own the result, no strings.</p>
+        <p>Fixed price · scoped to the outcome</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Retainer / build partner</h3>
+        <p>Ongoing capacity for teams that ship continuously. Month to month, I'm your product and AI builder — new features, new agents, iteration on what's already live, from someone who knows the codebase cold.</p>
+        <p>Monthly · by capacity</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Advisory</h3>
+        <p>For founders and investors who need judgment, not just hands. Architecture reviews, AI and automation strategy, technical due diligence. Short engagements that take the risk out of a decision before you spend real budget.</p>
+        <p>By the engagement</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pn-sec">
+    <h3 class="pn-h">FAQ</h3>
+    <p>The questions clients ask.</p>
+    <div class="pn-grid">
+      <div class="pn-cell">
+        <h3 class="pn-h">How long does a project take?</h3>
+        <p>Most builds ship in weeks, not quarters. A focused MVP or a motion-heavy site lands in a few weeks; a multi-tenant SaaS or an autonomous agent system takes longer depending on scope. Because one person owns the whole stack, there's no coordination drag — you'll have a working version early and we tighten from there. Exact timeline gets set in the framing step before anything is committed.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">How do you price?</h3>
+        <p>Project work is scoped to a fixed price against an agreed outcome, so you know the number before we start. Retainers are a monthly rate for ongoing capacity. Advisory is billed by the engagement. Pricing tracks the value and complexity of what's being built, not hours logged — you're paying for a shipped result.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Solo founder — can one person really deliver all this?</h3>
+        <p>Thirty-three projects shipped end to end say yes, seven of them live in production right now. Solo is the advantage: no handoffs between designer, backend, and AI engineer, no markup on subcontracted work, and decisions made in hours instead of meetings. For unusually large scope, I bring in trusted specialists and stay the single point of accountability.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">What's your stack?</h3>
+        <p>Next.js, React, TypeScript, Python, and FastAPI for products; Three.js, GSAP, and Remotion for motion and content; Postgres for data; and Gemini, Claude, and FLUX for AI. I pick tools to fit the problem, not the other way around — but everything listed here is in production across shipped work, not theory.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Who owns the code and IP?</h3>
+        <p>You do. On project and retainer work, you own the source, the deployment, and the IP outright when it ships. No lock-in, no per-seat licensing on your own product, no hostage code. You get the repo and the keys.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">How do we get started?</h3>
+        <p>Email a few sentences on what you're trying to build or solve. We'll do a short framing conversation to scope it, and you'll get a clear plan, timeline, and price before any commitment. If it's not a fit, I'll tell you straight and point you somewhere better.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">What if it's not what I wanted?</h3>
+        <p>We agree on a definition of done before I build, so "done" isn't a moving target — and getting that framing right is my job in step one. Within the agreed scope, revisions are part of the work, not an upsell. You also see working software early and often, so we catch a wrong turn in week one, not at delivery.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Can you take over an existing or half-built project?</h3>
+        <p>Often, yes. I'll start with a short read of the codebase and tell you honestly whether it's better to build on what's there or rebuild a part. A good chunk of real work is getting someone's stalled project to actually ship.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Do you only do whole projects, or can you build one piece?</h3>
+        <p>Either. A single feature, one agent, a landing page, a backtest — owning the whole stack means I can slot into exactly the part you need without a team around me. Scope it small if that's what the problem calls for.</p>
+      </div>
+      <div class="pn-cell">
+        <h3 class="pn-h">Do you sign an NDA?</h3>
+        <p>Happy to. Send yours, or I can work to a simple mutual one. Your idea, your code, and your data stay yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <p class="pn-links"><a class="more" href="#/contact">&gt; Start a project</a></p>
+</template>
+  <template id="tpl-writing"><h2 class="pn-title">Notes from the build.</h2><p class="pn-lede">Short, honest notes on how I ship software solo — the decisions, the trade-offs, and the systems that run without me.</p><section class="pn-sec"><h3 class="pn-h">Principles · Jun 2026</h3><p class="pn-post-t">Honest by design</p><p>A rule that lives in a doc gets broken. Not out of malice. Docs are suggestions, and deadlines are real, so the honest behavior gets skipped the first time it's inconvenient and nobody notices until a customer does. Across my SaaS work I stopped writing rules for people to follow and started building them into the one place that can't be argued with: the schema. If the data model won't let you do the wrong thing, you don't have to remember not to.</p><p>GrowNet is the clearest case. Running inbound nurture and outbound cold-email on the same person at the same time is about the worst thing you can hand a prospect, and I didn't want that to be a setting someone could fat-finger on a bad day. So I put a lock at the database level: one active automation per contact. You can nurture them or you can cold-email them. "Both at once" isn't a mistake the UI nudges you away from. It's a state the database refuses to store.</p><p>ReachNet works the same way. The moment someone replies or unsubscribes, the sending stops. No daily review, no flag a human has to clear. It's enforced where it can't slip. And LeadNet never holds your data hostage, because I never built the leverage to do it. Same move every time: don't trust intentions, delete the option.</p><p>None of this is glamorous, which is sort of the point. Policy is what you promise. The data model is what actually happens. When the two disagree, the data model wins, so I'd rather the honest version be the only one the system can express. Make the right thing the only thing, and nobody has to be trusted to do it.</p></section><section class="pn-sec"><h3 class="pn-h">Systems · Jun 2026</h3><p class="pn-post-t">Running a strategy live and walking away</p><p>A backtest is a hypothesis. A system that trades on its own, on a schedule, with nobody watching — that's the real test. Stock Trader V7 has run on an Alpaca paper account since June 2026: a two-speed loop that checks positions every 60 seconds and re-evaluates signals daily, with full order execution and slippage tracking.</p><p>The hard part wasn't the strategy (19.0% CAGR against a −36.6% max drawdown, after I re-ran my own optimistic 20.7% headline at realistic costs). It was making it boring: no manual intervention, no babysitting, clean restarts. "Hands-off" is a feature you have to engineer, not a state you hope for.</p></section><section class="pn-sec"><h3 class="pn-h">AI Agents · Jun 2026</h3><p class="pn-post-t">Scoring strangers</p><p>Most lead tools hand you a number and hide where it came from. You get a 92 and a promise that the model knows best. I don't trust that, and I don't expect a small business owner to act on it either. So when I built ScoutNet, the agent that decides which local businesses are worth pitching, I made it show its work. Every score breaks into two axes you can say out loud: can they pay, and is there something I could actually fix.</p><p>Income stability answers the first question. Digital gap answers the second, and that's the half that does the real work. Rather than ask a model to guess, ScoutNet runs deterministic checks on each site. SSL or not. Mobile-readiness. Stale copy. Whether the contact form actually submits. Whether they show up anywhere social. None of it is a hunch. It's a checklist that runs the same way every time, so when a business scores high on digital gap, I can point at the dead form and say, that, right there.</p><p>Sending follows the same logic. Anything over 80 gets a personalized cold email, fired from your own domain. Everything below queues for manual review, because the cases that aren't obvious are exactly the ones a human should read. It's CAN-SPAM compliant, and an unsubscribe maps straight to suppression. No second-guessing, no quiet re-adds. Discovery pulls from Google Places, OpenStreetMap, or sample data, but the part I care about is what happens after.</p><p>A model that scores 92 and shrugs is asking for blind trust. A score built from missing SSL, a dead form, and a four-year-old homepage is an argument. The second one I can defend to the person I'm about to email, and to myself. A score you can explain beats a model you can't.</p></section><section class="pn-sec"><h3 class="pn-h">Product · Jun 2026</h3><p class="pn-post-t">When billing lapses, capture shouldn't</p><p>Most lead tools tie capture to billing. Miss a payment and the form goes dark. So the one thing a customer pays you to never break is the first thing you break. That's backwards. A billing problem is between me and the customer. It should never reach the stranger filling out a contact form.</p><p>In LeadNet I split the two apart. The app stays on. An operator can suspend an account from an /admin console, and that suspend locks the dashboard, but it does not stop capture. Leads keep landing in a vault the customer pays to reopen, with a 7-day grace window before the lock bites. The money question and the data question run on separate systems. You can owe me and still not lose a single lead.</p><p>The hard part was making the lock honest. Locking the UI is easy and meaningless if the capture path still trusts the front end. I ran an adversarial review of my own code and found a server-side bypass: the data could be reached around the locked dashboard. I closed it. The delivery side carries the same rule. I only confirm a lead as saved to the person who submitted it once an alert actually succeeds, so a silent failure can't pass itself off as a delivered lead.</p><p>Right now 14 of 14 lead-vault tests pass, and tsc, lint, and build are green. That's not the point on its own. The point is the rule underneath it. The worst day in a customer's billing relationship with me should cost them an awkward email, not a customer of their own.</p></section><section class="pn-sec"><h3 class="pn-h">AI Agents · Jun 2026</h3><p class="pn-post-t">Teaching an assistant to check its own work</p><p>Most assistants are blind and forgetful about their own output. They make something, hand it over, and have no clue whether it's any good. Jarvis is where I tried to fix both ends of that. It's a voice assistant with an always-on wake word, and it actually sees the world in front of it: a camera feeds Gemini vision, so it has a read on what's there. That one capability changes what you can ask it to do.</p><p>The part I'm proudest of is the fabrication side. The Hologram Deconstructor takes a reference image and runs Depth Anything V2 in the browser to lift it into a 3D hologram. The Fabrication Engine goes further. It builds schematics as real geometry, twelve to thirty parts per component, not a flat picture dressed up to look dimensional. Once you're building actual parts, the build can be wrong in real, inspectable ways. That's what made the next step possible.</p><p>Here's the loop I care about. Jarvis renders its own build, sends that render back through Gemini vision, and compares it against the original reference. Where they disagree, it hot-swaps the fixes and re-renders. A REFINE button kicks off another pass when I want one. The assistant doesn't trust its first answer. It looks at what it actually made and grades it against the target, the same way I'd squint at a render and go, no, the proportions are off.</p><p>I think this is the part more agents should steal. Seeing the world is one capability. Checking your own output against a goal is a different one, and most tools skip it because shipping the first draft is easier. Jarvis does both, and the self-correction loop is the reason its holograms come out looking like the thing I pointed it at.</p></section><section class="pn-sec"><h3 class="pn-h">Architecture · Jun 2026</h3><p class="pn-post-t">Why I gave GrowNet a database-level lock</p><p>Most growth tools let inbound nurture and outbound cold-email run side by side. The result is the worst email a prospect can get: a "nice to meet you" sequence and a cold pitch landing in the same inbox, the same week, from the same company.</p><p>I didn't want that to be a policy you could misconfigure — I wanted it to be impossible. So GrowNet is built on a spine-first data model: one person is one record, resolved by email, and a single-active-automation lock lives in the database, not the UI. A contact can be in nurture <em>or</em> outreach, never both. The honest behaviour is enforced by the only thing that actually enforces anything — the schema. I verified the full loop twice, as the client, before I trusted it.</p></section><section class="pn-sec"><h3 class="pn-h">Systems · Jun 2026</h3><p class="pn-post-t">Two sleeves, twenty-six years</p><p>Every trading strategy has a regime it was never built for, and that's where it quietly bleeds. Trend-following loves a market that keeps moving and gets chopped to pieces in one that doesn't. Mean reversion does the opposite. So my NQ futures system doesn't pick a side. It runs two sleeves, and each one covers the other's bad weather.</p><p>TREND is time-series momentum: 19.3% CAGR against a −43% max drawdown at 5x, winning only about 40% of the time. That win rate looks ugly until you see the shape of it. A handful of big trends pay for a long line of small losers, and that's the deal you sign for with trend-following. DIP-CATCHER has the opposite temperament. It buys oversold pullbacks, but only above the 200-day SMA, so it catches dips inside an uptrend instead of knives in a falling market. The triggers are simple: RSI(2) at or below 10, three down days, or a low IBS reading. It wins around 70% of the time for 8–16% CAGR at 2–3x MNQ. Blended, the two land near 21.8% CAGR. But the number isn't the point. The point is that the two equity curves don't suffer at the same time.</p><p>I backtested this across 2000 to 2026, twenty-six years, net of costs. The number I trust isn't the CAGR. It's the validation around it. I checked the edge four ways: Monte-Carlo resampling to see if the order of returns mattered, walk-forward to test it on data it hadn't fit to, a cost-stress pass to confirm fees didn't eat the whole thing, and an 1,800-config parameter frontier to prove the result wasn't one lucky setting perched on a cliff. A pretty equity curve is the easiest thing in the world to draw. A result that survives being attacked from four directions is something else.</p><p>Here's the honest part: this is backtest only. No real capital has touched it, and I won't pretend otherwise. The lesson I'm keeping isn't about NQ at all. A single strategy bleeds in the regime it wasn't built for, and confidence should come from how hard you tried to break the thing, not from how good the chart looks when you don't.</p></section><section class="pn-sec"><h3 class="pn-h">Automation · Jun 2026</h3><p class="pn-post-t">Posting every day without touching it</p><p>Consistent short-form content is a grind that burns creators out in weeks. So MINTSET removes the human from the loop entirely: AI story ideation, deterministic Remotion rendering, and scheduled posting — script to publish, every day, to its audience.</p><p>The lesson that keeps repeating across my work: if a thing needs to happen reliably, don't rely on discipline. Build the pipeline, give it a schedule, and let the system carry it.</p></section><p class="pn-links"><a class="more" href="#/contact">&gt; Start a project</a></p></template>
+  <template id="tpl-now">
+  <h2 class="pn-title">What I'm working on now.</h2>
+  <p class="pn-lede">A snapshot of where my attention is — what's running on its own, what I'm shipping, and what I'm open to. Updated August&nbsp;2026.</p>
+  <div class="pn-grid">
+    <div class="pn-cell">
+      <h3 class="pn-h">Stock Trader V7 — live and hands-off</h3>
+      <p>My systematic equity engine has traded itself on an Alpaca paper account since June 2026 — 60-second position checks, daily signal cycles, no manual intervention. In August I put it through a deflated-Sharpe and overfitting audit: the edge held up, the fine-tuning of the risk dials did not. I read the dashboard; I don't touch the trades.</p>
+    </div>
+    <div class="pn-cell">
+      <h3 class="pn-h">SignalDeck — grading its own predictions</h3>
+      <p>Most of my research time goes here. It records a forecast, freezes the probability, and grades itself later against a rule written before the outcome was known. It retired its own headline signal when the numbers came back below the baseline. The next set can't be graded until 14 August, so I'm waiting rather than tinkering.</p>
+    </div>
+    <div class="pn-cell">
+      <h3 class="pn-h">MINTSET — posting on autopilot</h3>
+      <p>The finance-reel engine writes, renders, and posts every day with no human in the loop. The creative is deliberately frozen until mid-August so a single change — the audio track — is the only thing moving.</p>
+    </div>
+    <div class="pn-cell">
+      <h3 class="pn-h">Small tools I actually use</h3>
+      <p>TickStream, a consolidated crypto order book in Go, and Flow, a local dictation tool that replaced a paid subscription. Both started as things I wanted on my own machine and turned into real builds.</p>
+    </div>
+    <div class="pn-cell">
+      <h3 class="pn-h">New client work</h3>
+      <p>Taking on a small number of product, AI-agent, and website builds. If you've got something that needs to go from idea to live, <a href="#/contact">let's talk</a>.</p>
+    </div>
   </div>
-
-  <script>window.NS_GREETING = "Welcome to Nicholas.";</script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-  <script src="data.js?v=5"></script>
-  <script src="components.js?v=4"></script>
-  <script src="app.js?v=4"></script>
-  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
-  <script type="module" src="scene.js?v=7"></script>
-  <script defer src="motion.js?v=6"></script>
-  <script defer src="premium.js?v=4"></script>
-  <script defer src="assistant.js?v=4"></script>
-  <script defer src="interactive.js?v=4"></script>
+  <p>This is a <a href="https://nownownow.com/about" target="_blank" rel="noopener">/now page</a> — a snapshot, not a feed. <a href="#/contact">Get in touch →</a></p>
+  <p class="pn-links"><a class="more" href="#/contact">&gt; Start a project</a></p>
+</template>
+  <script defer src="data.js?v=7"></script>
+  <script type="module" src="v2/panel.js?v=1"></script>
+  <script type="module" src="v2/main.js?v=1"></script>
 </body>
 </html>

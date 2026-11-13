@@ -15,16 +15,15 @@ function liveUrl(u) { return u.startsWith('http') ? u : 'https://' + u; }
 
 /* clean category icons replace the amateur "big initial" emblems */
 const CAT_ICON = {
-  'SaaS Product': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.5h.01"/><path d="M9 6.5h.01"/></svg>',
-  'AI Agent': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><circle cx="18" cy="17.5" r="1.6"/></svg>',
-  'Quant / Trading': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg>',
-  'Website': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.7 2.6 2.7 15.4 0 18M12 3c-2.7 2.6-2.7 15.4 0 18"/></svg>',
-  'Content Engine': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10.5 9.2v5.6l4.5-2.8z"/></svg>',
-  'Developer Tool': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M13 15h4"/></svg>',
+  'Quant & Research': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg>',
+  'Products': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.5h.01"/><path d="M9 6.5h.01"/></svg>',
+  'AI Agents': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7z"/><circle cx="18" cy="17.5" r="1.6"/></svg>',
+  'Motion & Content': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10.5 9.2v5.6l4.5-2.8z"/></svg>',
+  'Tools & Websites': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3"/><path d="M13 15h4"/></svg>'
 };
-const catIcon = (p) => CAT_ICON[p.category] || CAT_ICON['Developer Tool'];
+const catIcon = (p) => CAT_ICON[p.category] || CAT_ICON['Tools & Websites'];
 /* cohesive, category-based cover tint (replaces random per-slug hues) */
-const COVER_CLASS = { 'SaaS Product': 'cat-saas', 'AI Agent': 'cat-ai', 'Quant / Trading': 'cat-quant', 'Website': 'cat-web', 'Content Engine': 'cat-content', 'Developer Tool': 'cat-tool' };
+const COVER_CLASS = { 'Quant & Research': 'cat-quant', 'Products': 'cat-saas', 'AI Agents': 'cat-ai', 'Motion & Content': 'cat-content', 'Tools & Websites': 'cat-tool' };
 const coverClass = (p) => COVER_CLASS[p.category] || 'cat-tool';
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -74,31 +73,32 @@ function renderGrid(container, list) {
 
 /* ---------- Work page: filters + full grid ---------- */
 function initWorkGrid() {
-  const grid = document.getElementById('proj-grid');
-  if (!grid) return;
+  const bands = document.querySelectorAll('.work-band');
+  if (!bands.length) return;
   const bar = document.getElementById('filters');
   let current = 'All';
-  const draw = () => renderGrid(grid, current === 'All' ? PROJECTS : PROJECTS.filter(p => p.category === current));
+  const apply = () => {
+    bands.forEach(b => { b.hidden = current !== 'All' && b.dataset.cat !== current; });
+  };
   if (bar) {
-    const cats = ['All', ...Array.from(new Set(PROJECTS.map(p => p.category)))];
+    const cats = ['All', ...Array.from(new Set(Array.from(bands).map(b => b.dataset.cat)))];
     bar.innerHTML = cats.map((c, i) => `<button type="button" class="filter${i === 0 ? ' active' : ''}" data-cat="${c}" aria-pressed="${i === 0}">${c}</button>`).join('');
     bar.querySelectorAll('.filter').forEach(btn => btn.addEventListener('click', () => {
       bar.querySelectorAll('.filter').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
       btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true');
-      current = btn.dataset.cat; draw();
+      current = btn.dataset.cat; apply();
     }));
   }
-  draw();
+  apply();
+  bindProjectCards();
+  observeReveals(document);
 }
 
 /* ---------- Home page: featured grid ---------- */
 function initFeatured() {
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
-  const flagships = PROJECTS.filter(p => p.tier === 'flagship');
-  const rest = PROJECTS.filter(p => p.tier !== 'flagship');
-  const featured = [...flagships, ...rest].slice(0, 6);
-  renderGrid(grid, featured);
+  renderGrid(grid, PROJECTS.filter(p => p.selected).sort((x, y) => x.selected - y.selected));
 }
 
 /* ---------- Testimonials (renders only when real quotes exist) ---------- */

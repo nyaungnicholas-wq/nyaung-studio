@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discipline Reels — Case Study | Nicholas</title>
+  <meta name="description" content="A specified visual language for vertical short-form — Discipline Reels is a repeatable system for creating faceless, cinematic vertical shorts that pair disciplined-themed sp" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-discipline-reels.html" />
+  <meta property="og:title" content="Discipline Reels — A specified visual language for vertical short-form" />
+  <meta property="og:description" content="A specified visual language for vertical short-form — Discipline Reels is a repeatable system for creating faceless, cinematic vertical shorts that pair disciplined-themed sp" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Discipline Reels","headline":"Discipline Reels — A specified visual language for vertical short-form","description":"Discipline Reels is a repeatable system for creating faceless, cinematic vertical shorts that pair disciplined-themed speech with dark b-roll, a swelling orchestral bed, and synchronized karaoke captions. It defines a fixed visual-caption language so each reel can be produced by swapping data rather than building from scratch.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Remotion, React, TypeScript, AWS Lambda","about":"Motion & Content"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Motion &amp; Content</span>
+        <h1 class="reveal" data-d="1">Discipline Reels</h1>
+        <p class="lede reveal" data-d="2">A specified visual language for vertical short-form</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-content reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10.5 9.2v5.6l4.5-2.8z"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>Discipline Reels is a repeatable system for creating faceless, cinematic vertical shorts that pair disciplined-themed speech with dark b-roll, a swelling orchestral bed, and synchronized karaoke captions. It defines a fixed visual-caption language so each reel can be produced by swapping data rather than building from scratch.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">22–40s</span><span class="ml">speech segment duration</span></div><div class="metric"><span class="mv">2.5–4s</span><span class="ml">average shot length</span></div><div class="metric"><span class="mv">600–900ms</span><span class="ml">word chunk display time</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Creators struggle to make discipl-themed motivation reels at scale because extracting usable speech from YouTube risks copyright strikes, manual editing is slow, and maintaining a premium cinematic look across varied free clips is hard without a consistent visual language. The result is either low-quality, legally risky content or a bottleneck that prevents regular posting, hurting algorithmic growth and audience retention.</p></div>
+        <div class="feature"><h3>What I built</h3><p>To date the project has produced the complete super prompt, this operating guideline, the competitor-intelligence report, and the exact audio-pipeline design (yt-dlp, ffmpeg, faster-whisper commands). The three automation scripts and the locked Remotion template (CinematicDisciplineV1.tsx) are still to be built; once finished the workflow will reduce to paste-link-and-render. No performance metrics have been measured yet because the rendering engine is not complete.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The workflow starts by pasting a YouTube URL and selecting a 22–40s peak segment; yt-dlp extracts the audio and ffmpeg converts it to wav. faster-whisper produces word-level timing JSON, which is cleaned of filler words. In SAFE mode the transcript is re-voiced with ElevenLabs, then re-timed for tight karaoke. A hook is scored ≥14/18 using the super-prompt rubric, the turn and resolve lines are identified, and a 70–100 BPM royalty-free cinematic bed is chosen. Real-footage b-roll is fetched via node script, a call-out table maps each beat to visuals, transitions, music and captions, the data stamps the locked Remotion template, and the render is QA-checked on tentpole frames before posting.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>Shot length, caption cadence and speech timing fixed as parameters rather than taste</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The pipeline extracts audio with yt-dlp and ffmpeg, then transcribes it word-by-word using faster-whisper.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>In SAFE mode the cleaned transcript is re-voiced with an ElevenLabs cinematic voice to avoid copyright claims.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Music beds are royalty-free cinematic tracks at 70–100 BPM that swell under the resolving line for emotional payoff.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>All visuals are real footage only—no AI-generated faces—to prevent reach-penalty flags on platforms.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Each reel uses a single serif key line with one imperfect hand-drawn mark as the sole human touch.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The final render is a seamless 1080×1920 loop at ~−14 LUFS, cross-posted to Instagram Reels and TikTok.</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Remotion</span><span class="proj-tag">React</span><span class="proj-tag">TypeScript</span><span class="proj-tag">AWS Lambda</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-ae-to-remotion.html"><div class="dir">← Previous</div><div class="nm">AE to Remotion</div></a>
+          <a class="next" href="work-dogear.html"><div class="dir">Next →</div><div class="nm">Dogear</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=6"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=6"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script type="module" src="scene.js?v=7"></script>
+  <script defer src="motion.js?v=6"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

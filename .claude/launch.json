@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "nyaung-studio",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "5190"],
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["server.py"],
       "port": 5190
     }
   ]

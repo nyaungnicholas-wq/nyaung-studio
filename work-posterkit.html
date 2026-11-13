@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PosterKit — Case Study | Nicholas</title>
+  <meta name="description" content="An approved poster set, rebuildable parameter by parameter — PosterKit is a replication engine that captures every parameter of an approved poster set so any poster can be rebuilt o" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-posterkit.html" />
+  <meta property="og:title" content="PosterKit — An approved poster set, rebuildable parameter by parameter" />
+  <meta property="og:description" content="An approved poster set, rebuildable parameter by parameter — PosterKit is a replication engine that captures every parameter of an approved poster set so any poster can be rebuilt o" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"PosterKit","headline":"PosterKit — An approved poster set, rebuildable parameter by parameter","description":"PosterKit is a replication engine that captures every parameter of an approved poster set so any poster can be rebuilt or varied programmatically. It works entirely through a design platform's API, using measured specs and a deterministic pipeline to generate new variants without manual design work.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, Canva Connect API, JSON","about":"Motion & Content"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Motion &amp; Content</span>
+        <h1 class="reveal" data-d="1">PosterKit</h1>
+        <p class="lede reveal" data-d="2">An approved poster set, rebuildable parameter by parameter</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-content reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10.5 9.2v5.6l4.5-2.8z"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>PosterKit is a replication engine that captures every parameter of an approved poster set so any poster can be rebuilt or varied programmatically. It works entirely through a design platform's API, using measured specs and a deterministic pipeline to generate new variants without manual design work.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">10</span><span class="ml">posters in the approved set</span></div><div class="metric"><span class="mv">100%</span><span class="ml">percentage of posters built via the platform API</span></div><div class="metric"><span class="mv">~1,350</span><span class="ml">scalar parameters measured across the set</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Design teams often need to produce multiple variants of an approved poster set while maintaining exact visual fidelity. Manual recreation introduces inconsistencies and is time-consuming. The approved posters were built exclusively through a design platform's API, but no record existed of the underlying parameters, making it impossible to regenerate or adjust them programmatically without reverse-engineering each design. This gap forced designers to repeat manual steps for every new variant, increasing the risk of drift from the approved brand standards and slowing down production cycles.</p></div>
+        <div class="feature"><h3>What I built</h3><p>The repository now holds validated v1 element-level specs for all ten posters (specs/pXX_*_v1.json) and the corresponding plan files (plans/*.plan.json) that together comprise 470 operations. The pipeline successfully reproduces the approved builds and can generate new poster variants programmatically. All specs pass validation and the build process is deterministic, requiring only the builder's final approval.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>PosterKit captures a reference poster by programmatically measuring its colour bands, hero bounding box and layout constants. The engine transcribes this reference into a named-constant CONFIG block and a content dictionary for each poster. A local image composition plus a collision gate is reviewed by the builder before any platform call. The platform build copies the client's carrier design, applies batches in stacking order, and enforces gotchas such as crop re-issue after update_fill, auto re-front of covered carrier elements, knockout-compiled letterform paths, and deferred crop/format markers. Exports are verified at full size and at 150px, with the builder's approval required. Specs are validated against SCHEMA.md and turned into ordered edit-design batches.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>~1,350 measured parameters captured across a 10-poster set, every one built through the API</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The engine captures every parameter needed to replicate or vary any of the approved posters.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>A local image composition plus a collision gate is reviewed before any platform call.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The v1 spec example for one poster contains 30 elements, 4 batches and 71 operations.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>All ten poster specs validate clean and generate plans totalling 470 operations.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Exports are verified at full size and at 150px, with the builder's approval required.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The pipeline batches edits in stacking order and applies gotchas such as crop re-issue after update_fill and auto re-front of covered carrier elements.</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">Canva Connect API</span><span class="proj-tag">JSON</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-finance-book.html"><div class="dir">← Previous</div><div class="nm">Money, Finally Explained</div></a>
+          <a class="next" href="work-shanty-realestate.html"><div class="dir">Next →</div><div class="nm">Shanty Soerjono — Realtor Site</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=6"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=6"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script type="module" src="scene.js?v=7"></script>
+  <script defer src="motion.js?v=6"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

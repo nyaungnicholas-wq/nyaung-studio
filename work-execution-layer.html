@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Execution Layer — Case Study | Nicholas</title>
+  <meta name="description" content="The layer between a target book and a real broker order — The execution layer sits between automated trading strategies and a broker, converting target portfolios into actual ord" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-execution-layer.html" />
+  <meta property="og:title" content="Execution Layer — The layer between a target book and a real broker order" />
+  <meta property="og:description" content="The layer between a target book and a real broker order — The execution layer sits between automated trading strategies and a broker, converting target portfolios into actual ord" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Execution Layer","headline":"Execution Layer — The layer between a target book and a real broker order","description":"The execution layer sits between automated trading strategies and a broker, converting target portfolios into actual orders and reconciling the results. It enforces exposure caps, loss limits, and idempotency through a signed authorisation scheme. No live order has been placed; the system remains in pre-live validation.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, Alpaca API, pytest","about":"Quant & Research"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Quant &amp; Research</span>
+        <h1 class="reveal" data-d="1">Execution Layer</h1>
+        <p class="lede reveal" data-d="2">The layer between a target book and a real broker order</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Built</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-quant reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>The execution layer sits between automated trading strategies and a broker, converting target portfolios into actual orders and reconciling the results. It enforces exposure caps, loss limits, and idempotency through a signed authorisation scheme. No live order has been placed; the system remains in pre-live validation.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">151 agents</span><span class="ml">adversarial review agents</span></div><div class="metric"><span class="mv">25 confirmed</span><span class="ml">confirmed defects found</span></div><div class="metric"><span class="mv">78 tests</span><span class="ml">test coverage after fixes</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Automated strategies produce target books but cannot safely place orders directly — they need a layer that validates every order against hard limits, reconciles broker responses against intent, and prevents duplicate or untracked executions. The broker API offers no idempotency, no atomic cancel-replace, and partial fills are common. A defect in this layer risks unbounded loss, duplicate orders, or silent drift between intended and actual positions.</p></div>
+        <div class="feature"><h3>What I built</h3><p>The system is not live. No live order has been placed. An adversarial review with 151 agents found 25 confirmed defects across 11 clusters; all were fixed and re-reviewed by 152 agents, which caught five more defects in the repairs. Test coverage grew from 51 to 78 tests; a mutation gate reverted each fix and required the suite to go red — 5 of 5 caught. Nineteen drills remain unrun. Shadow and paper phases require 15 and 30 clean sessions respectively; zero have been completed.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The layer runs as a single-session CLI: a dry run prints a session token and the four hashes (settings, code, planned orders, git commit) that a human must sign into an authorisation record. On commit, the same hashes are recomputed and any mismatch refuses the session. Orders are submitted sequentially with per-order collars; a watchdog cancels resting orders on heartbeat loss. Reconciliation verifies five links — intended → submitted → filled → positions → cash — and hard-stops on any rejected, canceled, or expired order. The wrapper drives both lanes through ten exit-code scenarios.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>78 tests standing after a 151-agent adversarial review found 25 confirmed defects</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>An adversarial review with 151 agents across 8 lenses and 3 refutation angles each confirmed 25 defects in 11 clusters before any live session.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The wrapper script was syntactically invalid due to four em dashes that PowerShell parsed as a smart quote, preventing any execution until fixed.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Reconciliation falsely reported success while checking only two of five required links and ignoring rejected orders entirely.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>A full portfolio exit was unsendable because sell notional was rounded up off the position, causing the commit-time re-check to refuse it.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Test coverage increased from 51 to 78 tests and a mutation gate verified 5 of 5 fixes by reverting each and requiring the suite to fail.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Nineteen operational drills including HALT cancellation, watchdog cancel-all, and uncertain acceptance resolution remain unrun.</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">Alpaca API</span><span class="proj-tag">pytest</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-equity-direction-study.html"><div class="dir">← Previous</div><div class="nm">Equity Direction Study</div></a>
+          <a class="next" href="work-quant-lab.html"><div class="dir">Next →</div><div class="nm">Quant Lab</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=6"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=6"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script type="module" src="scene.js?v=7"></script>
+  <script defer src="motion.js?v=6"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-page="work">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trend Study — Case Study | Nicholas</title>
+  <meta name="description" content="A study designed so it could fail, that then failed — A pre-registered, fail-closed research study testing twelve trend-following signal variants across two arms with a devel" />
+  <meta name="theme-color" content="#07070B" />
+  <script>document.documentElement.classList.add('js');</script>
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://nicholasnyaung.com/work-trend-study.html" />
+  <meta property="og:title" content="Trend Study — A study designed so it could fail, that then failed" />
+  <meta property="og:description" content="A study designed so it could fail, that then failed — A pre-registered, fail-closed research study testing twelve trend-following signal variants across two arms with a devel" />
+  <meta property="og:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nicholasnyaung.com/assets/og.png" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preload" as="style" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=general-sans@400,500,600&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="stylesheet" href="styles.css?v=8" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Trend Study","headline":"Trend Study — A study designed so it could fail, that then failed","description":"A pre-registered, fail-closed research study testing twelve trend-following signal variants across two arms with a develop window (2003-2013), a validate window (2014-2018), and a sealed holdout. All variants failed their pre-committed gates, exhausting the variant budget. The sealed holdout was never opened and remains available for future study.","creator":{"@type":"Person","name":"Nicholas Nyaung","url":"https://nicholasnyaung.com/about.html"},"keywords":"Python, pandas, NumPy, pytest","about":"Quant & Research"}</script>
+</head>
+<body>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <main id="top">
+    <section class="page-hero">
+      <div class="wrap case-wrap">
+        <a href="work.html" class="case-back"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> All work</a>
+        <span class="eyebrow reveal">Quant &amp; Research</span>
+        <h1 class="reveal" data-d="1">Trend Study</h1>
+        <p class="lede reveal" data-d="2">A study designed so it could fail, that then failed</p>
+        <div class="case-meta reveal" data-d="3">
+          <span class="status built"><span class="sd"></span>Closed - negative result</span>
+          
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:8px">
+      <div class="wrap case-wrap">
+        <div class="case-cover cover cat-quant reveal"><span class="proj-emblem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></svg></span></div>
+        <div class="prose reveal" style="margin:30px 0 22px"><p>A pre-registered, fail-closed research study testing twelve trend-following signal variants across two arms with a develop window (2003-2013), a validate window (2014-2018), and a sealed holdout. All variants failed their pre-committed gates, exhausting the variant budget. The sealed holdout was never opened and remains available for future study.</p></div>
+        <div class="metric-strip reveal" style="margin:4px 0 26px"><div class="metric"><span class="mv">12 of 12</span><span class="ml">variant budget exhausted</span></div><div class="metric"><span class="mv">36</span><span class="ml">multiple comparisons</span></div><div class="metric"><span class="mv">0 of 1</span><span class="ml">sealed holdout grading attempts used</span></div></div>
+        
+      <div class="feature-grid reveal" style="grid-template-columns:1fr 1fr;margin-bottom:8px">
+        <div class="feature"><h3>The problem</h3><p>Trend-following strategies often appear promising in backtests but fail out of sample due to overfitting and multiple-comparison bias. The study needed to test whether a specific construction of trend signals could survive a pre-committed validation bar without parameter tuning after seeing results. The core difficulty was designing a process that could genuinely fail and record that failure rather than iterating until something passed.</p></div>
+        <div class="feature"><h3>What I built</h3><p>The study closed with a negative result on 2026-09-04. All twelve Arm A variants cleared every gate on the develop window (Sharpe 0.735-0.852 vs 0.61 benchmark) but failed on the validate window (Sharpe -0.037 to +0.341 vs 0.80 benchmark, G1 12/12, G3 12/12, G4 10/12). Arm B never cleared develop. The failure was identical across the entire parameter grid, indicating the approach itself was wrong. The sealed holdout was never opened (0 of 1 grading attempts used) and remains spendable.</p></div>
+      </div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:14px 0 14px">How it works</h2>
+        <div class="prose reveal" style="margin:0 0 30px"><p>The study pre-registered twelve variant configurations across two arms (A and B) with a fixed variant budget of twelve per arm. Arm A used a specific signal construction tested on a develop window (2003-2013) and validate window (2014-2018); Arm B used an alternative construction. Each variant was graded against three gates (G1, G3, G4) on the validate window. A sealed holdout window was reserved but never opened. The pipeline enforced fail-closed mechanics: once the variant budget was exhausted, no further variants could run under the same registration. SHA-256 hashes locked all inputs and variant rows.</p></div>
+        <div class="m-result reveal" style="margin:6px 0 30px"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg><span>All 12 declared variants failed the validate window; recorded as a negative, holdout unspent</span></div>
+        <h2 class="reveal" style="font-size:clamp(24px,3vw,32px);letter-spacing:-0.02em;margin:8px 0 16px">Highlights</h2>
+        <ul class="case-list reveal"><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The study pre-registered twelve variants per arm with a hard budget that could not be exceeded after seeing results.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Arm A variants achieved Sharpe ratios of 0.735 to 0.852 on the develop window against a 0.61 benchmark.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>All twelve Arm A variants failed on the validate window with Sharpe ratios of -0.037 to +0.341 against a 0.80 benchmark.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Gate failures on validate were G1 12/12, G3 12/12, and G4 10/12 across the full variant grid.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Arm B never cleared the develop window in any of its twelve variants.</span></li><li><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>The sealed holdout window was never opened and remains available for a future study with a new registration.</span></li></ul>
+        <div class="case-meta reveal" style="margin-top:30px"><span class="proj-tag">Python</span><span class="proj-tag">pandas</span><span class="proj-tag">NumPy</span><span class="proj-tag">pytest</span></div>
+      </div>
+    </section>
+
+    <section style="padding-top:10px">
+      <div class="wrap case-wrap">
+        <div class="case-nav">
+          <a href="work-futures-trader.html"><div class="dir">← Previous</div><div class="nm">NQ Futures Quant Suite</div></a>
+          <a class="next" href="work-1042s-organizer.html"><div class="dir">Next →</div><div class="nm">1042-S Organizer</div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <div class="cta-card reveal">
+          <span class="eyebrow" style="justify-content:center">Want one of these?</span>
+          <h2>Let's build <span class="brand-text">yours.</span></h2>
+          <p>Tell me what you're trying to ship — you'll get a scoped plan and a straight answer.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Start a project</a>
+            <a href="work.html" class="btn btn-ghost btn-lg">See all work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="data.js?v=6"></script>
+  <script src="components.js?v=4"></script>
+  <script src="app.js?v=6"></script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }</script>
+  <script type="module" src="scene.js?v=7"></script>
+  <script defer src="motion.js?v=6"></script>
+  <script defer src="premium.js?v=4"></script>
+  <script defer src="assistant.js?v=4"></script>
+  <script defer src="interactive.js?v=4"></script>
+</body>
+</html>
