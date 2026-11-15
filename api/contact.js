@@ -78,11 +78,18 @@ export default async function handler(req, res) {
       `Budget / timeline: ${budget || '—'}\n\n` +
       `${message}\n`;
 
-    const r = await fetch('https://api.resend.com/emails', {
+    const send = (sender) => fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ from, to, reply_to: email, subject, text }),
+      body: JSON.stringify({ from: sender, to, reply_to: email, subject, text }),
     });
+    let r = await send(from);
+    // ponytail: unverified sender domain -> Resend's shared sender (delivers to the account owner only);
+    // verify the domain at resend.com/domains and this branch stops firing.
+    if (r.status === 403 && !from.includes('resend.dev')) {
+      console.error('Resend refused sender, retrying with onboarding@resend.dev:', (await r.text().catch(() => '')).slice(0, 200));
+      r = await send('Nicholas Nyaung site <onboarding@resend.dev>');
+    }
 
     if (!r.ok) {
       // Log provider detail server-side only — never leak Resend's response (key/domain

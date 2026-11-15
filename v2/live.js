@@ -126,7 +126,7 @@ async function loadStatus() {
     const { checkedAt, systems, lastPush } = data;
     const up = systems.filter(s => s.ok).length;
     const total = systems.length;
-    const label = up === 0 || total === 0 ? 'OFFLINE' : up === total ? `${up} LIVE` : `${up}/${total} LIVE`;
+    const label = up === 0 || total === 0 ? 'OFFLINE' : `${up}/${total} UP`;
     btnLive.querySelector('.lv-label').textContent = label;
     btnLive.classList.toggle('is-warn', up < total && up > 0);
     btnLive.classList.toggle('is-down', up === 0 || total === 0);

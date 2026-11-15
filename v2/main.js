@@ -110,10 +110,10 @@ async function init() {
   }
   const urls = [
     'v2/img/portrait.png',
-    'v2/img/work-taxlens.jpg',
     'v2/img/work-shanty.jpg',
+    'v2/img/work-1042s.jpg',
+    'v2/img/work-taxlens.jpg',
     'v2/img/work-lotline.jpg',
-    'v2/img/work-signaldeck.jpg',
     'v2/img/contact.jpg'   // if it fails to load, contact.js draws a procedural red field instead
   ];
   const total = urls.length;

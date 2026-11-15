@@ -15,7 +15,8 @@
     taxlens: 'v2/img/work-taxlens.jpg',
     'shanty-realestate': 'v2/img/work-shanty.jpg',
     lotline: 'v2/img/work-lotline.jpg',
-    signaldeck: 'v2/img/work-signaldeck.jpg'
+    signaldeck: 'v2/img/work-signaldeck.jpg',
+    '1042s-organizer': 'v2/img/work-1042s.jpg'
   };
 
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

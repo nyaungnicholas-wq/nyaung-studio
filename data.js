@@ -98,7 +98,7 @@ window.NS_PROJECTS = [
     "tier": "flagship"
   },
   {
-    "slug": "signaldeck", "selected": 4,
+    "slug": "signaldeck",
     "name": "SignalDeck",
     "category": "Quant & Research",
     "tagline": "A market-research platform built to catch itself being wrong",
@@ -397,7 +397,7 @@ window.NS_PROJECTS = [
     "tier": "flagship"
   },
   {
-    "slug": "1042s-organizer",
+    "slug": "1042s-organizer", "selected": 2,
     "name": "1042-S Organizer",
     "category": "Products",
     "tagline": "Turning a 1,000-page tax PDF into one clean file per recipient",
@@ -474,7 +474,7 @@ window.NS_PROJECTS = [
     "tier": "standard"
   },
   {
-    "slug": "lotline", "selected": 3,
+    "slug": "lotline", "selected": 4,
     "name": "Lotline",
     "category": "Products",
     "tagline": "What a property is worth, costs to own, and costs to fix",
@@ -730,7 +730,7 @@ window.NS_PROJECTS = [
     "tier": "standard"
   },
   {
-    "slug": "taxlens", "selected": 1,
+    "slug": "taxlens", "selected": 3,
     "name": "TaxLens",
     "category": "AI Agents",
     "tagline": "Cross-border tax answers that cite their own sources",
@@ -1229,7 +1229,7 @@ window.NS_PROJECTS = [
     "tier": "standard"
   },
   {
-    "slug": "shanty-realestate", "selected": 2,
+    "slug": "shanty-realestate", "selected": 1,
     "name": "Shanty Soerjono — Realtor Site",
     "category": "Tools & Websites",
     "tagline": "A live probate-realtor platform, and the print book that goes with it",
