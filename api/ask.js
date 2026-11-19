@@ -39,7 +39,7 @@ function tokens(s) {
     .map(t => (t.length > 4 ? t.replace(/s$/, '') : t));   // crude plural fold: agents -> agent
 }
 
-const ABOUT = `Nicholas Nyaung is a one-person product and AI studio. He designs, engineers and ships software solo, end to end: design, frontend, backend, infrastructure and the AI layer, with no handoffs. He has built 33 projects across SaaS, AI agents, quant and trading research, websites and content engines; the ones marked Live are running in production. He takes on a small number of product, AI-agent and website builds and replies to serious inquiries within 1-2 business days via the contact form or nyaungnicholas@gmail.com. Prices and timelines are discussed per project and are not published.`;
+const ABOUT = `Nicholas Nyaung is a one-person product and AI studio. He designs, engineers and ships software solo, end to end: design, frontend, backend, infrastructure and the AI layer, with no handoffs. He has built 33 projects across SaaS, AI agents, quant and trading research, websites and content engines; the ones marked Live are running in production. He is 15 and started building about a year ago; his first client was a realtor whose site is still live. He takes on a small number of product, AI-agent and website builds, is open to internships, and replies to serious inquiries within 1-2 business days via the contact form or nyaungnicholas@gmail.com. Prices and timelines are discussed per project and are not published.`;
 
 export function buildDocs(text) {
   const start = text.indexOf('window.NS_PROJECTS = ');

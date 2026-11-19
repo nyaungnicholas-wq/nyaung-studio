@@ -32,7 +32,8 @@ export default function createTunnelChart(scene, opts) {
 
   for (let i = 0; i < N; i++) {
     const open = price;
-    const drift = (rng() - 0.5) * 0.9 + 0.08 * Math.sin(i * 0.11);
+    const t = i / (N - 1);   // the year: flat and choppy at the start, climbing by the end
+    const drift = (rng() - 0.5) * (0.25 + 0.6 * t) + 0.42 * t * t;
     const close = open + drift;
     const high = Math.max(open, close) + rng() * 0.35;
     const low = Math.min(open, close) - rng() * 0.35;

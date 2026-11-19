@@ -317,3 +317,43 @@ html.no-gl .mp { display: none; }
   .lv-card { top: 54px; }
 }
 @media (prefers-reduced-motion: reduce) { .lv-card { animation: none; } }
+
+/* story overlay: chapter rail (top centre) + big caption between scenes */
+#story { position: fixed; inset: 0; z-index: 40; pointer-events: none; mix-blend-mode: difference; }
+.st-rail { position: absolute; top: 64px; left: 50%; translate: -50% 0; display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--fg); opacity: 0; transition: opacity .9s ease 2.4s; }
+html.loaded .st-rail { opacity: 1; }
+.st-n { color: var(--mint); }
+.st-ticks { display: flex; gap: 4px; }
+.st-ticks i { width: 18px; height: 2px; background: rgba(242,242,238,.25); transition: background .4s; }
+.st-ticks i.on { background: var(--fg); }
+.st-cap { position: absolute; left: 50%; top: 50%; width: min(760px, calc(100vw - 2 * var(--pad))); text-align: center; opacity: 0; will-change: opacity, transform; }
+.stage > * { filter: opacity(calc(1 - var(--cap, 0))); }
+.st-k { margin: 0 0 10px; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--fg); opacity: .7; }
+.st-h { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(40px, 6.4vw, 96px); line-height: .98; letter-spacing: -.02em; color: var(--fg); }
+.st-l { margin: 16px 0 0; font-family: var(--display); font-size: clamp(16px, 1.6vw, 22px); line-height: 1.35; color: var(--fg); }
+.st-l:empty { display: none; }
+html.no-gl #story { display: none; }
+@media (max-width: 700px) { .st-rail { top: 58px; gap: 8px; font-size: 9px; } .st-ticks i { width: 12px; } .st-t { display: none; } }
+
+/* work: each card is a step in the story, told right under the list (no dead band between them) */
+.cap-s { margin: 0 0 10px; font-family: var(--display); font-weight: 500; font-size: 22px; letter-spacing: -.01em; color: #000; }
+.cap-n { margin: 12px 0 0; font-size: 10px; letter-spacing: .14em; color: #888; }
+@media (min-width: 768px) {
+  .wl { top: 30%; }
+  .wl-caps { top: calc(30% + 150px); bottom: auto; width: 330px; }
+  .wl-cap { top: 0; bottom: auto; }
+  .wl-cap .cap-t { font-size: 13px; }
+}
+/* tunnel: the project being passed, inside the story panel */
+.tk { display: block; margin: 14px 0 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.tk-k { display: block; font-size: 9.5px; letter-spacing: .14em; color: #8a8f96; }
+.tk-k.is-live { color: #5fe0b0; }
+.tk-n { display: block; margin: 6px 0 2px; font-family: var(--display); font-size: 24px; line-height: 1.1; color: #fff; }
+.tk-t { display: block; font-size: 11px; line-height: 1.45; color: #c9ccd1; min-height: 2.9em; }
+.tk-bar { display: block; height: 2px; margin-top: 10px; background: rgba(255,255,255,.12); }
+.tk-bar i { display: block; height: 100%; background: #5fe0b0; transform-origin: left; transform: scaleX(0); transition: transform .3s; }
+.tk.is-in .tk-n, .tk.is-in .tk-t { animation: tk-in .35s ease-out; }
+@keyframes tk-in { from { opacity: 0; transform: translateY(6px); } }
+@media (min-width: 768px) { #about .panel { width: 380px; } }
+html.no-gl .tk { display: none; }
+@media (max-width: 767px) { .cap-s { font-size: 17px; margin-bottom: 6px; } .cap-n { margin-top: 8px; } }

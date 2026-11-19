@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import createTunnelChart from './tunnelchart.js';
 import createTradeStream from './tradestream.js';
+import createTunnelTicker from './tunnelticker.js';
 
 export default function createTunnel(ctx) {
   const { THREE: T, renderer, width, height, isMobile, reducedMotion } = ctx;
@@ -234,11 +235,14 @@ export default function createTunnel(ctx) {
   let pe = 0;                          // eased scroll progress
   const TRAVEL = COLS * 0.92 - 28;     // stop ~30 units before the last bars (phones have fewer columns)
   const WHITE = new T.Color(0xffffff);
+  // the story: every project passes as a sign, first client first
+  const ticker = createTunnelTicker(window.NS_PROJECTS);
 
   function update(s) {
     pe += (s.progress - pe) * (1 - Math.pow(1 - 0.08, s.dt * 60));
     const camZ = 4 - pe * TRAVEL;
     chart.update(s.time, camZ);
+    ticker(pe);
     trades.update(s.time, s.dt, camZ);
 
     const kMouse = 1 - Math.pow(1 - 0.06, s.dt * 60);

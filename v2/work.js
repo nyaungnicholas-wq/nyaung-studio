@@ -96,11 +96,11 @@ export default function createWork(ctx) {
       cw = vw * 0.84;
       x = 0;
       spacing = 2.6;
-      yOff = -vh * 0.06;
+      yOff = -vh * 0.09;
     } else {
       cw = Math.min(vw * 0.5, vh * 0.62 * 1.6);
       x = vw * 0.09;
-      spacing = 1.28;
+      spacing = 1.06;
       yOff = 0;
     }
     const ch = cw / 1.6;

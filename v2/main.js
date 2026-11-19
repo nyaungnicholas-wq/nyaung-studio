@@ -7,6 +7,7 @@ import createContact from './contact.js';
 import createMapHud from './maphud.js';
 import createMapPreview from './mappreview.js';
 import createMapTour from './maptour.js';
+import { initStory } from './story.js';
 
 // Colour pipeline is "hex in = colour out" (see SPEC): stop three converting THREE.Color hex to linear.
 THREE.ColorManagement.enabled = false;
@@ -52,11 +53,11 @@ vec3 composite(vec2 uv){
     }
     return c / 6.0;
   } else if (uType < 2.5) {
-    vec3 a = A(0.5 + (uv - 0.5) / (1.0 + m * 0.6));
-    vec3 b = B(0.5 + (uv - 0.5) / (1.4 - 0.4 * m));
-    vec3 c = mix(a, b, smoothstep(0.35, 0.65, m));
-    float flash = exp(-pow((m - 0.5) * 5.0, 2.0)) * max(0.0, 1.0 - length(uv - 0.5) * 1.1);
-    return c + vec3(0.85, 0.92, 1.0) * flash * 0.5;
+    // camera pushes past A and B arrives from behind it; a soft dim in the middle keeps the two from muddying
+    vec3 a = A(0.5 + (uv - 0.5) / (1.0 + m * 1.2));
+    vec3 b = B(0.5 + (uv - 0.5) / (1.5 - 0.5 * m));
+    vec3 c = mix(a, b, smoothstep(0.3, 0.7, m));
+    return c * (1.0 - 0.5 * sin(3.14159 * m));
   } else {
     float e = pow(m, 1.6);
     vec2 hs = mix(vec2(0.06, 0.09), vec2(0.78, 0.78), e);
@@ -192,6 +193,7 @@ async function init() {
   const t0 = performance.now() / 1000;
   let last = t0;
   let lastWorkIdx = -1;
+  const story = initStory();
   const mmRoot = document.querySelector('#clients .mm');
   const mmNodes = mmRoot ? [...mmRoot.querySelectorAll('.mm-node')] : [];
   const hud = mmRoot ? createMapHud(mmRoot.closest('.stage'), { reducedMotion }) : null;   // route rail + telemetry + label decode
@@ -262,7 +264,7 @@ async function init() {
       renderChapter(active, rtA);
       renderChapter(next, rtB);
       postMat.uniforms.uMix.value = tp;
-      postMat.uniforms.uType.value = active;
+      postMat.uniforms.uType.value = 2;   // one continuous push forward between every chapter
     } else {
       renderChapter(active, rtA);
       postMat.uniforms.uMix.value = 0;
@@ -275,6 +277,7 @@ async function init() {
     renderer.setRenderTarget(null);
     renderer.render(postScene, postCam);
 
+    story(active, next, tp);
     const chapterId = (tp > 0.5 && next >= 0) ? sections[next].id : sections[active].id;
     if (document.documentElement.dataset.chapter !== chapterId) {
       document.documentElement.dataset.chapter = chapterId;
